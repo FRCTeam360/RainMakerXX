@@ -9,6 +9,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class RobotMap {
   public static PowerDistributionPanel pdp = new PowerDistributionPanel();
@@ -20,8 +22,14 @@ public class RobotMap {
   
   public static Compressor compressor = new Compressor();
 
-  public static TalonSRX motorLeftMaster = new TalonSRX(0);
-	public static TalonSRX motorLeftSlave = new TalonSRX(1);
-	public static TalonSRX motorRightMaster = new TalonSRX(2);
-	public static TalonSRX motorRightSlave = new TalonSRX(3);
+  // public static TalonSRX motorLeftMaster = new TalonSRX(0);
+	// public static TalonSRX motorLeftSlave = new TalonSRX(1);
+	// public static TalonSRX motorRightMaster = new TalonSRX(2);
+  // public static TalonSRX motorRightSlave = new TalonSRX(3);
+
+  public static CANSparkMax left1Motor = new CANSparkMax(0, MotorType.kBrushless);
+  public static CANSparkMax left2Motor = new CANSparkMax(1, MotorType.kBrushless);
+  public static CANSparkMax right1Motor = new CANSparkMax(2, MotorType.kBrushless);
+  public static CANSparkMax right2Motor = new CANSparkMax(3, MotorType.kBrushless);
+  
 }
