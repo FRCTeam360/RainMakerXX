@@ -10,11 +10,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.*;
-import com.revrobotics.CANSparkMax.InputMode;
-
-import org.opencv.features2d.KAZE;
-
-import java.util.Arrays;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.Robot;
@@ -23,33 +18,41 @@ import frc.robot.commands.*;
 
 public class DriveTrain extends Subsystem {
 
-  public TalonSRX motorRMaster = RobotMap.motorRightMaster;
-	private TalonSRX motorRSlave = RobotMap.motorRightSlave;
+  // public TalonSRX motorRMaster = RobotMap.motorRightMaster;
+	// private TalonSRX motorRSlave = RobotMap.motorRightSlave;
 	
-	public TalonSRX motorLMaster = RobotMap.motorLeftMaster;
-  private TalonSRX motorLSlave = RobotMap.motorLeftSlave;
+	// public TalonSRX motorLMaster = RobotMap.motorLeftMaster;
+  // private TalonSRX motorLSlave = RobotMap.motorLeftSlave;
+ 
+  public CANSparkMax motorR1 = RobotMap.right1Motor;
+  public CANSparkMax motorR2 = RobotMap.right2Motor;
+  public CANSparkMax motorL1 = RobotMap.left1Motor;
+  public CANSparkMax motorL2 = RobotMap.left2Motor;
 
-  public static CANSparkMax.InputMode[] values(){
-    System.out.println(Arrays.toString(values()));
-    return values();
-  }
   public DriveTrain() {
 
+    // motorRSlave.follow(motorRMaster);
+    // motorLSlave.follow(motorLMaster);
 
-    motorRSlave.follow(motorRMaster);
-    motorLSlave.follow(motorLMaster);
+    motorL2.follow(motorL1);
+    motorR2.follow(motorR1);
     
-    motorLMaster.setInverted(false);
-		motorLSlave.setInverted(false);
+    // motorLMaster.setInverted(false);
+    // motorLSlave.setInverted(false);
 		
-		motorRMaster.setInverted(true);
-		motorRSlave.setInverted(true);
-		
-		motorLMaster.setSensorPhase(false);
-    motorRMaster.setSensorPhase(false);
+		// motorRMaster.setInverted(true);
+    // motorRSlave.setInverted(true);
     
-    motorLMaster.selectProfileSlot(0, 0);
-		motorRMaster.selectProfileSlot(0, 0);
+    motorL1.setInverted(false);
+    motorL2.setInverted(false);
+    motorR1.setInverted(true);
+    motorR2.setInverted(true);
+		
+		// motorLMaster.setSensorPhase(false);
+    // motorRMaster.setSensorPhase(false);
+    
+    // motorLMaster.selectProfileSlot(0, 0);
+		// motorRMaster.selectProfileSlot(0, 0);
 		
 		// resetTalons(motorRMaster);
 		// resetTalons(motorLMaster);
@@ -57,11 +60,17 @@ public class DriveTrain extends Subsystem {
 		// resetTalons(motorRSlave);
     // resetTalons(motorLSlave);
   }
-  public void driveR(double RMotor) {
-		motorRMaster.set(ControlMode.PercentOutput, RMotor);
+  // public void driveR(double RMotor) {
+	// 	motorRMaster.set(ControlMode.PercentOutput, RMotor);
+	// }
+	// public void driveL(double LMotor){
+	// 	motorLMaster.set(ControlMode.PercentOutput, LMotor);
+  // }
+  public void driveRMAX(double RMotor) {
+    motorR1.set(RMotor);
 	}
-	public void driveL(double LMotor){
-		motorLMaster.set(ControlMode.PercentOutput, LMotor);
+	public void driveLMAX(double LMotor){
+		motorL1.set(LMotor);
 	}
   @Override
   public void initDefaultCommand() {
