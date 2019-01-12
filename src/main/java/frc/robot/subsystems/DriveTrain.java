@@ -9,6 +9,13 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.*;
+import com.revrobotics.CANSparkMax.InputMode;
+
+import org.opencv.features2d.KAZE;
+
+import java.util.Arrays;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -21,8 +28,13 @@ public class DriveTrain extends Subsystem {
 	
 	public TalonSRX motorLMaster = RobotMap.motorLeftMaster;
   private TalonSRX motorLSlave = RobotMap.motorLeftSlave;
-  
+
+  public static CANSparkMax.InputMode[] values(){
+    System.out.println(Arrays.toString(values()));
+    return values();
+  }
   public DriveTrain() {
+
 
     motorRSlave.follow(motorRMaster);
     motorLSlave.follow(motorLMaster);
