@@ -8,16 +8,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
 
 public class Robot extends TimedRobot {
   public static Shifter shifter;
+  public static Limelight limelight;
   public static Pneumatics pneumatics;
   public static DriveTrain driveTrain;
   public static OI oi;
@@ -28,6 +25,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     shifter = new Shifter();
+    limelight = new Limelight();
 		pneumatics = new Pneumatics();
 		driveTrain = new DriveTrain();
     oi = new OI();
@@ -68,6 +66,7 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.cancel();
     // }
+    
   }
 
   @Override
