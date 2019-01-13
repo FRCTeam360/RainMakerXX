@@ -8,11 +8,20 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Limelight extends Subsystem {
+
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTableEntry tx = table.getEntry("tx");
+  NetworkTableEntry ty = table.getEntry("ty");
+
+  double x = tx.getDouble(0.0);
+  double y = ty.getDouble(0.0);
   
   public void changeCameraMode() {
     if (NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").getDouble(1) == 1) {
@@ -22,8 +31,9 @@ public class Limelight extends Subsystem {
     }
   }
 
-  public void runCamera() {
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  public void printOffsets() {
+    SmartDashboard.putNumber("LimelightX", x);
+    SmartDashboard.putNumber("LimelightY", y);
   }
 
   @Override
