@@ -26,6 +26,7 @@ public class Robot extends TimedRobot {
   public static Pneumatics pneumatics;
   public static DriveTrain driveTrain;
   public static OI oi;
+  I2C i2c;
   
   
   //Command m_autonomousCommand;
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
 		pneumatics = new Pneumatics();
 		driveTrain = new DriveTrain();
     oi = new OI();
+    i2c = new I2C(I2C.Port.kMXP, 0x39);
     
 
     //Set Sensor Settings and Enable
