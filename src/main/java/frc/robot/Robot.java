@@ -14,15 +14,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.ArrayList;
-
-import javax.sound.midi.Soundbank;
-
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
+
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
@@ -32,7 +26,7 @@ public class Robot extends TimedRobot {
   public static Pneumatics pneumatics;
   public static DriveTrain driveTrain;
   public static OI oi;
-  I2C i2c;
+  
   
   //Command m_autonomousCommand;
   //SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -44,7 +38,7 @@ public class Robot extends TimedRobot {
 		pneumatics = new Pneumatics();
 		driveTrain = new DriveTrain();
     oi = new OI();
-    i2c = new I2C(I2C.Port.kMXP, 0x39);
+    
 
     //Set Sensor Settings and Enable
     i2c.write(0x80 | 0x0D, 0x00);
