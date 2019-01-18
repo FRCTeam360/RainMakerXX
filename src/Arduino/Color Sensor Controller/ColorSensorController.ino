@@ -28,9 +28,12 @@ int threshold = 80;
 int version = 1.0;
 
 //Stored Sensor Values
-double sensor1[] = {0, 0, 0, 0};
-double sensor2[] = {0, 0, 0, 0};
-double sensor3[] = {0, 0, 0, 0};
+double sensor1[4] = {0, 0, 0, 0};
+double sensor2[4] = {0, 0, 0, 0};
+double sensor3[4] = {0, 0, 0, 0};
+
+//I2C data return
+byte returnData[] = {0, 0, 0};
 
 void multiSelect(uint8_t i) {
     if (i > 7) return;
@@ -84,14 +87,14 @@ void startLEDS() {
 }
 
 void setLEDColor(char color, bool enable) {
-    switch color {
-        case R: 
+    switch (color) {
+        case 'R': 
             digitalWrite(ledR, enable);
             break;
-        case G: 
+        case 'G': 
             digitalWrite(ledG, enable);
             break;
-        case B: 
+        case 'B': 
             digitalWrite(ledB, enable);
             break;
     }
@@ -132,15 +135,29 @@ void sensorLoop() {
         //Set to non temp double values
         //This section is gross but is an easy way to do it
         if (i == 0) {
-            sensor1 = {R, G, B, C};
+            sensor1[3] = C;
         } else if (i == 1) {
-            sensor2 = {R, G, B, C};
+            sensor2[3] = C;
         } else {
-            sensor3 = {R, G, B, C};
+            sensor3[3] = C;
         }
 
     }
 
+    postProcessing();
+
+}
+
+void postProcessing() {
+    if (sensor1[3] > threshold) {
+        returnData[0] = sensor1[3];
+    }
+    if (sensor2[3] > threshold) {
+        returnData[1] = sensor2[3];
+    }
+    if (sensor3[3] > threshold) {
+        returnData[2] = sensor3[3];
+    }
 }
 
 void onRioRequest() {
@@ -163,7 +180,7 @@ void setup() {
     initSensors();
 
     //Respond to Rio requests
-    Wire.onRequest(onRioRequest());
+    Wire.onRequest(onRioRequest);
 
 }
 
