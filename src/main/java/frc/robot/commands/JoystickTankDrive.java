@@ -13,7 +13,7 @@ import frc.robot.OI;
 
 public class JoystickTankDrive extends Command {
   public JoystickTankDrive() {
-    requires(Robot.driveTrain);
+    //requires(Robot.driveTrain);
   }
 
   @Override

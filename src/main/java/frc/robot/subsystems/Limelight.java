@@ -12,6 +12,8 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
+import frc.robot.commands.MoveToTarget;
 
 
 public class Limelight extends Subsystem {
@@ -20,8 +22,8 @@ public class Limelight extends Subsystem {
   NetworkTableEntry tx = table.getEntry("tx");
   NetworkTableEntry ty = table.getEntry("ty");
 
-  double x = tx.getDouble(0.0);
-  double y = ty.getDouble(0.0);
+  private double x = tx.getDouble(0.0);
+  private double y = ty.getDouble(0.0);
   
   public void changeCameraMode() {
     if (NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").getDouble(1) == 1) {
@@ -31,13 +33,16 @@ public class Limelight extends Subsystem {
     }
   }
 
-  public void printOffsets() {
-    SmartDashboard.putNumber("LimelightX", x);
-    SmartDashboard.putNumber("LimelightY", y);
+  public double getX() {
+    return tx.getDouble(0.0);
+  }
+
+  public double getY() {
+    return ty.getDouble(0.0);
   }
 
   @Override
   public void initDefaultCommand() {
-    
+    setDefaultCommand(new MoveToTarget());
   }
 }
