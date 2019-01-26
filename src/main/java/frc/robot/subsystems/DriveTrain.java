@@ -12,8 +12,11 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.*;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.RobotMap.ShiftState;
 import frc.robot.commands.*;
 
 public class DriveTrain extends Subsystem {
@@ -28,6 +31,16 @@ public class DriveTrain extends Subsystem {
   public CANSparkMax motorR2 = RobotMap.right2Motor;
   public CANSparkMax motorL1 = RobotMap.left1Motor;
   public CANSparkMax motorL2 = RobotMap.left2Motor;
+
+  private CANEncoder rightOne;
+  private CANEncoder rightTwo;
+  private CANEncoder leftOne;
+  private CANEncoder leftTwo;
+
+  double leftPos;
+  double rightPos;
+  double leftVel;
+  double rightVel;
 
   public DriveTrain() {
 
@@ -66,6 +79,43 @@ public class DriveTrain extends Subsystem {
 	// public void driveL(double LMotor){
 	// 	motorLMaster.set(ControlMode.PercentOutput, LMotor);
   // }
+
+  public void rightEnc(){
+    rightOne = motorR1.getEncoder();
+    rightTwo = motorR2.getEncoder();
+    rightVel = rightTwo.getVelocity();
+    rightPos = rightOne.getPosition();
+    if(RobotMap.shiftState == ShiftState.UP){
+      rightVel /= Constants.highFactor;
+      rightPos /= Constants.highFactor;
+      
+    } else if(RobotMap.shiftState == ShiftState.DOWN){
+      rightVel /= Constants.lowFactor;
+      rightPos /= Constants.lowFactor;
+
+    }else{
+      rightPos = 0;
+      rightVel = 0;
+    }
+  }
+  public void leftEnc(){
+    leftOne = motorL1.getEncoder();
+    leftTwo = motorL2.getEncoder();
+    leftVel = leftTwo.getVelocity();
+    leftPos = leftOne.getPosition();
+    if(RobotMap.shiftState == ShiftState.UP){
+      leftVel /= Constants.highFactor;
+      leftPos /= Constants.highFactor;
+
+    } else if(RobotMap.shiftState == ShiftState.DOWN){
+      leftVel /= Constants.lowFactor;
+      leftPos /= Constants.lowFactor;
+
+    }else{
+      leftVel = 0;
+      leftPos = 0;
+    }
+  }
   public void driveRMAX(double RMotor) {
     motorR1.set(RMotor);
 	}
