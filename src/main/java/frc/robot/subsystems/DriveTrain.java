@@ -80,42 +80,42 @@ public class DriveTrain extends Subsystem {
 	// 	motorLMaster.set(ControlMode.PercentOutput, LMotor);
   // }
 
-  public void rightEnc(){
-    rightOne = motorR1.getEncoder();
-    rightTwo = motorR2.getEncoder();
-    rightVel = rightTwo.getVelocity();
-    rightPos = rightOne.getPosition();
-    if(RobotMap.shiftState == ShiftState.UP){
-      rightVel /= Constants.highFactor;
-      rightPos /= Constants.highFactor;
+  // public void rightEnc(){
+  //   rightOne = motorR1.getEncoder();
+  //   rightTwo = motorR2.getEncoder();
+  //   rightVel = rightTwo.getVelocity();
+  //   rightPos = rightOne.getPosition();
+  //   if(RobotMap.shiftState == ShiftState.UP){
+  //     rightVel /= Constants.highFactor;
+  //     rightPos /= Constants.highFactor;
       
-    } else if(RobotMap.shiftState == ShiftState.DOWN){
-      rightVel /= Constants.lowFactor;
-      rightPos /= Constants.lowFactor;
+  //   } else if(RobotMap.shiftState == ShiftState.DOWN){
+  //     rightVel /= Constants.lowFactor;
+  //     rightPos /= Constants.lowFactor;
 
-    }else{
-      rightPos = 0;
-      rightVel = 0;
-    }
-  }
-  public void leftEnc(){
-    leftOne = motorL1.getEncoder();
-    leftTwo = motorL2.getEncoder();
-    leftVel = leftTwo.getVelocity();
-    leftPos = leftOne.getPosition();
-    if(RobotMap.shiftState == ShiftState.UP){
-      leftVel /= Constants.highFactor;
-      leftPos /= Constants.highFactor;
+  //   }else{
+  //     rightPos = 0;
+  //     rightVel = 0;
+  //   }
+  // }
+  // public void leftEnc(){
+  //   leftOne = motorL1.getEncoder();
+  //   leftTwo = motorL2.getEncoder();
+  //   leftVel = leftTwo.getVelocity();
+  //   leftPos = leftOne.getPosition();
+  //   if(RobotMap.shiftState == ShiftState.UP){
+  //     leftVel /= Constants.highFactor;
+  //     leftPos /= Constants.highFactor;
 
-    } else if(RobotMap.shiftState == ShiftState.DOWN){
-      leftVel /= Constants.lowFactor;
-      leftPos /= Constants.lowFactor;
+  //   } else if(RobotMap.shiftState == ShiftState.DOWN){
+  //     leftVel /= Constants.lowFactor;
+  //     leftPos /= Constants.lowFactor;
 
-    }else{
-      leftVel = 0;
-      leftPos = 0;
-    }
-  }
+  //   }else{
+  //     leftVel = 0;
+  //     leftPos = 0;
+  //   }
+  // }
   public void driveRMAX(double RMotor) {
     motorR1.set(RMotor);
 	}

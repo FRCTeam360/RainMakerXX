@@ -26,7 +26,7 @@ public class Pressurize extends Command {
   @Override
   protected void execute() {
     // if(shouldRun == true && RobotController.getInputVoltage() > 10) {
-    //   Robot.pneumatics.pressurize(); 	
+    Robot.pneumatics.pressurize(); 	
     // } else if (shouldRun == true && ! (RobotController.getInputVoltage() > 10)) {
     //   shouldRun = false;
     //   Robot.pneumatics.stop();

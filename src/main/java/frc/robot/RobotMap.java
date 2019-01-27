@@ -15,9 +15,9 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class RobotMap {
   public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 
-  public static DoubleSolenoid shifter = new DoubleSolenoid(3, 2);
+  public static DoubleSolenoid shifter = new DoubleSolenoid(2, 3);
 
-  public static enum ShiftState {UP, DOWN, UNKNOWN}
+  public static enum ShiftState {UP, DOWN, UNKNOWN};
   public static ShiftState shiftState = ShiftState.UNKNOWN;
   
   public static Compressor compressor = new Compressor();

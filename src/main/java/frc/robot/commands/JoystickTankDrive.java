@@ -37,16 +37,16 @@ public class JoystickTankDrive extends Command {
     //   Robot.driveTrain.driveLMAX(0);
     // }
     
-      if(Math.abs(OI.joyOI.getRawAxis(1)) >= .01 || Math.abs(OI.joyOI.getRawAxis(1)) <= -.01){
-    		Robot.driveTrain.driveRMAX(OI.joyOI.getRawAxis(1));
-      }else{
+    if(Math.abs(OI.joyOI.getRawAxis(3)) >= .01 || Math.abs(OI.joyOI.getRawAxis(3)) <= -.01){
+    		Robot.driveTrain.driveRMAX(-1 * OI.joyOI.getRawAxis(3));
+    }else{
     		Robot.driveTrain.driveRMAX(0);
-    	}
-    	if(Math.abs(OI.joyOI.getRawAxis(5)) >= .01 || Math.abs(OI.joyOI.getRawAxis(5)) <= -.01){
-    		Robot.driveTrain.driveLMAX(OI.joyOI.getRawAxis(5));
-    	}else{
+    }
+    if(Math.abs(OI.joyOI.getRawAxis(1)) >= .01 || Math.abs(OI.joyOI.getRawAxis(1)) <= -.01){
+    		Robot.driveTrain.driveLMAX(-1 * OI.joyOI.getRawAxis(1));
+    }else{
     		Robot.driveTrain.driveLMAX(0);
-    	}
+    }
   }
 
   @Override
