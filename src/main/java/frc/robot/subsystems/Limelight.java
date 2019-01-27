@@ -11,9 +11,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
-import frc.robot.commands.MoveToTarget;
+import frc.robot.commands.AlignWithTarget;
 
 
 public class Limelight extends Subsystem {
@@ -43,6 +41,5 @@ public class Limelight extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new MoveToTarget());
   }
 }

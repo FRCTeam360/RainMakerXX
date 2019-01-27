@@ -7,30 +7,35 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MoveToTarget extends Command {
-  public MoveToTarget() {
+public class AlignWithTarget extends Command {
+
+  Timer timer = new Timer();
+
+  public AlignWithTarget() {
     requires(Robot.limelight);
   }
 
   @Override
   protected void initialize() {
+    timer.reset();
+	  timer.stop();
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.limelight.getY() < -2.0 && Robot.limelight.getX() > 0.5 && Robot.limelight.getX() < -0.5) {
-      Robot.driveTrain.driveL(-0.3);
-      Robot.driveTrain.driveR(-0.3);
-    } else if (Robot.limelight.getX() > 0.5 && Robot.limelight.getX() < -0.5) {
-      if(Robot.limelight.getX() > 0.5) {
+    timer.start();
+    while(timer.get() < 10) {
+      System.out.println("start loop");
+      double x = Robot.limelight.getX();
+      if(x > 0.5) {
         System.out.println("turn right");
         Robot.driveTrain.driveR(-0.2);
         Robot.driveTrain.driveL(0.2);
-      } else if(Robot.limelight.getX() < -0.5) {
+      } else if(x < -0.5) {
         System.out.println("turn left");
         Robot.driveTrain.driveL(-0.2);
         Robot.driveTrain.driveR(0.2);
@@ -39,25 +44,27 @@ public class MoveToTarget extends Command {
         Robot.driveTrain.driveL(0);
         Robot.driveTrain.driveR(0);
       }
-    } else {
-      Robot.driveTrain.driveL(0);
-      Robot.driveTrain.driveR(0);
+      if (timer.get() < 5 && Robot.driveTrain.motorLMaster.getMotorOutputVoltage() == 0 && Robot.driveTrain.motorRMaster.getMotorOutputVoltage() == 0) {
+        isFinished();
+      }
     }
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    System.out.println("finsihed");
+    return true;
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
+    System.out.println("Ended");
+    timer.stop();
+    timer.reset();
+    Robot.driveTrain.driveL(0);
+    Robot.driveTrain.driveR(0);
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
   }
