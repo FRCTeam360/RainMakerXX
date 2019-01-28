@@ -20,7 +20,7 @@ public class RobotMap {
   public static enum ShiftState {UP, DOWN, UNKNOWN};
   public static ShiftState shiftState = ShiftState.UNKNOWN;
   
-  public static Compressor compressor = new Compressor();
+  public static Compressor compressor = new Compressor(1);
 
   // public static TalonSRX motorLeftMaster = new TalonSRX(0);
 	// public static TalonSRX motorLeftSlave = new TalonSRX(1);

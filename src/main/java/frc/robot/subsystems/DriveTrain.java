@@ -8,13 +8,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.revrobotics.*;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.RobotMap.ShiftState;
 import frc.robot.commands.*;
@@ -44,78 +42,65 @@ public class DriveTrain extends Subsystem {
 
   public DriveTrain() {
 
-    // motorRSlave.follow(motorRMaster);
-    // motorLSlave.follow(motorLMaster);
-
     motorL2.follow(motorL1);
     motorR2.follow(motorR1);
-    
-    // motorLMaster.setInverted(false);
-    // motorLSlave.setInverted(false);
-		
-		// motorRMaster.setInverted(true);
-    // motorRSlave.setInverted(true);
     
     motorL1.setInverted(false);
     motorL2.setInverted(false);
     motorR1.setInverted(true);
     motorR2.setInverted(true);
-		
-		// motorLMaster.setSensorPhase(false);
-    // motorRMaster.setSensorPhase(false);
-    
-    // motorLMaster.selectProfileSlot(0, 0);
-		// motorRMaster.selectProfileSlot(0, 0);
-		
-		// resetTalons(motorRMaster);
-		// resetTalons(motorLMaster);
-		
-		// resetTalons(motorRSlave);
-    // resetTalons(motorLSlave);
   }
-  // public void driveR(double RMotor) {
-	// 	motorRMaster.set(ControlMode.PercentOutput, RMotor);
-	// }
-	// public void driveL(double LMotor){
-	// 	motorLMaster.set(ControlMode.PercentOutput, LMotor);
-  // }
 
-  // public void rightEnc(){
-  //   rightOne = motorR1.getEncoder();
-  //   rightTwo = motorR2.getEncoder();
-  //   rightVel = rightTwo.getVelocity();
-  //   rightPos = rightOne.getPosition();
-  //   if(RobotMap.shiftState == ShiftState.UP){
-  //     rightVel /= Constants.highFactor;
-  //     rightPos /= Constants.highFactor;
+  public void rightEnc(){
+    rightOne = motorR1.getEncoder();
+    rightTwo = motorR2.getEncoder();
+
+    rightVel = rightTwo.getVelocity();
+    rightPos = rightOne.getPosition();
+
+    SmartDashboard.putNumber("Right velocity before math: ", rightVel);
+    SmartDashboard.putNumber("Right position before math: ", rightPos);
+
+    if(RobotMap.shiftState == ShiftState.UP){
+      rightVel /= Constants.highFactor;
+      rightPos /= Constants.highFactor;
       
-  //   } else if(RobotMap.shiftState == ShiftState.DOWN){
-  //     rightVel /= Constants.lowFactor;
-  //     rightPos /= Constants.lowFactor;
+    } else if(RobotMap.shiftState == ShiftState.DOWN){
+      rightVel /= Constants.lowFactor;
+      rightPos /= Constants.lowFactor;
 
-  //   }else{
-  //     rightPos = 0;
-  //     rightVel = 0;
-  //   }
-  // }
-  // public void leftEnc(){
-  //   leftOne = motorL1.getEncoder();
-  //   leftTwo = motorL2.getEncoder();
-  //   leftVel = leftTwo.getVelocity();
-  //   leftPos = leftOne.getPosition();
-  //   if(RobotMap.shiftState == ShiftState.UP){
-  //     leftVel /= Constants.highFactor;
-  //     leftPos /= Constants.highFactor;
+    }else{
+      rightPos = 0;
+      rightVel = 0;
+    }
+    SmartDashboard.putNumber("Right velocity after math: ", rightVel);
+    SmartDashboard.putNumber("Right position after math: ", rightPos);
+  }
+  public void leftEnc(){
+    leftOne = motorL1.getEncoder();
+    leftTwo = motorL2.getEncoder();
 
-  //   } else if(RobotMap.shiftState == ShiftState.DOWN){
-  //     leftVel /= Constants.lowFactor;
-  //     leftPos /= Constants.lowFactor;
+    leftVel = leftTwo.getVelocity();
+    leftPos = leftOne.getPosition();
 
-  //   }else{
-  //     leftVel = 0;
-  //     leftPos = 0;
-  //   }
-  // }
+    SmartDashboard.putNumber("Left velocity before math: ", leftVel);
+    SmartDashboard.putNumber("Left position before math: ", leftPos);
+
+    if(RobotMap.shiftState == ShiftState.UP){
+      leftVel /= Constants.highFactor;
+      leftPos /= Constants.highFactor;
+
+    } else if(RobotMap.shiftState == ShiftState.DOWN){
+      leftVel /= Constants.lowFactor;
+      leftPos /= Constants.lowFactor;
+
+    }else{
+      leftVel = 0;
+      leftPos = 0;
+    }
+    SmartDashboard.putNumber("Left velocity after math: ", leftVel);
+    SmartDashboard.putNumber("Left position after math: ", leftPos);
+  }
   public void driveRMAX(double RMotor) {
     motorR1.set(RMotor);
 	}
