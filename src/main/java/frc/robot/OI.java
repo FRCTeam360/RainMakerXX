@@ -19,6 +19,6 @@ public class OI {
 
   public static Button buttonMoveWithLime = new JoystickButton(joyR, 3);
   public OI() {
-    buttonMoveWithLime.whenPressed(new AlignAndMove());
+    buttonMoveWithLime.whenPressed(new MoveToTarget());
   }
 }

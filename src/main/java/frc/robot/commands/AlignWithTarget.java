@@ -45,7 +45,10 @@ public class AlignWithTarget extends Command {
         Robot.driveTrain.driveR(0);
       }
       if (timer.get() > 5 && Robot.driveTrain.motorLMaster.getMotorOutputVoltage() == 0 && Robot.driveTrain.motorRMaster.getMotorOutputVoltage() == 0) {
-        isFinished();
+        System.out.println("end loop");
+        timer.stop();
+        timer.reset();
+        break;
       }
     }
   }
