@@ -11,7 +11,4 @@ package frc.robot;
  * Add your docs here.
  */
 public class Constants {
-    public static final double highFactor = 22.66667;
-    public static final double lowFactor = 7.56667;
-    public static final int encoderTics = 62;
 }

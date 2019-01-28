@@ -7,15 +7,14 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.Compressor;
 import frc.robot.RobotMap;
 import frc.robot.commands.Pressurize;
 
 public class Pneumatics extends Subsystem {
   private Compressor comp = RobotMap.compressor;
   public void pressurize(){
-    comp.setClosedLoopControl(true);
     comp.start();
   }
   public void stop(){
