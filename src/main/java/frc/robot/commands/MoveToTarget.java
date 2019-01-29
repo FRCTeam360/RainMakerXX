@@ -22,24 +22,27 @@ public class MoveToTarget extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.limelight.getY() < -2.0 && Robot.limelight.getX() > 0.5 && Robot.limelight.getX() < -0.5) {
+    System.out.println("Move To Target");
+    if(Robot.limelight.getY() < -2.0) {
       Robot.driveTrain.driveL(-0.3);
       Robot.driveTrain.driveR(-0.3);
-    } else if (Robot.limelight.getX() > 0.5 && Robot.limelight.getX() < -0.5) {
-      if(Robot.limelight.getX() > 0.5) {
-        System.out.println("turn right");
-        Robot.driveTrain.driveR(-0.2);
-        Robot.driveTrain.driveL(0.2);
-      } else if(Robot.limelight.getX() < -0.5) {
-        System.out.println("turn left");
-        Robot.driveTrain.driveL(-0.2);
-        Robot.driveTrain.driveR(0.2);
-      } else {
-        System.out.println("motor stop");
-        Robot.driveTrain.driveL(0);
-        Robot.driveTrain.driveR(0);
-      }
+      System.out.println("run to target");
+    // } else if (Robot.limelight.getX() > 0.5 && Robot.limelight.getX() < -0.5) {
+    //   if(Robot.limelight.getX() > 0.5) {
+    //     System.out.println("turn right");
+    //     Robot.driveTrain.driveR(-0.2);
+    //     Robot.driveTrain.driveL(0.2);
+    //   } else if(Robot.limelight.getX() < -0.5) {
+    //     System.out.println("turn left");
+    //     Robot.driveTrain.driveL(-0.2);
+    //     Robot.driveTrain.driveR(0.2);
+    //   } else {
+    //     System.out.println("motor stop");
+    //     Robot.driveTrain.driveL(0);
+    //     Robot.driveTrain.driveR(0);
+    //   }
     } else {
+      System.out.println("Stop");
       Robot.driveTrain.driveL(0);
       Robot.driveTrain.driveR(0);
     }
@@ -60,5 +63,6 @@ public class MoveToTarget extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

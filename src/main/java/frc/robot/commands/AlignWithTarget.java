@@ -21,12 +21,6 @@ public class AlignWithTarget extends Command {
 
   @Override
   protected void initialize() {
-    timer.reset();
-	  timer.stop();
-  }
-
-  @Override
-  protected void execute() {
     timer.start();
     while(timer.get() < 10) {
       System.out.println("start loop");
@@ -43,14 +37,47 @@ public class AlignWithTarget extends Command {
         System.out.println("motor stop");
         Robot.driveTrain.driveL(0);
         Robot.driveTrain.driveR(0);
+        timer.stop();
+        timer.reset();
+        isFinished();
+        break;
       }
       if (timer.get() > 5 && Robot.driveTrain.motorLMaster.getMotorOutputVoltage() == 0 && Robot.driveTrain.motorRMaster.getMotorOutputVoltage() == 0) {
         System.out.println("end loop");
         timer.stop();
         timer.reset();
+        isFinished();
         break;
       }
     }
+  }
+
+  @Override
+  protected void execute() {
+    // timer.start();
+    // while(timer.get() < 10) {
+    //   System.out.println("start loop");
+    //   double x = Robot.limelight.getX();
+    //   if(x > 0.5) {
+    //     System.out.println("turn right");
+    //     Robot.driveTrain.driveR(-0.2);
+    //     Robot.driveTrain.driveL(0.2);
+    //   } else if(x < -0.5) {
+    //     System.out.println("turn left");
+    //     Robot.driveTrain.driveL(-0.2);
+    //     Robot.driveTrain.driveR(0.2);
+    //   } else {
+    //     System.out.println("motor stop");
+    //     Robot.driveTrain.driveL(0);
+    //     Robot.driveTrain.driveR(0);
+    //   }
+    //   if (timer.get() > 5 && Robot.driveTrain.motorLMaster.getMotorOutputVoltage() == 0 && Robot.driveTrain.motorRMaster.getMotorOutputVoltage() == 0) {
+    //     System.out.println("end loop");
+    //     timer.stop();
+    //     timer.reset();
+    //     break;
+    //   }
+    // }
   }
 
   @Override
@@ -62,13 +89,14 @@ public class AlignWithTarget extends Command {
   @Override
   protected void end() {
     System.out.println("Ended");
-    timer.stop();
-    timer.reset();
+    // timer.stop();
+    // timer.reset();
     Robot.driveTrain.driveL(0);
     Robot.driveTrain.driveR(0);
   }
 
   @Override
   protected void interrupted() {
+    end();
   }
 }
