@@ -8,48 +8,104 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.revrobotics.*;
+
+import frc.robot.Constants;
 import frc.robot.RobotMap;
+import frc.robot.RobotMap.ShiftState;
 import frc.robot.commands.*;
 
 public class DriveTrain extends Subsystem {
 
-  public TalonSRX motorRMaster = RobotMap.motorRightMaster;
-	private TalonSRX motorRSlave = RobotMap.motorRightSlave;
+  // public TalonSRX motorRMaster = RobotMap.motorRightMaster;
+	// private TalonSRX motorRSlave = RobotMap.motorRightSlave;
 	
-	public TalonSRX motorLMaster = RobotMap.motorLeftMaster;
-  private TalonSRX motorLSlave = RobotMap.motorLeftSlave;
-  
+	// public TalonSRX motorLMaster = RobotMap.motorLeftMaster;
+  // private TalonSRX motorLSlave = RobotMap.motorLeftSlave;
+ 
+  public CANSparkMax motorR1 = RobotMap.right1Motor;
+  public CANSparkMax motorR2 = RobotMap.right2Motor;
+  public CANSparkMax motorL1 = RobotMap.left1Motor;
+  public CANSparkMax motorL2 = RobotMap.left2Motor;
+
+  private CANEncoder rightOne;
+  private CANEncoder rightTwo;
+  private CANEncoder leftOne;
+  private CANEncoder leftTwo;
+
+  double leftPos;
+  double rightPos;
+  double leftVel;
+  double rightVel;
+
   public DriveTrain() {
 
-    motorRSlave.follow(motorRMaster);
-    motorLSlave.follow(motorLMaster);
+    motorL2.follow(motorL1);
+    motorR2.follow(motorR1);
     
-    motorLMaster.setInverted(false);
-		motorLSlave.setInverted(false);
-		
-		motorRMaster.setInverted(true);
-		motorRSlave.setInverted(true);
-		
-		motorLMaster.setSensorPhase(false);
-    motorRMaster.setSensorPhase(false);
-    
-    motorLMaster.selectProfileSlot(0, 0);
-		motorRMaster.selectProfileSlot(0, 0);
-		
-		// resetTalons(motorRMaster);
-		// resetTalons(motorLMaster);
-		
-		// resetTalons(motorRSlave);
-    // resetTalons(motorLSlave);
+    motorL1.setInverted(false);
+    motorL2.setInverted(false);
+    motorR1.setInverted(true);
+    motorR2.setInverted(true);
   }
-  public void driveR(double RMotor) {
-		motorRMaster.set(ControlMode.PercentOutput, RMotor);
+
+  public void rightEnc(){
+    rightOne = motorR1.getEncoder();
+    rightTwo = motorR2.getEncoder();
+
+    rightVel = rightTwo.getVelocity();
+    rightPos = rightOne.getPosition();
+
+    SmartDashboard.putNumber("Right velocity before math: ", rightVel);
+    SmartDashboard.putNumber("Right position before math: ", rightPos);
+
+    if(RobotMap.shiftState == ShiftState.UP){
+      rightVel /= Constants.highFactor;
+      rightPos /= Constants.highFactor;
+      
+    } else if(RobotMap.shiftState == ShiftState.DOWN){
+      rightVel /= Constants.lowFactor;
+      rightPos /= Constants.lowFactor;
+
+    }else{
+      rightPos = 0;
+      rightVel = 0;
+    }
+    SmartDashboard.putNumber("Right velocity after math: ", rightVel);
+    SmartDashboard.putNumber("Right position after math: ", rightPos);
+  }
+  public void leftEnc(){
+    leftOne = motorL1.getEncoder();
+    leftTwo = motorL2.getEncoder();
+
+    leftVel = leftTwo.getVelocity();
+    leftPos = leftOne.getPosition();
+
+    SmartDashboard.putNumber("Left velocity before math: ", leftVel);
+    SmartDashboard.putNumber("Left position before math: ", leftPos);
+
+    if(RobotMap.shiftState == ShiftState.UP){
+      leftVel /= Constants.highFactor;
+      leftPos /= Constants.highFactor;
+
+    } else if(RobotMap.shiftState == ShiftState.DOWN){
+      leftVel /= Constants.lowFactor;
+      leftPos /= Constants.lowFactor;
+
+    }else{
+      leftVel = 0;
+      leftPos = 0;
+    }
+    SmartDashboard.putNumber("Left velocity after math: ", leftVel);
+    SmartDashboard.putNumber("Left position after math: ", leftPos);
+  }
+  public void driveRMAX(double RMotor) {
+    motorR1.set(RMotor);
 	}
-	public void driveL(double LMotor){
-		motorLMaster.set(ControlMode.PercentOutput, LMotor);
+	public void driveLMAX(double LMotor){
+		motorL1.set(LMotor);
 	}
   @Override
   public void initDefaultCommand() {

@@ -8,12 +8,21 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ShiftDown;
+import frc.robot.commands.ShiftUp;
 
 public class OI {
   public static Joystick joyR = new Joystick(0);
 	public static Joystick joyL = new Joystick(1);
   public static Joystick joyOI = new Joystick(2);
-  public OI() {
 
+  public static Button buttonUp = new JoystickButton(joyOI, 12);
+  public static Button buttonDown = new JoystickButton(joyOI, 11);
+
+  public OI() {
+    buttonUp.whenPressed(new ShiftUp());
+    buttonDown.whenPressed(new ShiftDown());
   }
 }
