@@ -10,6 +10,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
 
@@ -49,7 +52,19 @@ public class DriveTrain extends Subsystem {
 	}
 	public void driveL(double LMotor){
 		motorLMaster.set(ControlMode.PercentOutput, LMotor);
-	}
+  }
+  public void brakeMode() {
+    Robot.driveTrain.motorLMaster.setNeutralMode(NeutralMode.Brake);
+    Robot.driveTrain.motorRMaster.setNeutralMode(NeutralMode.Brake);
+    Robot.driveTrain.motorLSlave.setNeutralMode(NeutralMode.Brake);
+    Robot.driveTrain.motorRSlave.setNeutralMode(NeutralMode.Brake);
+  }
+  public void coastMode() {
+    Robot.driveTrain.motorLMaster.setNeutralMode(NeutralMode.Coast);
+    Robot.driveTrain.motorRMaster.setNeutralMode(NeutralMode.Coast);
+    Robot.driveTrain.motorLSlave.setNeutralMode(NeutralMode.Coast);
+    Robot.driveTrain.motorRSlave.setNeutralMode(NeutralMode.Coast);
+  }
   @Override
   public void initDefaultCommand() {
     //setDefaultCommand(new JoystickTankDrive());
