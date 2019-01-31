@@ -30,10 +30,10 @@ public class DriveTrain extends Subsystem {
   public CANSparkMax motorL1 = RobotMap.left1Motor;
   public CANSparkMax motorL2 = RobotMap.left2Motor;
 
-  private CANEncoder rightOne;
-  private CANEncoder rightTwo;
-  private CANEncoder leftOne;
-  private CANEncoder leftTwo;
+  public CANEncoder rightOne;
+  public CANEncoder rightTwo;
+  public CANEncoder leftOne;
+  public CANEncoder leftTwo;
 
   double leftPos;
   double rightPos;
@@ -58,8 +58,8 @@ public class DriveTrain extends Subsystem {
     rightVel = rightTwo.getVelocity();
     rightPos = rightOne.getPosition();
 
-    SmartDashboard.putNumber("Right velocity before math: ", rightVel);
-    SmartDashboard.putNumber("Right position before math: ", rightPos);
+    SmartDashboard.putNumber("Right velocity before math: ", rightTwo.getVelocity());
+    SmartDashboard.putNumber("Right position before math: ", rightOne.getPosition());
 
     if(RobotMap.shiftState == ShiftState.UP){
       rightVel /= Constants.highFactor;
@@ -103,9 +103,11 @@ public class DriveTrain extends Subsystem {
   }
   public void driveRMAX(double RMotor) {
     motorR1.set(RMotor);
+    rightEnc();
 	}
 	public void driveLMAX(double LMotor){
-		motorL1.set(LMotor);
+    motorL1.set(LMotor);
+    leftEnc();
 	}
   @Override
   public void initDefaultCommand() {
