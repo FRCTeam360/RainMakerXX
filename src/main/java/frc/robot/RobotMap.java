@@ -23,5 +23,7 @@ public class RobotMap {
   public static TalonSRX motorLeftMaster = new TalonSRX(0);
 	public static TalonSRX motorLeftSlave = new TalonSRX(1);
 	public static TalonSRX motorRightMaster = new TalonSRX(2);
-	public static TalonSRX motorRightSlave = new TalonSRX(3);
+  public static TalonSRX motorRightSlave = new TalonSRX(3);
+  
+  public static TalonSRX armMotor = new TalonSRX(7);
 }
