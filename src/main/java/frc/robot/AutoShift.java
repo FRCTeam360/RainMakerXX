@@ -25,9 +25,10 @@ public class AutoShift extends Command {
   @Override
   protected void execute() {
     double getRightVelocity = RobotMap.right1Motor.getEncoder().getVelocity();
-    if(Math.abs(getRightVelocity) >= 3000){
+    double getLeftVelocity = RobotMap.left1Motor.getEncoder().getVelocity();
+    if(Math.abs(getRightVelocity) >= 5000 && Math.abs(getLeftVelocity) >= 5000){
       Robot.shifter.shiftDown();
-    } else if(Math.abs(getRightVelocity) <= 1000){
+    } else if(Math.abs(getRightVelocity) <= 1000 && Math.abs(getLeftVelocity) <= 1000){
       Robot.shifter.shiftUp();
     }
   }
