@@ -7,22 +7,24 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import frc.robot.commands.AutoShift;
 import frc.robot.RobotMap;
-import frc.robot.commands.Pressurize;
+import frc.robot.RobotMap.ShiftState;
 
-public class Pneumatics extends Subsystem {
-  private Compressor comp = RobotMap.compressor;
-  public void pressurize(){
-    comp.setClosedLoopControl(true);
-    comp.start();
-  }
-  public void stop(){
-  	comp.stop();
-  }
+public class Shifter extends Subsystem {
+  private DoubleSolenoid shifter = RobotMap.shifter;
+	public void shiftUp(){ 
+		shifter.set(DoubleSolenoid.Value.kForward);
+		RobotMap.shiftState = ShiftState.UP;
+	}
+	public void shiftDown() {
+		shifter.set(DoubleSolenoid.Value.kReverse);
+		RobotMap.shiftState = ShiftState.DOWN;
+	}
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new Pressurize());
+    // setDefaultCommand(new AutoShift());
   }
 }
