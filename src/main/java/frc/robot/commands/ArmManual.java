@@ -8,11 +8,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.OI;
+import frc.robot.Robot;
 
-public class ArmManuel extends Command {
-  public ArmManuel() {
+public class ArmManual extends Command {
+  public ArmManual() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.armControl);
   }
 
   // Called just before this Command runs the first time
@@ -20,9 +24,15 @@ public class ArmManuel extends Command {
   protected void initialize() {
   }
 
+
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if(Math.abs(OI.joyControl.getRawAxis(1)) >= .18){
+        Robot.armControl.articulateArm(OI.joyControl.getRawAxis(1) / 3);
+    }else{
+        Robot.armControl.articulateArm(-.14);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

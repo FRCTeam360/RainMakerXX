@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class ShiftDown extends Command {
@@ -17,7 +18,9 @@ public class ShiftDown extends Command {
 
   @Override
   protected void initialize() {
-    Robot.shifter.shiftDown();
+    if(Constants.isInAutoShift != true){
+      Robot.shifter.shiftDown();
+    }
   }
 
   @Override

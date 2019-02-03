@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
@@ -15,6 +17,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class HatchPanelSolenoid extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  public void hatchIn(){
+    RobotMap.hatchPanel.set(DoubleSolenoid.Value.kForward);
+  }
+  
+  public void hatchOut(){
+    RobotMap.hatchPanel.set(DoubleSolenoid.Value.kForward);
+  }
 
   @Override
   public void initDefaultCommand() {

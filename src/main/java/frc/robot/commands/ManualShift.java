@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 
 public class ManualShift extends Command {
   public ManualShift() {
@@ -23,6 +24,7 @@ public class ManualShift extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Constants.isInAutoShift = false;
   }
 
   // Make this return true when this Command no longer needs to run execute()

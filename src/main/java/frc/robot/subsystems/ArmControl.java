@@ -7,7 +7,14 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.OI;
+import frc.robot.RobotMap;
+import frc.robot.commands.ArmManual;
 
 /**
  * Add your docs here.
@@ -16,9 +23,15 @@ public class ArmControl extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  public void articulateArm(double armMotor){
+    RobotMap.armMotor.setNeutralMode(NeutralMode.Brake);
+    RobotMap.armMotor.set(ControlMode.PercentOutput, armMotor);
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new ArmManual());
   }
 }
