@@ -7,7 +7,11 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+import frc.robot.commands.WristManual;
 
 /**
  * Add your docs here.
@@ -15,10 +19,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class WristControl extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  public void articulateWrist(double armMotor){
+    RobotMap.wristMotor.set(ControlMode.PercentOutput, armMotor);
+  }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new WristManual());
   }
 }
