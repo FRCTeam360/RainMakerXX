@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.WristManual;
 
@@ -21,17 +22,17 @@ public class WristControl extends Subsystem {
   // here. Call these from Commands.
   public void articulateWrist(double wristMotor){
     // RobotMap.wristMotor.set(ControlMode.PercentOutput, wristMotor);
-    if(RobotMap.armMotor.getSelectedSensorPosition() - (-1 * RobotMap.wristMotor.getSelectedSensorPosition()) > 50){
-      RobotMap.wristMotor.set(ControlMode.PercentOutput, -.2);
-    }else if((-1 * RobotMap.armMotor.getSelectedSensorPosition()) + (-1 * RobotMap.wristMotor.getSelectedSensorPosition()) > 50){
-      RobotMap.wristMotor.set(ControlMode.PercentOutput, .2);
+    if(RobotMap.armMotor.getSelectedSensorPosition() + RobotMap.wristMotor.getSelectedSensorPosition() > 50){
+      RobotMap.wristMotor.set(ControlMode.PercentOutput, -.15);
+    }else if((-1 * RobotMap.armMotor.getSelectedSensorPosition()) - RobotMap.wristMotor.getSelectedSensorPosition() > 50){
+      RobotMap.wristMotor.set(ControlMode.PercentOutput, .15);
     } else{
       RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
     }
   }
   public void wristReset(){
     RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
-    RobotMap.wristMotor.setSelectedSensorPosition(3500);
+    RobotMap.wristMotor.setSelectedSensorPosition(Constants.wristResetPosition);
     while(RobotMap.wristMotor.getSelectedSensorPosition() >= 0){
       RobotMap.wristMotor.set(ControlMode.PercentOutput, -.3);
     }
