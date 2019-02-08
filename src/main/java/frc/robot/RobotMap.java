@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+
 
 public class RobotMap {
   public static PowerDistributionPanel pdp = new PowerDistributionPanel();
@@ -32,4 +35,10 @@ public class RobotMap {
   public static CANSparkMax right1Motor = new CANSparkMax(2, MotorType.kBrushless);
   public static CANSparkMax right2Motor = new CANSparkMax(3, MotorType.kBrushless);
   
+  public static Victor lift1Motor = new Victor(4);
+  public static Victor lift2Motor = new Victor(5);
+  public static DigitalInput limit1 = new DigitalInput(6);
+  public static DigitalInput limit2 = new DigitalInput(7);
+  public static BuiltInAccelerometer accell = new BuiltInAccelerometer();
+
 }

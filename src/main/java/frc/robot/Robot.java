@@ -21,6 +21,7 @@ public class Robot extends TimedRobot {
   public static Pneumatics pneumatics;
   public static DriveTrain driveTrain;
   public static OI oi;
+  public static ClimbingThing climbingThing;
 
   //Command m_autonomousCommand;
   //SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot {
 		pneumatics = new Pneumatics();
 		driveTrain = new DriveTrain();
     oi = new OI();
+    climbingThing = new ClimbingThing();
     
     //m_chooser.addDefault("Default Auto", new ExampleCommand());
     // chooser.addObject("My Auto", new MyAutoCommand());
