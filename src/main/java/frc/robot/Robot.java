@@ -21,6 +21,8 @@ public class Robot extends TimedRobot {
   public static Pneumatics pneumatics;
   public static DriveTrain driveTrain;
   public static OI oi;
+  public static ArmControl armcontrol;
+
 
   //Command m_autonomousCommand;
   //SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -29,7 +31,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     shifter = new Shifter();
 		pneumatics = new Pneumatics();
-		driveTrain = new DriveTrain();
+    driveTrain = new DriveTrain();
+    armcontrol = new ArmControl();
     oi = new OI();
     
     //m_chooser.addDefault("Default Auto", new ExampleCommand());
