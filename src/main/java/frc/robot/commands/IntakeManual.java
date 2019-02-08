@@ -31,7 +31,7 @@ public class IntakeManual extends Command {
     } else if(OI.joyControl.getRawButton(6)){
       Robot.intakeControl.controlIntake(.5);
     }else{
-      Robot.intakeControl.controlIntake(-.05);
+      Robot.intakeControl.controlIntake(0);
     }
   }
 

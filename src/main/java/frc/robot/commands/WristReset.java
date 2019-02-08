@@ -7,12 +7,14 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
-import frc.robot.Robot;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
-public class WristManual extends Command {
-  public WristManual() {
+import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
+import frc.robot.RobotMap;
+
+public class WristReset extends Command {
+  public WristReset() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.wristControl);
@@ -26,22 +28,19 @@ public class WristManual extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Math.abs(OI.joyControl.getRawAxis(3)) >= .05){
-      Robot.wristControl.articulateWrist(-.6 * OI.joyControl.getRawAxis(3));
-    }else{
-      Robot.wristControl.articulateWrist(0);
-    }
+    RobotMap.wristMotor.set(ControlMode.PercentOutput, .4);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return RobotMap.pdp.getCurrent(15) >= 7;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.wristControl.wristReset();
   }
 
   // Called when another command which requires one or more of the same

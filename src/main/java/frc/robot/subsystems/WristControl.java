@@ -19,8 +19,22 @@ import frc.robot.commands.WristManual;
 public class WristControl extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public void articulateWrist(double armMotor){
-    RobotMap.wristMotor.set(ControlMode.PercentOutput, armMotor);
+  public void articulateWrist(double wristMotor){
+    // RobotMap.wristMotor.set(ControlMode.PercentOutput, wristMotor);
+    if(RobotMap.armMotor.getSelectedSensorPosition() - (-1 * RobotMap.wristMotor.getSelectedSensorPosition()) > 50){
+      RobotMap.wristMotor.set(ControlMode.PercentOutput, -.2);
+    }else if((-1 * RobotMap.armMotor.getSelectedSensorPosition()) + (-1 * RobotMap.wristMotor.getSelectedSensorPosition()) > 50){
+      RobotMap.wristMotor.set(ControlMode.PercentOutput, .2);
+    } else{
+      RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
+    }
+  }
+  public void wristReset(){
+    RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
+    RobotMap.wristMotor.setSelectedSensorPosition(3500);
+    while(RobotMap.wristMotor.getSelectedSensorPosition() >= 0){
+      RobotMap.wristMotor.set(ControlMode.PercentOutput, -.3);
+    }
   }
 
   @Override

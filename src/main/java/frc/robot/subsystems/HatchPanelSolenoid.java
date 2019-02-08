@@ -22,7 +22,7 @@ public class HatchPanelSolenoid extends Subsystem {
   }
   
   public void hatchOut(){
-    RobotMap.hatchPanel.set(DoubleSolenoid.Value.kForward);
+    RobotMap.hatchPanel.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override
