@@ -37,6 +37,11 @@ public class ArmControl extends Subsystem {
     return armTalon.getSelectedSensorPosition();
   }
 
+  public void resetArm(){
+    armTalon.set(ControlMode.PercentOutput, 0);
+    armTalon.setSelectedSensorPosition(0);
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

@@ -8,14 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
-import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class IntakeManual extends Command {
-  public IntakeManual() {
+public class ArmReset extends Command {
+  public ArmReset() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.intakeControl);
   }
 
   // Called just before this Command runs the first time
@@ -26,24 +24,18 @@ public class IntakeManual extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.joyControl.getRawButton(5)) {
-      Robot.intakeControl.controlIntake(-.5);
-    } else if(OI.joyControl.getRawButton(6)){
-      Robot.intakeControl.controlIntake(.5);
-    }else{
-      Robot.intakeControl.controlIntake(-.03);
-    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return RobotMap.armSwitch.get();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    
   }
 
   // Called when another command which requires one or more of the same
