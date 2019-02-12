@@ -25,7 +25,8 @@ public class OI {
   public static Button buttonHatchPanelUp = new JoystickButton(joyControl, 1);
   public static Button buttonHatchPanelDown = new JoystickButton(joyControl, 2);
 
-  public static Button buttonResetWrist = new JoystickButton(joyControl, 11);
+  public static Button buttonResetWrist = new JoystickButton(joyControl, 9);
+  public static Button buttonResetArm = new JoystickButton(joyControl, 10);
 
   public static Button buttonIntakeBall = new JoystickButton(joyControl, 5);
   public static Button buttonOutakeButton = new JoystickButton(joyControl, 6);
@@ -41,5 +42,6 @@ public class OI {
     buttonHatchPanelDown.whenPressed(new HatchOut());
 
     buttonResetWrist.whenPressed(new WristReset());
+    buttonResetArm.whenPressed(new ArmReset());
   }
 }

@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
+import frc.robot.OI;
 import frc.robot.RobotMap;
 import frc.robot.commands.WristManual;
 
@@ -20,14 +21,20 @@ import frc.robot.commands.WristManual;
 public class WristControl extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+
   public void articulateWrist(double wristMotor){
-    // RobotMap.wristMotor.set(ControlMode.PercentOutput, wristMotor);
-    if(RobotMap.armMotor.getSelectedSensorPosition() + RobotMap.wristMotor.getSelectedSensorPosition() > 50){
-      RobotMap.wristMotor.set(ControlMode.PercentOutput, -.15);
-    }else if((-1 * RobotMap.armMotor.getSelectedSensorPosition()) - RobotMap.wristMotor.getSelectedSensorPosition() > 50){
-      RobotMap.wristMotor.set(ControlMode.PercentOutput, .15);
-    } else{
-      RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
+    if(OI.joyControl.getRawButton(12)){
+      RobotMap.wristMotor.set(ControlMode.PercentOutput, wristMotor);
+    }else{
+      int armEncode = RobotMap.armMotor.getSelectedSensorPosition();
+      int wristEncode = RobotMap.wristMotor.getSelectedSensorPosition();
+      if((armEncode + wristEncode) > 50){
+        RobotMap.wristMotor.set(ControlMode.PercentOutput, -.15);
+      }else if((-(armEncode) - wristEncode) > 50){
+        RobotMap.wristMotor.set(ControlMode.PercentOutput, .15);
+      } else{
+        RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
+      }
     }
   }
   public void wristReset(){
