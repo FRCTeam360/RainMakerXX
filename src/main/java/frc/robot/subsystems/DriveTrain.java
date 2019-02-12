@@ -16,7 +16,7 @@ import com.revrobotics.CANEncoder;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.RobotMap.ShiftState;
-import frc.robot.commands.JoystickTankDrive;;
+import frc.robot.commands.JoystickTankDrive;
 
 public class DriveTrain extends Subsystem {
 
