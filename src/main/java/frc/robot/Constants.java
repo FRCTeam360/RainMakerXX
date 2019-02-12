@@ -22,5 +22,9 @@ public class Constants {
     public static final int wristResetPosition = 3500;
     public static final int armIntakePosition = 0;
 
+    public static final int armLowPosition = 0;
+    public static final int armMidPosition = 1000;
+    public static final int armHighPosition = 2000;
+
     public static boolean isInAutoShift = false;
 }
