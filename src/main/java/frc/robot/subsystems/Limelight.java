@@ -11,7 +11,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.AlignWithTarget;
+import frc.robot.commands.CameraMode;
 
 
 public class Limelight extends Subsystem {
@@ -41,5 +41,6 @@ public class Limelight extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new CameraMode());
   }
 }

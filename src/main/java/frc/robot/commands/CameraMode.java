@@ -38,5 +38,6 @@ public class CameraMode extends Command {
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

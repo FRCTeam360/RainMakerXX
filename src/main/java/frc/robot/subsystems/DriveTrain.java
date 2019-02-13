@@ -7,8 +7,12 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
@@ -19,10 +23,21 @@ import frc.robot.commands.*;
 public class DriveTrain extends Subsystem {
 
   public TalonSRX motorRMaster = RobotMap.motorRightMaster;
-	private TalonSRX motorRSlave = RobotMap.motorRightSlave;
-	
-	public TalonSRX motorLMaster = RobotMap.motorLeftMaster;
+  private TalonSRX motorRSlave = RobotMap.motorRightSlave;
+  
+  public TalonSRX motorLMaster = RobotMap.motorLeftMaster;
   private TalonSRX motorLSlave = RobotMap.motorLeftSlave;
+
+  // public CANSparkMax motorRMaster = RobotMap.motorRightMaster;
+	// private CANSparkMax motorRSlave = RobotMap.motorRightSlave;
+	
+	// public CANSparkMax motorLMaster = RobotMap.motorLeftMaster;
+  // private CANSparkMax motorLSlave = RobotMap.motorLeftSlave;
+
+  // private CANEncoder rightOne;
+  // private CANEncoder rightTwo;
+  // private CANEncoder leftOne;
+  // private CANEncoder leftTwo;
   
   public DriveTrain() {
 
@@ -58,15 +73,25 @@ public class DriveTrain extends Subsystem {
     Robot.driveTrain.motorRMaster.setNeutralMode(NeutralMode.Brake);
     Robot.driveTrain.motorLSlave.setNeutralMode(NeutralMode.Brake);
     Robot.driveTrain.motorRSlave.setNeutralMode(NeutralMode.Brake);
+
+    // Robot.driveTrain.motorLMaster.setIdleMode(IdleMode.kBrake);
+    // Robot.driveTrain.motorRMaster.setIdleMode(IdleMode.kBrake);
+    // Robot.driveTrain.motorLSlave.setIdleMode(IdleMode.kBrake);
+    // Robot.driveTrain.motorRSlave.setIdleMode(IdleMode.kBrake);
   }
   public void coastMode() {
     Robot.driveTrain.motorLMaster.setNeutralMode(NeutralMode.Coast);
     Robot.driveTrain.motorRMaster.setNeutralMode(NeutralMode.Coast);
     Robot.driveTrain.motorLSlave.setNeutralMode(NeutralMode.Coast);
     Robot.driveTrain.motorRSlave.setNeutralMode(NeutralMode.Coast);
+
+    // Robot.driveTrain.motorLMaster.setIdleMode(IdleMode.kCoast);
+    // Robot.driveTrain.motorRMaster.setIdleMode(IdleMode.kCoast);
+    // Robot.driveTrain.motorLSlave.setIdleMode(IdleMode.kCoast);
+    // Robot.driveTrain.motorRSlave.setIdleMode(IdleMode.kCoast);
   }
   @Override
   public void initDefaultCommand() {
-    //setDefaultCommand(new JoystickTankDrive());
+    setDefaultCommand(new JoystickTankDrive());
   }
 }

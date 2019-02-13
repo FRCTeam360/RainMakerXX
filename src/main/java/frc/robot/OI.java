@@ -17,8 +17,14 @@ public class OI {
 	public static Joystick joyL = new Joystick(1);
   public static Joystick joyOI = new Joystick(2);
 
+  public static Button buttonDriveUp = new JoystickButton(joyR, 1);
+  public static Button buttonDriveDown = new JoystickButton(joyL, 1);
+
   public static Button buttonMoveWithLime = new JoystickButton(joyR, 3);
   public OI() {
     buttonMoveWithLime.whenPressed(new MoveToTarget());
+
+    buttonDriveUp.whenPressed(new ShiftUp());
+		buttonDriveDown.whenPressed(new ShiftDown());
   }
 }
