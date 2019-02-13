@@ -27,11 +27,11 @@ public class WristControl extends Subsystem {
       RobotMap.wristMotor.set(ControlMode.PercentOutput, wristMotor);
     }else{
       int armEncode = RobotMap.armMotor.getSelectedSensorPosition();
-      int wristEncode = RobotMap.wristMotor.getSelectedSensorPosition();
-      if((armEncode + wristEncode) > 50){
-        RobotMap.wristMotor.set(ControlMode.PercentOutput, -.15);
-      }else if((-1 * (armEncode + wristEncode)) > 50){
-        RobotMap.wristMotor.set(ControlMode.PercentOutput, .15);
+      int wristEncode = (int) (RobotMap.wristMotor.getSelectedSensorPosition() * 1.3);
+      if((armEncode + wristEncode) > 65){
+        RobotMap.wristMotor.set(ControlMode.PercentOutput, -.20);
+      }else if((-1 * (armEncode + wristEncode)) > 65){
+        RobotMap.wristMotor.set(ControlMode.PercentOutput, .30);
       } else{
         RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
       }

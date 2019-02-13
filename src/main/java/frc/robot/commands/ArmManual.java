@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 import frc.robot.OI;
 import frc.robot.Robot;
 
@@ -27,12 +28,12 @@ public class ArmManual extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.joyControl.getRawAxis(1) <= -.18){
+    if(OI.joyControl.getRawAxis(1) <= -.36){
         Robot.armControl.articulateArm(OI.joyControl.getRawAxis(1) / 2);
     }else if(OI.joyControl.getRawAxis(1) >= .18){
         Robot.armControl.articulateArm(OI.joyControl.getRawAxis(1) / 20);
     }else{
-        Robot.armControl.articulateArm(-.15);
+        Robot.armControl.articulateArm(Constants.armStaySpeed);
     }
   }
 
