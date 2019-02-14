@@ -35,13 +35,9 @@ public class OI {
   public static Button buttonArmMid = new JoystickButton(joyControl, 3);
   public static Button buttonArmHigh = new JoystickButton(joyControl, 4);
 
-  public static Button buttonWristPanelPosition = new JoystickButton(joyControl, 1);
-
   public OI() {
     buttonUp.whenPressed(new ShiftUp());
     buttonDown.whenPressed(new ShiftDown());
-
-    buttonWristPanelPosition.whenPressed(new WristPanelPosition());
 
     autoShift.whenPressed(new AutoShift());
     manualShift.whenPressed(new ManualShift());
