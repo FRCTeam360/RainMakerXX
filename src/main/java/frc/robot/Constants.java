@@ -28,6 +28,9 @@ public class Constants {
     public static final int armMidPosition = 2060 + armOffset;
     public static final int armHighPosition = 3135 + armOffset;
 
+    public static final int armPanelPickUp = -3344;
+    public static boolean armPanelPickUpActivation = false;
+
     public static final double armAutoSpeedUp = -.55;
     public static final double armAutoSpeedDown = 0;
     public static final double armStaySpeed = -.2;
