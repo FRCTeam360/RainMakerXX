@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class ArmManual extends Command {
   public ArmManual() {
@@ -30,7 +31,7 @@ public class ArmManual extends Command {
     if(OI.joyControl.getRawAxis(1) <= -.18){
         Robot.armControl.articulateArm(OI.joyControl.getRawAxis(1) / 2);
     }else if(OI.joyControl.getRawAxis(1) >= .18){
-        Robot.armControl.articulateArm(OI.joyControl.getRawAxis(1) / 20);
+        Robot.armControl.articulateArm(0);
     }else{
         Robot.armControl.articulateArm(-.15);
     }
@@ -45,6 +46,7 @@ public class ArmManual extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    RobotMap.armMotor.setSelectedSensorPosition(0);
   }
 
   // Called when another command which requires one or more of the same
