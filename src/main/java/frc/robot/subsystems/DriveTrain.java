@@ -100,8 +100,6 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("Left Pos", leftOutput);
     // outputs velocity in smartdashboard
     SmartDashboard.putNumber("Left Vel", leftVel);
-
-    SmartDashboard.putNumber("Wrist Amp Draw", RobotMap.pdp.getCurrent(15));
   }
 
   public void rightEnc(){
@@ -146,14 +144,12 @@ public class DriveTrain extends Subsystem {
     motorR1.set(RMotor);
     // makes the rightEnc method run and put the numbers in smartdashboard
     rightEnc();
-    SmartDashboard.putNumber("Arm encoder", RobotMap.armMotor.getSelectedSensorPosition());
 	}
 	public void driveLMAX(double LMotor){
     // sets the primary motor on the left side is set to the speed set by the joystick
     motorL1.set(LMotor);
     // makes the leftEnc method run and put the numbers in smartdashboard
     leftEnc();
-    SmartDashboard.putNumber("Wrist encoder", RobotMap.wristMotor.getSelectedSensorPosition());
 	}
   @Override
   public void initDefaultCommand() {

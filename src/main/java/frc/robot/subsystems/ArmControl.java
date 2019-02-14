@@ -8,9 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -22,19 +20,10 @@ import frc.robot.commands.ArmManual;
 public class ArmControl extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public TalonSRX armTalon = RobotMap.armMotor;
-  public ArmControl(){
-    armTalon.setNeutralMode(NeutralMode.Brake);
-    armTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    armTalon.setSensorPhase(false);
-  }
 
   public void articulateArm(double armMotor){
-    armTalon.set(ControlMode.PercentOutput, armMotor);
-  }
-
-  public double armPosition(){
-    return armTalon.getSelectedSensorPosition();
+    RobotMap.armMotor.setNeutralMode(NeutralMode.Brake);
+    RobotMap.armMotor.set(ControlMode.PercentOutput, armMotor);
   }
 
   @Override

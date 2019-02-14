@@ -10,7 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DigitalInput;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
@@ -21,7 +20,7 @@ public class RobotMap {
 
   public static DoubleSolenoid shifter = new DoubleSolenoid(3, 2);
 
-  public static DoubleSolenoid hatchPanel = new DoubleSolenoid(0, 1);
+  public static DoubleSolenoid hatchPanel = new DoubleSolenoid(4, 5);
 
   public static enum ShiftState {UP, DOWN, UNKNOWN};
   public static ShiftState shiftState = ShiftState.UNKNOWN;
@@ -36,7 +35,5 @@ public class RobotMap {
   public static TalonSRX armMotor = new TalonSRX(4);
   public static TalonSRX wristMotor = new TalonSRX(5);
   public static TalonSRX intakeMotor = new TalonSRX(6);
-
-  public static DigitalInput armSwitch = new DigitalInput(1);
   
 }
