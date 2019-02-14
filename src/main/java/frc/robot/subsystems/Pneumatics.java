@@ -7,18 +7,21 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+import frc.robot.commands.Pressurize;
 
 public class Pneumatics extends Subsystem {
-  //private Compressor comp = RobotMap.compressor;
-  public void pressurize (){
-    //comp.start();
+  private Compressor comp = RobotMap.compressor;
+  public void pressurize(){
+    comp.start();
   }
   public void stop(){
-  	//comp.stop();
+  	comp.stop();
   }
   @Override
   public void initDefaultCommand() {
-    //setDefaultCommand(new Pressurize());
+    setDefaultCommand(new Pressurize());
   }
 }

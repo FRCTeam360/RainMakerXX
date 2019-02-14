@@ -7,45 +7,27 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.robot.RobotMap;
-import frc.robot.commands.ArmManual;
 
 /**
  * Add your docs here.
  */
-public class ArmControl extends Subsystem {
+public class HatchPanelSolenoid extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public TalonSRX armTalon = RobotMap.armMotor;
-  public ArmControl(){
-    armTalon.setNeutralMode(NeutralMode.Brake);
-    armTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    armTalon.setSensorPhase(false);
+  public void hatchIn(){
+    RobotMap.hatchPanel.set(DoubleSolenoid.Value.kForward);
   }
-
-  public void articulateArm(double armMotor){
-    armTalon.set(ControlMode.PercentOutput, armMotor);
-  }
-
-  public double armPosition(){
-    return armTalon.getSelectedSensorPosition();
-  }
-
-  public void resetArm(){
-    armTalon.set(ControlMode.PercentOutput, 0);
-    armTalon.setSelectedSensorPosition(0);
+  
+  public void hatchOut(){
+    RobotMap.hatchPanel.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new ArmManual());
   }
 }
