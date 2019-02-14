@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class ArmMiddle extends Command {
@@ -18,6 +19,7 @@ public class ArmMiddle extends Command {
   public ArmMiddle() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.armControl);
   }
 
   // Called just before this Command runs the first time
@@ -29,11 +31,12 @@ public class ArmMiddle extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armMidPosition) > Constants.armAutoThreshold){
-      RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedDown);
-    }else if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armMidPosition) < Constants.armAutoThreshold){
-      RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedUp);
+    if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armMidPosition) > 50){
+      RobotMap.armMotor.set(ControlMode.PercentOutput, .08);
+    }else if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armMidPosition) < 50){
+      RobotMap.armMotor.set(ControlMode.PercentOutput, -.4);
     }else{
+      RobotMap.armMotor.set(ControlMode.PercentOutput, -.15);
       isDone = true;
     }
   }

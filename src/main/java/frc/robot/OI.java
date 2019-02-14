@@ -22,18 +22,14 @@ public class OI {
   public static Button buttonUp = new JoystickButton(joyDrive, 12);
   public static Button buttonDown = new JoystickButton(joyDrive, 11);
 
-  public static Button buttonHatchPanelUp = new JoystickButton(joyControl, 7);
-  public static Button buttonHatchPanelDown = new JoystickButton(joyControl, 8);
+  public static Button buttonHatchPanelUp = new JoystickButton(joyControl, 1);
+  public static Button buttonHatchPanelDown = new JoystickButton(joyControl, 2);
 
   public static Button buttonResetWrist = new JoystickButton(joyControl, 9);
   public static Button buttonResetArm = new JoystickButton(joyControl, 10);
 
   public static Button buttonIntakeBall = new JoystickButton(joyControl, 5);
   public static Button buttonOutakeButton = new JoystickButton(joyControl, 6);
-
-  public static Button buttonArmLow = new JoystickButton(joyControl, 2);
-  public static Button buttonArmMid = new JoystickButton(joyControl, 3);
-  public static Button buttonArmHigh = new JoystickButton(joyControl, 4);
 
   public OI() {
     buttonUp.whenPressed(new ShiftUp());
@@ -47,9 +43,5 @@ public class OI {
 
     buttonResetWrist.whenPressed(new WristReset());
     buttonResetArm.whenPressed(new ArmReset());
-
-    buttonArmLow.whenPressed(new ArmLow());
-    buttonArmMid.whenPressed(new ArmMiddle());
-    buttonArmHigh.whenPressed(new ArmHigh());
   }
 }
