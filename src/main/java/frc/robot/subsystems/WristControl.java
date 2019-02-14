@@ -50,9 +50,6 @@ public class WristControl extends Subsystem {
   public void wristReset(){
     RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
     RobotMap.wristMotor.setSelectedSensorPosition(Constants.wristResetPosition);
-    while(RobotMap.wristMotor.getSelectedSensorPosition() >= 0){
-      RobotMap.wristMotor.set(ControlMode.PercentOutput, -.3);
-    }
   }
 
   @Override
