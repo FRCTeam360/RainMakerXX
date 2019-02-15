@@ -14,12 +14,16 @@ import frc.robot.RobotMap;
 import frc.robot.RobotMap.ShiftState;
 
 public class Shifter extends Subsystem {
-  private DoubleSolenoid shifter = RobotMap.shifter;
+
+	private DoubleSolenoid shifter = RobotMap.shifter;
+	
 	public void shiftUp(){ 
+
 		shifter.set(DoubleSolenoid.Value.kForward);
 		RobotMap.shiftState = ShiftState.UP;
 	}
 	public void shiftDown() {
+		
 		shifter.set(DoubleSolenoid.Value.kReverse);
 		RobotMap.shiftState = ShiftState.DOWN;
 	}

@@ -22,14 +22,19 @@ public class JoystickTankDrive extends Command {
 
   @Override
   protected void execute() {
+
     if(Math.abs(OI.joyDrive.getRawAxis(3)) >= .03){
+
     		Robot.driveTrain.driveRMAX(-1 * OI.joyDrive.getRawAxis(3));
     }else{
+
     		Robot.driveTrain.driveRMAX(0);
     }
     if(Math.abs(OI.joyDrive.getRawAxis(1)) >= .03){
-    		Robot.driveTrain.driveLMAX(-1 * OI.joyDrive.getRawAxis(1));
+
+        Robot.driveTrain.driveLMAX(-1 * OI.joyDrive.getRawAxis(1));
     }else{
+      
     		Robot.driveTrain.driveLMAX(0);
     }
   }

@@ -24,20 +24,24 @@ public class ArmControl extends Subsystem {
   // here. Call these from Commands.
   public TalonSRX armTalon = RobotMap.armMotor;
   public ArmControl(){
+
     armTalon.setNeutralMode(NeutralMode.Brake);
     armTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     armTalon.setSensorPhase(false);
   }
 
   public void articulateArm(double armMotor){
+
     armTalon.set(ControlMode.PercentOutput, armMotor);
   }
 
   public double armPosition(){
+
     return armTalon.getSelectedSensorPosition();
   }
 
   public void resetArm(){
+    
     armTalon.set(ControlMode.PercentOutput, 0);
     armTalon.setSelectedSensorPosition(0);
   }

@@ -26,9 +26,12 @@ public class WristManual extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
     if(Math.abs(OI.joyControl.getRawAxis(3)) >= .05){
+
       Robot.wristControl.articulateWrist(-.6 * OI.joyControl.getRawAxis(3));
     }else{
+      
       Robot.wristControl.articulateWrist(0);
     }
   }

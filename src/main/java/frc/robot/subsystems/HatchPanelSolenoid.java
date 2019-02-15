@@ -18,10 +18,12 @@ public class HatchPanelSolenoid extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public void hatchIn(){
+
     RobotMap.hatchPanel.set(DoubleSolenoid.Value.kForward);
   }
   
   public void hatchOut(){
+    
     RobotMap.hatchPanel.set(DoubleSolenoid.Value.kReverse);
   }
 

@@ -27,10 +27,15 @@ public class IntakeManual extends Command {
   @Override
   protected void execute() {
     if(OI.joyControl.getRawButton(5)) {
+
       Robot.intakeControl.controlIntake(-.5);
+
     } else if(OI.joyControl.getRawButton(6)){
+
       Robot.intakeControl.controlIntake(.5);
+
     }else{
+      
       Robot.intakeControl.controlIntake(-.03);
     }
   }

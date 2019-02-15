@@ -22,6 +22,7 @@ public class IntakeControl extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public void controlIntake(double armMotor){
+    
     RobotMap.intakeMotor.setNeutralMode(NeutralMode.Brake);
     RobotMap.intakeMotor.set(ControlMode.PercentOutput, armMotor);
   }

@@ -24,25 +24,41 @@ public class WristControl extends Subsystem {
 
   public void articulateWrist(double wristMotor){
     if(OI.joyControl.getRawButton(12)){
+
       RobotMap.wristMotor.set(ControlMode.PercentOutput, wristMotor);
+      
     }else if(Constants.armPanelPickUpActivation == false){
+      
       int armEncode = RobotMap.armMotor.getSelectedSensorPosition();
       int wristEncode = (int) (RobotMap.wristMotor.getSelectedSensorPosition() * 1.3);
-      if((armEncode + wristEncode) > 75){
-        RobotMap.wristMotor.set(ControlMode.PercentOutput, -.30);
-      }else if((-1 * (armEncode + wristEncode)) > 75){
-        RobotMap.wristMotor.set(ControlMode.PercentOutput, .30);
+
+      if((armEncode + wristEncode) > Constants.wristThreshold){
+
+        RobotMap.wristMotor.set(ControlMode.PercentOutput, (-1 * Constants.wristSpeed));
+
+      }else if(((armEncode + wristEncode)) < -1 * (Constants.wristThreshold)){
+
+        RobotMap.wristMotor.set(ControlMode.PercentOutput, Constants.wristSpeed);
+
       } else{
+
         RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
       }
     }else{
+
       int armEncode = RobotMap.armMotor.getSelectedSensorPosition();
-      int wristEncode = (int) ((RobotMap.wristMotor.getSelectedSensorPosition() + Constants.armPanelPickUp) * 1.3);
-      if((armEncode + wristEncode) > 75){
-        RobotMap.wristMotor.set(ControlMode.PercentOutput, -.30);
-      }else if((armEncode + wristEncode) < -75){
-        RobotMap.wristMotor.set(ControlMode.PercentOutput, .30);
+      int wristEncode = (int) ((RobotMap.wristMotor.getSelectedSensorPosition() + Constants.wristPanelPickUp) * 1.3);
+
+      if((armEncode + wristEncode) > Constants.wristThreshold){
+
+        RobotMap.wristMotor.set(ControlMode.PercentOutput, (-1 * Constants.wristSpeed));
+
+      }else if((armEncode + wristEncode) < -1 * (Constants.wristThreshold)){
+
+        RobotMap.wristMotor.set(ControlMode.PercentOutput, Constants.wristSpeed);
+
       } else{
+
         RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
       }
     }

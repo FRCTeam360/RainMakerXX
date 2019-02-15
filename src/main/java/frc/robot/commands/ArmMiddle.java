@@ -30,8 +30,10 @@ public class ArmMiddle extends Command {
   @Override
   protected void execute() {
     if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armMidPosition) > Constants.armAutoThreshold){
+
       RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedDown);
     }else if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armMidPosition) < Constants.armAutoThreshold){
+      
       RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedUp);
     }else{
       isDone = true;
