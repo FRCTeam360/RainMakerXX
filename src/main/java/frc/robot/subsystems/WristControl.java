@@ -28,9 +28,9 @@ public class WristControl extends Subsystem {
     }else if(Constants.armPanelPickUpActivation == false){
       int armEncode = RobotMap.armMotor.getSelectedSensorPosition();
       int wristEncode = (int) (RobotMap.wristMotor.getSelectedSensorPosition() * 1.3);
-      if((armEncode + wristEncode) > 65){
-        RobotMap.wristMotor.set(ControlMode.PercentOutput, -.20);
-      }else if((-1 * (armEncode + wristEncode)) > 65){
+      if((armEncode + wristEncode) > 75){
+        RobotMap.wristMotor.set(ControlMode.PercentOutput, -.30);
+      }else if((-1 * (armEncode + wristEncode)) > 75){
         RobotMap.wristMotor.set(ControlMode.PercentOutput, .30);
       } else{
         RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
@@ -38,9 +38,9 @@ public class WristControl extends Subsystem {
     }else{
       int armEncode = RobotMap.armMotor.getSelectedSensorPosition();
       int wristEncode = (int) ((RobotMap.wristMotor.getSelectedSensorPosition() + Constants.armPanelPickUp) * 1.3);
-      if((armEncode + wristEncode) > 65){
-        RobotMap.wristMotor.set(ControlMode.PercentOutput, -.20);
-      }else if((armEncode + wristEncode) < -65){
+      if((armEncode + wristEncode) > 75){
+        RobotMap.wristMotor.set(ControlMode.PercentOutput, -.30);
+      }else if((armEncode + wristEncode) < -75){
         RobotMap.wristMotor.set(ControlMode.PercentOutput, .30);
       } else{
         RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
