@@ -22,29 +22,11 @@ public class OI {
   public static Button buttonUp = new JoystickButton(joyDrive, 12);
   public static Button buttonDown = new JoystickButton(joyDrive, 11);
 
-  public static Button buttonIntakeBall = new JoystickButton(joyControl, 5);
-  public static Button buttonOutakeButton = new JoystickButton(joyControl, 6);
-
-  // public static Button buttonWristArticulateUp = new JoystickButton(joyControl, 1);
-  // public static Button buttonWristArticulateDown = new JoystickButton(joyControl, 3);
-
-  // public static Button buttonArmArticulateUp = new JoystickButton(joyControl, 4);
-  // public static Button buttonArmArticulateDown = new JoystickButton(joyControl, 2);
-
   public OI() {
     buttonUp.whenPressed(new ShiftUp());
     buttonDown.whenPressed(new ShiftDown());
 
     autoShift.whenPressed(new AutoShift());
     manualShift.whenPressed(new ManualShift());
-
-    // buttonIntakeBall.whenPressed(new IntakeIn());
-    // buttonOutakeButton.whenPressed(new IntakeOut());
-
-    // buttonWristArticulateUp.whileHeld(new WristUp());
-    // buttonWristArticulateDown.whileHeld(new WristDown());
-
-    // buttonArmArticulateUp.whileHeld(new ArmUp());
-    // buttonArmArticulateDown.whileHeld(new ArmDown());
   }
 }
