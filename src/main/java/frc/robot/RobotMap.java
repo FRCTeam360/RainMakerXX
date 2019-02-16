@@ -21,7 +21,7 @@ public class RobotMap {
 
   public static DoubleSolenoid shifter = new DoubleSolenoid(3, 2);
 
-  public static DoubleSolenoid hatchPanel = new DoubleSolenoid(0, 1);
+  public static DoubleSolenoid hatchPanel = new DoubleSolenoid(1, 5);
 
   public static enum ShiftState {UP, DOWN, UNKNOWN};
   public static ShiftState shiftState = ShiftState.UNKNOWN;

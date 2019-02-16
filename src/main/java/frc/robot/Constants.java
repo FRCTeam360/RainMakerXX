@@ -38,7 +38,7 @@ public class Constants {
 
     public static final int armAutoThreshold = 100;
 
-    public static final int wristThreshold = 75;
+    public static final int wristThreshold = 100;
 
     public static boolean isInAutoShift = false;
     
