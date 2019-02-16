@@ -27,6 +27,7 @@ public class ClimbingThingDo extends Command {
   protected void execute() {
     //boolean accelStatus = RobotMap.
     Robot.climbingThing.getAccel();
+    Robot.climbingThing.iDunnoMane();
   }
 
   // Make this return true when this Command no longer needs to run execute()

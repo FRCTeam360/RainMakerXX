@@ -25,10 +25,10 @@ public class DriveTrain extends Subsystem {
 	// public TalonSRX motorLMaster = RobotMap.motorLeftMaster;
   // private TalonSRX motorLSlave = RobotMap.motorLeftSlave;
  
-  public CANSparkMax motorR1 = RobotMap.right1Motor;
-  public CANSparkMax motorR2 = RobotMap.right2Motor;
-  public CANSparkMax motorL1 = RobotMap.left1Motor;
-  public CANSparkMax motorL2 = RobotMap.left2Motor;
+  //public CANSparkMax motorR1 = RobotMap.right1Motor;
+  //public CANSparkMax motorR2 = RobotMap.right2Motor;
+  //public CANSparkMax motorL1 = RobotMap.left1Motor;
+  //public CANSparkMax motorL2 = RobotMap.left2Motor;
 
   private CANEncoder rightOne;
   private CANEncoder rightTwo;
@@ -42,18 +42,18 @@ public class DriveTrain extends Subsystem {
 
   public DriveTrain() {
 
-    motorL2.follow(motorL1);
-    motorR2.follow(motorR1);
+    //motorL2.follow(motorL1);
+    //motorR2.follow(motorR1);
     
-    motorL1.setInverted(false);
-    motorL2.setInverted(false);
-    motorR1.setInverted(true);
-    motorR2.setInverted(true);
+    //motorL1.setInverted(false);
+    //motorL2.setInverted(false);
+    //motorR1.setInverted(true);
+    //motorR2.setInverted(true);
   }
 
   public void rightEnc(){
-    rightOne = motorR1.getEncoder();
-    rightTwo = motorR2.getEncoder();
+    //rightOne = motorR1.getEncoder();
+    //rightTwo = motorR2.getEncoder();
 
     rightVel = rightTwo.getVelocity();
     rightPos = rightOne.getPosition();
@@ -77,8 +77,8 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("Right position after math: ", rightPos);
   }
   public void leftEnc(){
-    leftOne = motorL1.getEncoder();
-    leftTwo = motorL2.getEncoder();
+    //leftOne = motorL1.getEncoder();
+    //leftTwo = motorL2.getEncoder();
 
     leftVel = leftTwo.getVelocity();
     leftPos = leftOne.getPosition();
@@ -102,10 +102,10 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("Left position after math: ", leftPos);
   }
   public void driveRMAX(double RMotor) {
-    motorR1.set(RMotor);
+    //motorR1.set(RMotor);
 	}
 	public void driveLMAX(double LMotor){
-		motorL1.set(LMotor);
+		//motorL1.set(LMotor);
 	}
   @Override
   public void initDefaultCommand() {
