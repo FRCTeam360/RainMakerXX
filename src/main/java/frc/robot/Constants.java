@@ -30,15 +30,22 @@ public class Constants {
 
     public static final int wristPanelPickUp = -3344;
 
-    public static final double wristSpeed = .3;
+    public static final double wristSpeed = .2;
 
-    public static final double armAutoSpeedUp = -.55;
-    public static final double armAutoSpeedDown = 0;
-    public static final double armStaySpeed = -.2;
+    public static final int checkArmPosition = 1000;
 
-    public static final int armAutoThreshold = 100;
+    public static final double armAutoSpeedUp = -.4;
+    public static final double armAutoSpeedDown = .25;
+    public static final double armStaySpeed = -.1;
 
-    public static final int wristThreshold = 100;
+    public static final int armAutoThreshold = 150;
+
+    public static final int wristThreshold = 150;
+
+    public static final double wristF = .93;
+    public static final double wristP = 1.023;
+    public static final double wristI = .1023;
+    public static final double wristD = 102.3;
 
     public static boolean isInAutoShift = false;
     

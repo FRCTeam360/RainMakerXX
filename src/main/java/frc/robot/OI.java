@@ -55,5 +55,9 @@ public class OI {
     buttonArmLow.whenPressed(new ArmLow());
     buttonArmMid.whenPressed(new ArmMiddle());
     buttonArmHigh.whenPressed(new ArmHigh());
+
+    buttonArmLow.whenPressed(new MoveWrist(0));
+    buttonArmMid.whenPressed(new MoveWrist(1000));
+    buttonArmHigh.whenPressed(new MoveWrist(2000));
   }
 }

@@ -8,32 +8,41 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class WristManual extends Command {
-  public WristManual() {
+public class MoveWrist extends Command {
+
+  public double pos;
+  double wantedPos;
+  
+  public MoveWrist(double wantedPosition) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.wristControl);
+		wantedPos = wantedPosition;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    RobotMap.goalWristPos = wantedPos;
+    RobotMap.shouldWristStop = false;
+    if(wantedPos == 0) {
+    	RobotMap.shouldWristStop = true;
+    }
+    pos = wantedPos;	
+	  Robot.wristControl.motionMagicInit();
+	  Robot.wristControl.setMotorPosition(pos);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    if(Math.abs(OI.joyControl.getRawAxis(3)) >= .05){
-
-      Robot.wristControl.articulateWrist(-1 * OI.joyControl.getRawAxis(3));
-    }else{
-
-      Robot.wristControl.articulateWrist(0);
-    }
+    Robot.wristControl.Process();
+    SmartDashboard.putNumber("Wrist Position", Robot.wristControl.getPosition());
+   	SmartDashboard.putNumber("Future Position", pos);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -51,5 +60,6 @@ public class WristManual extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

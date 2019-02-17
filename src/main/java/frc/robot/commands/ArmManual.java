@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class ArmManual extends Command {
   public ArmManual() {
@@ -28,15 +29,19 @@ public class ArmManual extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.joyControl.getRawAxis(1) <= -.36){
+    if(OI.joyControl.getRawAxis(1) <= -.05){
 
-        Robot.armControl.articulateArm(OI.joyControl.getRawAxis(1) / 2);
-    }else if(OI.joyControl.getRawAxis(1) >= .18){
-
-        Robot.armControl.articulateArm(OI.joyControl.getRawAxis(1) / 20);
+        Robot.armControl.articulateArm(Constants.armAutoSpeedUp);
+    }else if(OI.joyControl.getRawAxis(1) >= .05){
+        Robot.armControl.articulateArm(Constants.armAutoSpeedDown);
     }else{
-      
+      if(RobotMap.armMotor.getSelectedSensorPosition() > Constants.checkArmPosition){
+
         Robot.armControl.articulateArm(Constants.armStaySpeed);
+      }else{
+
+        Robot.armControl.articulateArm(0);
+      }
     }
   }
 

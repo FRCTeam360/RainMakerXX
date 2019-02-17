@@ -23,6 +23,12 @@ public class RobotMap {
 
   public static DoubleSolenoid hatchPanel = new DoubleSolenoid(1, 5);
 
+  public static int currentPos;
+
+  public static double goalWristPos = 0;
+
+  public static boolean shouldWristStop = false;
+
   public static enum ShiftState {UP, DOWN, UNKNOWN};
   public static ShiftState shiftState = ShiftState.UNKNOWN;
   

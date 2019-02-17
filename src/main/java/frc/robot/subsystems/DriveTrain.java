@@ -154,6 +154,7 @@ public class DriveTrain extends Subsystem {
     // makes the leftEnc method run and put the numbers in smartdashboard
     leftEnc();
     SmartDashboard.putNumber("Wrist encoder", RobotMap.wristMotor.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Wrist velocity", RobotMap.wristMotor.getSelectedSensorVelocity());
 	}
   @Override
   public void initDefaultCommand() {
