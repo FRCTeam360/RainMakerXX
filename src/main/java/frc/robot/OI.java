@@ -27,6 +27,7 @@ public class OI {
 
   public static Button buttonResetWrist = new JoystickButton(joyControl, 9);
   public static Button buttonResetArm = new JoystickButton(joyControl, 10);
+  public static Button buttonManualWrist = new JoystickButton(joyControl, 12);
 
   public static Button buttonIntakeBall = new JoystickButton(joyControl, 5);
   public static Button buttonOutakeButton = new JoystickButton(joyControl, 6);
@@ -55,6 +56,8 @@ public class OI {
     buttonArmLow.whenPressed(new ArmLow());
     buttonArmMid.whenPressed(new ArmMiddle());
     buttonArmHigh.whenPressed(new ArmHigh());
+
+    buttonManualWrist.whileHeld(new WristManual());
 
     buttonArmLow.whenPressed(new MoveWrist(0));
     buttonArmMid.whenPressed(new MoveWrist(1000));
