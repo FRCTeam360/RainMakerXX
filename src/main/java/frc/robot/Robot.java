@@ -33,10 +33,6 @@ public class Robot extends TimedRobot {
     oi = new OI();
 
     autonomousCommand = new SandstromPeriod();
-    
-    //m_chooser.addDefault("Default Auto", new ExampleCommand());
-    // chooser.addObject("My Auto", new MyAutoCommand());
-    //SmartDashboard.putData("Auto mode", m_chooser);
   }
 
   @Override
