@@ -23,12 +23,12 @@ public class Limelight extends Subsystem {
   private double x = tx.getDouble(0.0);
   private double y = ty.getDouble(0.0);
   
-  public void changeCameraMode() {
-    if (NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").getDouble(1) == 1) {
-      NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
-    } else {
-      NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
-    }
+  public void driveCamera() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1.0);
+  }
+
+  public void visionCamera() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0);
   }
 
   public double getX() {

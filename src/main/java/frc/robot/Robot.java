@@ -21,7 +21,7 @@ public class Robot extends TimedRobot {
   public static DriveTrain driveTrain;
   public static OI oi;
 
-  //Command m_autonomousCommand;
+  Command autonomousCommand;
   //SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   @Override
@@ -31,6 +31,8 @@ public class Robot extends TimedRobot {
 		pneumatics = new Pneumatics();
 		driveTrain = new DriveTrain();
     oi = new OI();
+
+    autonomousCommand = new SandstromPeriod();
     
     //m_chooser.addDefault("Default Auto", new ExampleCommand());
     // chooser.addObject("My Auto", new MyAutoCommand());
@@ -43,6 +45,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
+    Robot.driveTrain.coastMode();
   }
 
   @Override
@@ -52,10 +55,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-  //  m_autonomousCommand = m_chooser.getSelected();
-  //   if (m_autonomousCommand != null) {
-  //     m_autonomousCommand.start();
-  //   }
+    Robot.limelight.driveCamera();
+    if (autonomousCommand != null) {
+      autonomousCommand.start();
+    }
   }
 
   @Override
@@ -65,10 +68,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // if (m_autonomousCommand != null) {
-    //   m_autonomousCommand.cancel();
-    // }
-    Robot.driveTrain.coastMode();
+    Robot.limelight.visionCamera();
+    if (autonomousCommand != null) {
+      autonomousCommand.cancel();
+    }
+    Robot.driveTrain.brakeMode();
   }
 
   @Override

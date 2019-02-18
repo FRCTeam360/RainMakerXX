@@ -7,12 +7,12 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class MoveToTarget extends Command {
   private int finish = 0;
-  private double turnConstant = 0.15;
   public MoveToTarget() {
     requires(Robot.limelight);
   }
@@ -28,18 +28,18 @@ public class MoveToTarget extends Command {
   @Override
   protected void execute() {
     System.out.println("Move To Target");
-    if(Robot.limelight.getY() < -3.0) {
+    if(Robot.limelight.getY() < -2.0) {
       if(Robot.limelight.getX() > 0.8) {
         System.out.println("turn right");
-        Robot.driveTrain.driveL(0.3 + turnConstant);
-        Robot.driveTrain.driveR(0.3 - turnConstant);
+        Robot.driveTrain.driveL(0.3 + Robot.limelight.getX() * 0.01);
+        Robot.driveTrain.driveR(0.3 - Robot.limelight.getX() * 0.01);
       } else if(Robot.limelight.getX() < -0.8) {
         System.out.println("turn left");
-        Robot.driveTrain.driveL(0.3 - turnConstant);
-        Robot.driveTrain.driveR(0.3 + turnConstant);
+        Robot.driveTrain.driveL(0.3 - Robot.limelight.getX() * -0.01);
+        Robot.driveTrain.driveR(0.3 + Robot.limelight.getX() * -0.01);
       } else {
-        Robot.driveTrain.driveL(0.3);
-        Robot.driveTrain.driveR(0.3);
+        Robot.driveTrain.driveL(0.3 - Robot.limelight.getY() * 0.01);
+        Robot.driveTrain.driveR(0.3 - Robot.limelight.getY() * 0.01);
         System.out.println("run to target");
       }
     } else {
@@ -60,7 +60,7 @@ public class MoveToTarget extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveTrain.coastMode();
+    
   }
 
   // Called when another command which requires one or more of the same

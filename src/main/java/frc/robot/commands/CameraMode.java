@@ -7,33 +7,39 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
 
 public class CameraMode extends Command {
+  private boolean isFinished = false;
+
   public CameraMode() {
     requires(Robot.limelight);
   }
 
   @Override
   protected void initialize() {
+    
   }
 
   @Override
   protected void execute() {
-    if(OI.joyR.getRawButton(3)) {
-      Robot.limelight.changeCameraMode();
+    while (OI.joyR.getRawButton(4) == true){
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1.0);
     }
+    isFinished = true;
   }
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return isFinished;
   }
 
   @Override
   protected void end() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0);
   }
 
   @Override

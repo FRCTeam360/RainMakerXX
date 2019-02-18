@@ -21,8 +21,13 @@ public class OI {
   public static Button buttonDriveDown = new JoystickButton(joyL, 1);
 
   public static Button buttonMoveWithLime = new JoystickButton(joyR, 3);
+
+  public static Button changeCamMode = new JoystickButton(joyR, 4);
+  
   public OI() {
     buttonMoveWithLime.whenPressed(new MoveToTarget());
+
+    changeCamMode.whenPressed(new CameraMode());
 
     buttonDriveUp.whenPressed(new ShiftUp());
 		buttonDriveDown.whenPressed(new ShiftDown());
