@@ -32,8 +32,6 @@ public class Constants {
 
     public static final double wristSpeed = .2;
 
-    public static final int checkArmPosition = 1000;
-
     public static final double armAutoSpeedUp = -.4;
     public static final double armAutoSpeedDown = .25;
     public static final double armStaySpeed = -.1;
@@ -43,9 +41,14 @@ public class Constants {
     public static final int wristThreshold = 150;
 
     public static final double wristF = .93;
-    public static final double wristP = 1.023;
-    public static final double wristI = .1023;
-    public static final double wristD = 102.3;
+    public static final double wristP = 0;
+    public static final double wristI = 0;
+    public static final double wristD = 0;
+
+    public static final double armF = 0;
+    public static final double armP = 0;
+    public static final double armI = 0;
+    public static final double armD = 0;
 
     public static boolean isInAutoShift = false;
     

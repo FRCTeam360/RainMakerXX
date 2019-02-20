@@ -29,20 +29,22 @@ public class ArmManual extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.joyControl.getRawAxis(1) <= -.05){
 
-        Robot.armControl.articulateArm(Constants.armAutoSpeedUp);
-    }else if(OI.joyControl.getRawAxis(1) >= .05){
-        Robot.armControl.articulateArm(Constants.armAutoSpeedDown);
-    }else{
-      if(RobotMap.armMotor.getSelectedSensorPosition() > Constants.checkArmPosition){
+    Robot.wristControl.setMotorPosition((-1 * RobotMap.armMotor.getSelectedSensorPosition()) + 300);
 
-        Robot.armControl.articulateArm(Constants.armStaySpeed);
+    if(Math.abs(OI.joyControl.getRawAxis(1)) >= .15){
+      Robot.armControl.setMotor(OI.joyControl.getRawAxis(1) * .75);
+    } else{
+
+      if(RobotMap.armMotor.getSelectedSensorPosition() > 1100){
+        // Robot.armControl.setMotor(Constants.armStaySpeed);
+        Robot.armControl.setMotor(0);
       }else{
-
-        Robot.armControl.articulateArm(0);
+        Robot.armControl.setMotor(0);
       }
     }
+
+    // Robot.wristControl.setMotorPosition((-1 * RobotMap.armMotor.getSelectedSensorPosition()) + 300);
   }
 
   // Make this return true when this Command no longer needs to run execute()

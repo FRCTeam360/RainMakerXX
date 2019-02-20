@@ -17,9 +17,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
-import frc.robot.OI;
 import frc.robot.RobotMap;
-import frc.robot.commands.WristManual;
+import frc.robot.commands.MoveWrist;;
 
 /**
  * Add your docs here.
@@ -28,8 +27,6 @@ public class WristControl extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private TalonSRX wristMotor = RobotMap.wristMotor;
-
-  private int zeroSensor;
 
   private final int kSlotIdx = 0;
 	private final int kPIDLoopIdx = 0;
@@ -62,8 +59,9 @@ public class WristControl extends Subsystem {
   public void setMotor(double speed) {
 		wristMotor.set(ControlMode.PercentOutput, speed);
 	}
-	public void setMotorPosition(double distance) {
-		wristMotor.set(ControlMode.MotionMagic, distance);
+	public void setMotorPosition(double position) {
+    wristMotor.set(ControlMode.MotionMagic, position);
+    Process();
 	}
 	public void stop() {
 		wristMotor.set(ControlMode.PercentOutput, 0);
@@ -72,11 +70,11 @@ public class WristControl extends Subsystem {
 		return wristMotor.getSelectedSensorPosition(0);
 	}
 	public void motionMagicInit() {
-		/* set acceleration and vcruise velocity - see documentation */
-		wristMotor.configMotionCruiseVelocity(1100, kTimeoutMs);
-		wristMotor.configMotionAcceleration(1500, kTimeoutMs);
-		/* zero the sensor */
-		//elevatorMaster.setSelectedSensorPosition(0, kPIDLoopIdx, kTimeoutMs);
+		// wristMotor.configMotionCruiseVelocity(1100, kTimeoutMs);
+    // wristMotor.configMotionAcceleration(1500, kTimeoutMs);
+    
+    wristMotor.configMotionCruiseVelocity(400, kTimeoutMs);
+		wristMotor.configMotionAcceleration(545, kTimeoutMs);
   }
   public void Process(){
     SmartDashboard.putNumber("WristVel", wristMotor.getSelectedSensorVelocity(0));
@@ -108,54 +106,7 @@ public class WristControl extends Subsystem {
 		}
 	}
 
-  public void articulateWrist(double wristMotor){
-    // if(OI.joyControl.getRawButton(12)){
-
-    //   RobotMap.wristMotor.set(ControlMode.PercentOutput, wristMotor);
-      
-    // }else if(Constants.armPanelPickUpActivation == false){
-      
-    //   int armEncode = RobotMap.armMotor.getSelectedSensorPosition();
-    //   int wristEncode = (int) (RobotMap.wristMotor.getSelectedSensorPosition() * 1.3);
-
-    //   if((armEncode + wristEncode) > Constants.wristThreshold){
-
-    //     RobotMap.wristMotor.set(ControlMode.PercentOutput, (-1 * Constants.wristSpeed));
-
-    //   }else if(((armEncode + wristEncode)) < -1 * (Constants.wristThreshold)){
-
-    //     RobotMap.wristMotor.set(ControlMode.PercentOutput, .6 * Constants.wristSpeed);
-
-    //   } else{
-
-    //     RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
-    //   }
-    // }else{
-
-    //   int armEncode = RobotMap.armMotor.getSelectedSensorPosition();
-    //   int wristEncode = (int) ((RobotMap.wristMotor.getSelectedSensorPosition() + Constants.wristPanelPickUp) * 1.3);
-
-    //   if((armEncode + wristEncode) > Constants.wristThreshold){
-
-    //     RobotMap.wristMotor.set(ControlMode.PercentOutput, (-1 * Constants.wristSpeed));
-
-    //   }else if((armEncode + wristEncode) < -1 * (Constants.wristThreshold)){
-
-    //     RobotMap.wristMotor.set(ControlMode.PercentOutput, .6 * Constants.wristSpeed);
-
-    //   } else{
-
-    //     if(armEncode > 2000){
-    //       RobotMap.wristMotor.set(ControlMode.PercentOutput, -.09);
-    //     }else if(armEncode > 400){
-    //       RobotMap.wristMotor.set(ControlMode.PercentOutput, -.04);
-    //     }else{
-
-    //       RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
-    //     }
-    //   }
-    // }
-  }
+  
   public void wristReset(){
     RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
     RobotMap.wristMotor.setSelectedSensorPosition(Constants.wristResetPosition);
@@ -164,6 +115,6 @@ public class WristControl extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new WristManual());
+    setDefaultCommand(new MoveWrist((-1 * RobotMap.armMotor.getSelectedSensorPosition()) + 300));
   }
 }

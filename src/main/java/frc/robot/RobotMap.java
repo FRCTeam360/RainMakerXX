@@ -24,10 +24,15 @@ public class RobotMap {
   public static DoubleSolenoid hatchPanel = new DoubleSolenoid(1, 5);
 
   public static int currentPos;
+  public static int wristOffset = 0;
+
+  public static int currentArmPos;
 
   public static double goalWristPos = 0;
-
   public static boolean shouldWristStop = false;
+
+  public static double goalArmPos = 0;
+  public static boolean shouldArmStop = false;
 
   public static enum ShiftState {UP, DOWN, UNKNOWN};
   public static ShiftState shiftState = ShiftState.UNKNOWN;
