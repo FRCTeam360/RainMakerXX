@@ -12,47 +12,49 @@ import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ClimbingThingDo;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.AnalogAccelerometer;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.SensorUtil;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Encoder;
+import frc.robot.OI;
 
-/**
- * Add your docs here.
- */
 public class ClimbingThing extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-
-  //Channels
 
   BuiltInAccelerometer accel = RobotMap.accell;
-  DigitalInput limitSwitch1 = RobotMap.limitTop1;
-  DigitalInput limitSwitch2 = RobotMap.limitTop2;
-  DigitalInput limitSwitch3 = RobotMap.limitBottom1;
-  DigitalInput limitSwitch4 = RobotMap.limitBottom2;
-  DigitalInput limitSwitch5 = RobotMap.limitFront1;
-  DigitalInput limitSwitch6 = RobotMap.limitFront2;
-  DigitalInput limitSwitch7 = RobotMap.limitBack1;
-  DigitalInput limitSwitch8 = RobotMap.limitBack2;
 
-  //public Victor one = RobotMap.lift1Motor;
-  //public Victor two = RobotMap.lift2Motor;
+  public TalonSRX one = RobotMap.lift1Motor;
+  public TalonSRX two = RobotMap.lift2Motor;
+  //public Victor bone = RobotMap.bottom1;
+  //public Victor btwo = RobotMap.bottom2;
+
+  public Encoder lift1 = RobotMap.lift1;
+  public Encoder lift2 = RobotMap.lift2;
 
   double accelerationX;
   double accelerationY;
   double accelerationZ;
   double pitch;
   double roll;
+  double power;
 
-  //This is the max angle the robot can be off by
   public static final int maxAngle = 5;
-  //Duh
+  public static final double dPerRev = 20.0;
+  public static final double pPerRev = 1024.0;
+  public static final double dPerPul = dPerRev/pPerRev;
+  public static final double dUpLift = 100;
+  //168
 
   public void init(){
     accel = new BuiltInAccelerometer(Accelerometer.Range.k4G);    
     double power = Math.log(100)/Math.log(maxAngle);
+    lift1.setDistancePerPulse(dPerPul);
+    lift2.setDistancePerPulse(dPerPul);
   }
 
   public void getAccel(){
@@ -64,15 +66,15 @@ public class ClimbingThing extends Subsystem {
     SmartDashboard.putNumber("Accel Y: ", accelerationY);
     SmartDashboard.putNumber("Accel Z: ", accelerationZ);
 
-    pitch = Math.atan2((- accelerationX),Math.sqrt(accelerationY*accelerationY+accelerationZ*accelerationZ)) * 57.3;
-    //roll = Math.atan2(accelerationY, accelerationZ) * 57.3;
+    //pitch = Math.atan2((- accelerationX),Math.sqrt(accelerationY*accelerationY+accelerationZ*accelerationZ)) * 57.3;
+    roll = Math.atan2(accelerationY, accelerationZ) * 57.3;
 
-    SmartDashboard.putNumber("Pitch : ", pitch);
-    //SmartDashboard.putNumber("Roll : ", roll);
+    SmartDashboard.putNumber("Roll : ", roll);
   }
 
   public void iDunnoMane(){
-    pitch = Math.atan2((- accelerationX),Math.sqrt(accelerationY*accelerationY+accelerationZ*accelerationZ)) * 57.3;
+    pitch = Math.atan2(accelerationY, accelerationZ) * 57.3;
+
 
     if(pitch > 5 || pitch < -5){
       SmartDashboard.putBoolean("Lift?", false);
@@ -86,59 +88,40 @@ public class ClimbingThing extends Subsystem {
   }
 
   public void climb(){
-    pitch = Math.atan2((- accelerationX),Math.sqrt(accelerationY*accelerationY+accelerationZ*accelerationZ)) * 57.3;
-    while(!limitSwitch1.get() && !limitSwitch2.get()){
-      if(pitch < maxAngle){
-        //set victor speed to 1-pitch to power of power/100
+    pitch = Math.atan2(accelerationY, accelerationZ) * 57.3;
+    //lift1.getDistance() <= dUpLift || lift1.getDistance() <= dUpLift
+    //OI.joyR.getRawAxis(1)) > .05
+    while(OI.joyR.getRawAxis(1) > .05){
+      System.out.print("asdfghjkjhgfdsasdfghjhgfdsdfghj");
+      if(pitch <= maxAngle){
+        one.set(ControlMode.PercentOutput, (1-Math.pow(pitch, power))/2);
       } else {
-        //set victor to 0
+        one.set(ControlMode.PercentOutput,0);
       }
-      if(pitch > -maxAngle){
-        //set victor speed to 1-pitch to power of power/100
+      if(pitch >= -maxAngle){
+        two.set(ControlMode.PercentOutput, (1-Math.pow(pitch, power))/2);
       } else {
-        //set victor to 0
+        two.set(ControlMode.PercentOutput,0);
       }
     }
   }
-  
-  public void getToLedge(){
-    climb();
-    while(!limitSwitch5.get() && !limitSwitch6.get()){
-      //set victor forward
+
+  public void retract(Encoder limit, TalonSRX victor){
+    while(lift1.getDistance() >= -dUpLift || OI.joyOI.getRawAxis(1) < -.05){
+      victor.set(ControlMode.PercentOutput,-1);
     }
   }
 
   public void retractOne(){
-    getToLedge();
-    while(!limitSwitch3.get()){
-      //set victor up
-    }
-  }
-
-  public void getToLedge2(){
-    climb();
-    while(!limitSwitch7.get() && !limitSwitch8.get()){
-      //set victor forward
-    }
+    retract(lift1, one);
   }
 
   public void retractTwo(){
-    getToLedge();
-    while(!limitSwitch4.get()){
-      //set victor up
-    }
+    retract(lift2, two);
   }
-
-  public void driveForward(){
-    retractTwo();
-    //stuff goes in here
-  }
-
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new ClimbingThingDo());
   }
 }

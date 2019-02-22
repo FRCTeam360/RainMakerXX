@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 
 
@@ -35,17 +36,11 @@ public class RobotMap {
   //public static CANSparkMax right1Motor = new CANSparkMax(2, MotorType.kBrushless);
   //public static CANSparkMax right2Motor = new CANSparkMax(3, MotorType.kBrushless);
   
-  //public static Victor lift1Motor = new Victor(4);
-  //public static Victor lift2Motor = new Victor(5);
-
-  public static DigitalInput limitTop1 = new DigitalInput(6);
-  public static DigitalInput limitTop2 = new DigitalInput(7);
-  public static DigitalInput limitBottom1 = new DigitalInput(8);
-  public static DigitalInput limitBottom2 = new DigitalInput(9);
-  public static DigitalInput limitFront1 = new DigitalInput(10);
-  public static DigitalInput limitFront2 = new DigitalInput(11);
-  public static DigitalInput limitBack1 = new DigitalInput(12);
-  public static DigitalInput limitBack2 = new DigitalInput(13);
+  public static TalonSRX lift1Motor = new TalonSRX(2);
+  public static TalonSRX lift2Motor = new TalonSRX(1);
+  //public static Victor bottom1 = new Victor(10);
+  //public static Victor bottom2 = new Victor(11);
   public static BuiltInAccelerometer accell = new BuiltInAccelerometer();
-
+  public static Encoder lift1 = new Encoder(0,1,false,EncodingType.k4X);
+  public static Encoder lift2 = new Encoder(2,3,false,EncodingType.k4X);
 }
