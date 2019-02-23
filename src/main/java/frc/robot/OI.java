@@ -45,7 +45,6 @@ public class OI {
     buttonWristPanelPosition.whenPressed(new WristPanelPosition());
 
     autoShift.whenPressed(new AutoShift());
-    manualShift.whenPressed(new ManualShift());
 
     buttonHatchPanelUp.whenPressed(new HatchIn());
     buttonHatchPanelDown.whenPressed(new HatchOut());

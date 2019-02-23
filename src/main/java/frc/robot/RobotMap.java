@@ -38,16 +38,16 @@ public class RobotMap {
   public static enum ShiftState {UP, DOWN, UNKNOWN};
   public static ShiftState shiftState = ShiftState.UNKNOWN;
   
-  public static Compressor compressor = new Compressor(1);
+  public static Compressor compressor = new Compressor();
 
-  public static CANSparkMax left1Motor = new CANSparkMax(0, MotorType.kBrushless);
-  public static CANSparkMax left2Motor = new CANSparkMax(1, MotorType.kBrushless);
-  public static CANSparkMax right1Motor = new CANSparkMax(2, MotorType.kBrushless);
-  public static CANSparkMax right2Motor = new CANSparkMax(3, MotorType.kBrushless);
+  public static CANSparkMax left1Motor = new CANSparkMax(1, MotorType.kBrushless);
+  public static CANSparkMax left2Motor = new CANSparkMax(2, MotorType.kBrushless);
+  public static CANSparkMax right1Motor = new CANSparkMax(3, MotorType.kBrushless);
+  public static CANSparkMax right2Motor = new CANSparkMax(4, MotorType.kBrushless);
 
-  public static TalonSRX armMotor = new TalonSRX(4);
-  public static TalonSRX wristMotor = new TalonSRX(5);
-  public static TalonSRX intakeMotor = new TalonSRX(6);
+  public static TalonSRX armMotor = new TalonSRX(5);
+  public static TalonSRX wristMotor = new TalonSRX(6);
+  public static TalonSRX intakeMotor = new TalonSRX(7);
 
   public static DigitalInput armSwitch = new DigitalInput(1);
   
