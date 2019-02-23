@@ -8,11 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
 
@@ -29,7 +25,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     shifter = new Shifter();
 		pneumatics = new Pneumatics();
-		driveTrain = new DriveTrain();
+    driveTrain = new DriveTrain();
     oi = new OI();
     
     //m_chooser.addDefault("Default Auto", new ExampleCommand());
