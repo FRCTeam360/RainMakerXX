@@ -27,7 +27,6 @@ public class AutoShift extends Command {
   @Override
   protected void execute() {
     if(Constants.isInAutoShift == true){
-
       double getRightVelocity = RobotMap.right1Motor.getEncoder().getVelocity();
       double getLeftVelocity = RobotMap.left1Motor.getEncoder().getVelocity();
 
