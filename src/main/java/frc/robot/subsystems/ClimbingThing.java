@@ -94,7 +94,7 @@ public class ClimbingThing extends Subsystem {
     //lift1.getDistance() <= dUpLift || lift1.getDistance() <= dUpLift
     //OI.joyR.getRawAxis(1)) > .05
       // if(pitch <= maxAngle){
-        one.set(ControlMode.PercentOutput, power/2/*(1-Math.pow(pitch, power))/2*/);
+        one.set(ControlMode.PercentOutput, power/*(1-Math.pow(pitch, power))/2*/);
       // } else {
       //   one.set(ControlMode.PercentOutput,0);
       // }
@@ -107,7 +107,7 @@ public class ClimbingThing extends Subsystem {
   }
 
   public void climbB(double power){
-    two.set(ControlMode.PercentOutput, power/2/*(1-Math.pow(pitch, power))/2*/);
+    two.set(ControlMode.PercentOutput, power/*(1-Math.pow(pitch, power))/2*/);
   }
 
   public void retract(/*Encoder limit,*/ TalonSRX victor){
