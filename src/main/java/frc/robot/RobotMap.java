@@ -22,7 +22,7 @@ public class RobotMap {
   public static enum ShiftState {UP, DOWN, UNKNOWN};
   public static ShiftState shiftState = ShiftState.UNKNOWN;
   
-  public static Compressor compressor = new Compressor(1);
+  public static Compressor compressor = new Compressor();
 
   public static CANSparkMax left1Motor = new CANSparkMax(0, MotorType.kBrushless);
   public static CANSparkMax left2Motor = new CANSparkMax(1, MotorType.kBrushless);
