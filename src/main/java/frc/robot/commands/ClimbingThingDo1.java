@@ -14,7 +14,7 @@ public class ClimbingThingDo1 extends Command {
   public ClimbingThingDo1() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.climbingThing);
+    //requires(Robot.climbingThing);
 
   }
 

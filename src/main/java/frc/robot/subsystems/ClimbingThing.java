@@ -33,13 +33,13 @@ public class ClimbingThing extends Subsystem {
   //public Victor bone = RobotMap.bottom1;
   //public Victor btwo = RobotMap.bottom2;
 
-  public Encoder lift1 = RobotMap.lift1;
-  public Encoder lift2 = RobotMap.lift2;
+  //public Encoder lift1 = RobotMap.lift1;
+  //public Encoder lift2 = RobotMap.lift2;
 
   double accelerationX;
   double accelerationY;
   double accelerationZ;
-  double pitch;
+  double pitch = Math.atan2(accelerationY, accelerationZ) * 57.3;
   double roll;
   double power;
 
@@ -52,9 +52,9 @@ public class ClimbingThing extends Subsystem {
 
   public void init(){
     accel = new BuiltInAccelerometer(Accelerometer.Range.k4G);    
-    double power = Math.log(100)/Math.log(maxAngle);
-    lift1.setDistancePerPulse(dPerPul);
-    lift2.setDistancePerPulse(dPerPul);
+    //power = Math.log(100)/Math.log(maxAngle);
+    //lift1.setDistancePerPulse(dPerPul);
+    //lift2.setDistancePerPulse(dPerPul);
   }
 
   public void getAccel(){
@@ -66,19 +66,21 @@ public class ClimbingThing extends Subsystem {
     SmartDashboard.putNumber("Accel Y: ", accelerationY);
     SmartDashboard.putNumber("Accel Z: ", accelerationZ);
 
-    //pitch = Math.atan2((- accelerationX),Math.sqrt(accelerationY*accelerationY+accelerationZ*accelerationZ)) * 57.3;
+    pitch = Math.atan2((- accelerationX),Math.sqrt(accelerationY*accelerationY+accelerationZ*accelerationZ)) * 57.3;
     roll = Math.atan2(accelerationY, accelerationZ) * 57.3;
 
     SmartDashboard.putNumber("Roll : ", roll);
   }
 
   public void iDunnoMane(){
-    pitch = Math.atan2(accelerationY, accelerationZ) * 57.3;
+    //pitch = Math.atan2(accelerationY, accelerationZ) * 57.3;
 
 
     if(pitch > 5 || pitch < -5){
       SmartDashboard.putBoolean("Lift?", false);
-    }else{ SmartDashboard.putBoolean("Lift?", true);}
+    }else{ 
+      SmartDashboard.putBoolean("Lift?", true);
+    }
 
     /*
     pitch to power 2.86
@@ -87,37 +89,39 @@ public class ClimbingThing extends Subsystem {
 
   }
 
-  public void climb(){
-    pitch = Math.atan2(accelerationY, accelerationZ) * 57.3;
+  public void climbF(double power){
+    //pitch = Math.atan2(accelerationY, accelerationZ) * 57.3;
     //lift1.getDistance() <= dUpLift || lift1.getDistance() <= dUpLift
     //OI.joyR.getRawAxis(1)) > .05
-    while(OI.joyR.getRawAxis(1) > .05){
-      System.out.print("asdfghjkjhgfdsasdfghjhgfdsdfghj");
-      if(pitch <= maxAngle){
-        one.set(ControlMode.PercentOutput, (1-Math.pow(pitch, power))/2);
-      } else {
-        one.set(ControlMode.PercentOutput,0);
-      }
-      if(pitch >= -maxAngle){
-        two.set(ControlMode.PercentOutput, (1-Math.pow(pitch, power))/2);
-      } else {
-        two.set(ControlMode.PercentOutput,0);
-      }
-    }
+      // if(pitch <= maxAngle){
+        one.set(ControlMode.PercentOutput, power/2/*(1-Math.pow(pitch, power))/2*/);
+      // } else {
+      //   one.set(ControlMode.PercentOutput,0);
+      // }
+      // if(pitch >= -maxAngle){
+        //two.set(ControlMode.PercentOutput, power/2/*(1-Math.pow(pitch, power))/2*/);
+      // } else {
+      //   two.set(ControlMode.PercentOutput,0);
+      // }
+    
   }
 
-  public void retract(Encoder limit, TalonSRX victor){
-    while(lift1.getDistance() >= -dUpLift || OI.joyOI.getRawAxis(1) < -.05){
-      victor.set(ControlMode.PercentOutput,-1);
-    }
+  public void climbB(double power){
+    two.set(ControlMode.PercentOutput, power/2/*(1-Math.pow(pitch, power))/2*/);
+  }
+
+  public void retract(/*Encoder limit,*/ TalonSRX victor){
+    // while(/*lift1.getDistance() >= -dUpLift ||*/ OI.joyOI.getRawAxis(1) < -.05){
+    //   victor.set(ControlMode.PercentOutput,-1);
+    // }
   }
 
   public void retractOne(){
-    retract(lift1, one);
+    retract(/*lift1*/ one);
   }
 
   public void retractTwo(){
-    retract(lift2, two);
+    retract(/*lift2*/ two);
   }
 
   @Override

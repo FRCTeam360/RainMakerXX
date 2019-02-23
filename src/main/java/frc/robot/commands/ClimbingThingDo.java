@@ -7,8 +7,13 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.subsystems.ClimbingThing;
 
 public class ClimbingThingDo extends Command {
   public ClimbingThingDo() {
@@ -28,7 +33,17 @@ public class ClimbingThingDo extends Command {
     //boolean accelStatus = RobotMap.
     Robot.climbingThing.getAccel();
     Robot.climbingThing.iDunnoMane();
-    Robot.climbingThing.climb();
+    if(Math.abs(OI.joyR.getRawAxis(1)) > .05) {
+      Robot.climbingThing.climbF(OI.joyR.getRawAxis(1));
+    } else {
+      Robot.climbingThing.climbF(0);
+    }
+    if(Math.abs(OI.joyR.getRawAxis(5)) > .05) {
+      Robot.climbingThing.climbB(OI.joyR.getRawAxis(5));
+    } else {
+      Robot.climbingThing.climbB(0);
+    }
+    //Robot.climbingThing.climb();
   }
 
   // Make this return true when this Command no longer needs to run execute()
