@@ -16,6 +16,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArmManual;
@@ -33,7 +34,7 @@ public class ArmControl extends Subsystem {
   private final int kTimeoutMs = 10;
   
   public ArmControl(){
-    armTalon.setInverted(false);
+    armTalon.setInverted(true);
     armTalon.setNeutralMode(NeutralMode.Brake);
 
     armTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, kPIDLoopIdx, kTimeoutMs);
@@ -71,9 +72,8 @@ public class ArmControl extends Subsystem {
 		return armTalon.getSelectedSensorPosition(0);
 	}
 	public void motionMagicInit() {
-    //CHANGE THE NUMBERS HERE!!!!!
-		armTalon.configMotionCruiseVelocity(1100, kTimeoutMs);
-    armTalon.configMotionAcceleration(1500, kTimeoutMs);
+		armTalon.configMotionCruiseVelocity(460, kTimeoutMs);
+    armTalon.configMotionAcceleration(642, kTimeoutMs);
   }
   public void Process(){
     SmartDashboard.putNumber("ArmVel", armTalon.getSelectedSensorVelocity(0));

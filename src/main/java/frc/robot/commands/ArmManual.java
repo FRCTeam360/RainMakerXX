@@ -8,10 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Constants;
-import frc.robot.OI;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
+import frc.robot.*;
 
 public class ArmManual extends Command {
   public ArmManual() {
@@ -29,16 +26,19 @@ public class ArmManual extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    int wristOffset = 0;
+    if(Constants.armPanelPickUpActivation == true){
+      wristOffset = Constants.wristPanelPickUp;
+    }
 
-    Robot.wristControl.setMotorPosition((-1 * RobotMap.armMotor.getSelectedSensorPosition()) + 300);
+    Robot.wristControl.setMotorPosition((.77 * RobotMap.armMotor.getSelectedSensorPosition() + 200 + wristOffset));
 
     if(Math.abs(OI.joyControl.getRawAxis(1)) >= .15){
-      Robot.armControl.setMotor(OI.joyControl.getRawAxis(1) * .75);
+      Robot.armControl.setMotor(OI.joyControl.getRawAxis(1) * -.5);
     } else{
 
-      if(RobotMap.armMotor.getSelectedSensorPosition() > 1100){
-        // Robot.armControl.setMotor(Constants.armStaySpeed);
-        Robot.armControl.setMotor(0);
+      if(RobotMap.armMotor.getSelectedSensorPosition() < -1100){
+        Robot.armControl.setMotor(Constants.armStaySpeed);
       }else{
         Robot.armControl.setMotor(0);
       }

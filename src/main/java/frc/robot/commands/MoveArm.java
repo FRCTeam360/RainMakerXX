@@ -41,8 +41,8 @@ public class MoveArm extends Command {
   @Override
   protected void execute() {
     Robot.armControl.Process();
-    SmartDashboard.putNumber("Wrist Position", Robot.armControl.getPosition());
-   	SmartDashboard.putNumber("Future Position", pos);
+    SmartDashboard.putNumber("Arm Position", Robot.armControl.getPosition());
+   	SmartDashboard.putNumber("Future Arm Position", pos);
   }
 
   // Make this return true when this Command no longer needs to run execute()

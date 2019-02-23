@@ -36,7 +36,7 @@ public class OI {
   public static Button buttonArmMid = new JoystickButton(joyControl, 3);
   public static Button buttonArmHigh = new JoystickButton(joyControl, 4);
 
-  public static Button buttonWristPanelPosition = new JoystickButton(joyControl, 1);
+  public static Button buttonWristPanelPosition = new JoystickButton(joyControl, 11);
 
   public OI() {
     buttonUp.whenPressed(new ShiftUp());
@@ -57,10 +57,10 @@ public class OI {
     buttonArmMid.whenPressed(new ArmMiddle());
     buttonArmHigh.whenPressed(new ArmHigh());
 
-    buttonManualWrist.whileHeld(new WristManual());
+    // buttonArmLow.whenPressed(new MoveArm(Constants.armLowPosition));
+    // buttonArmMid.whenPressed(new MoveArm(Constants.armMidPosition));
+    // buttonArmHigh.whenPressed(new MoveArm(Constants.armHighPosition));
 
-    buttonArmLow.whenPressed(new MoveWrist(0));
-    buttonArmMid.whenPressed(new MoveWrist(1000));
-    buttonArmHigh.whenPressed(new MoveWrist(2000));
+    buttonManualWrist.whileHeld(new WristManual());
   }
 }

@@ -34,7 +34,8 @@ public class ArmReset extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return RobotMap.armSwitch.get();
+    // return RobotMap.armSwitch.get();
+    return true;
   }
 
   // Called once after isFinished returns true

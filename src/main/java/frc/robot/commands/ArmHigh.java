@@ -29,13 +29,17 @@ public class ArmHigh extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armHighPosition) > Constants.armAutoThreshold){
+    int hatchPanelOffset = 0;
+    if(Constants.armPanelPickUpActivation == true){
+      hatchPanelOffset = Constants.armHatchPanelOffset;
+    }
+    if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armHighPosition - hatchPanelOffset) > Constants.armAutoThreshold){
 
-      RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedDown);
+      RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedUp);
 
     }else if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armHighPosition) < Constants.armAutoThreshold){
 
-      RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedUp);
+      RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedDown);
       
     }else{
       isDone = true;

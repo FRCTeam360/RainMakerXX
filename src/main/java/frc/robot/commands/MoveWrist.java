@@ -9,9 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
+import frc.robot.*;
 
 public class MoveWrist extends Command {
 
@@ -28,9 +26,7 @@ public class MoveWrist extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    if(Constants.armPanelPickUpActivation == true){
-      RobotMap.wristOffset = Constants.wristPanelPickUp;
-    }
+    
     RobotMap.goalWristPos = wantedPos + RobotMap.wristOffset;
     RobotMap.shouldWristStop = false;
     if(wantedPos == 0) {
