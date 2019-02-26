@@ -72,15 +72,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    Robot.limelight.visionCamera();
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }
-    Robot.driveTrain.brakeMode();
-    // if (m_autonomousCommand != null) {
-    //   m_autonomousCommand.cancel();
-    // }
+    Robot.limelight.visionCamera();
     Robot.shifter.shiftDown();
+    Robot.driveTrain.brakeMode();
   }
 
   @Override
