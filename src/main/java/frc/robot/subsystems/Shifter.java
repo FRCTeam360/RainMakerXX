@@ -9,7 +9,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import frc.robot.*;
+import frc.robot.commands.AutoShift;
+import frc.robot.RobotMap;
 import frc.robot.RobotMap.ShiftState;
 
 public class Shifter extends Subsystem {
@@ -24,6 +25,6 @@ public class Shifter extends Subsystem {
 	}
   @Override
   public void initDefaultCommand() {
-    
+    setDefaultCommand(new AutoShift());
   }
 }

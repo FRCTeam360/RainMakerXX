@@ -9,86 +9,162 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.revrobotics.CANEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.revrobotics.CANEncoder;
 
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.*;
+import frc.robot.RobotMap.ShiftState;
+import frc.robot.commands.JoystickTankDrive;
 
 public class DriveTrain extends Subsystem {
 
-  public TalonSRX motorRMaster = RobotMap.motorRightMaster;
-  private TalonSRX motorRSlave = RobotMap.motorRightSlave;
-  
-  public TalonSRX motorLMaster = RobotMap.motorLeftMaster;
-  private TalonSRX motorLSlave = RobotMap.motorLeftSlave;
+  public CANSparkMax motorR1 = RobotMap.right1Motor;
+  public CANSparkMax motorR2 = RobotMap.right2Motor;
+  public CANSparkMax motorL1 = RobotMap.left1Motor;
+  public CANSparkMax motorL2 = RobotMap.left2Motor;
 
-  // public CANSparkMax motorRMaster = RobotMap.motorRightMaster;
-	// private CANSparkMax motorRSlave = RobotMap.motorRightSlave;
-	
-	// public CANSparkMax motorLMaster = RobotMap.motorLeftMaster;
-  // private CANSparkMax motorLSlave = RobotMap.motorLeftSlave;
+  public CANEncoder rightOne;
+  public CANEncoder rightTwo;
+  public CANEncoder leftOne;
+  public CANEncoder leftTwo;
 
-  // private CANEncoder rightOne;
-  // private CANEncoder rightTwo;
-  // private CANEncoder leftOne;
-  // private CANEncoder leftTwo;
-  
+  // initializes velocities for left and right sides
+  double leftVel;
+  double rightVel;
+
+  // initializes new positions for left and right sides
+  double leftNewPos;
+  double rightNewPos;
+
+  // initializes old position values to zero
+  double leftOldPos = 0;
+  double rightOldPos = 0;
+
+  // initializes the output variable to zero for left and right sides
+  double leftOutput = 0;
+  double rightOutput = 0;
+
+  // initializes the changes in positions for left and right sides
+  double deltaRightPos;
+  double deltaLeftPos;
+
   public DriveTrain() {
 
-    motorRSlave.follow(motorRMaster);
-    motorLSlave.follow(motorLMaster);
+    // makes the second motor for left and right sides to follow the primary motor on the left and right
+    motorL2.follow(motorL1);
+    motorR2.follow(motorR1);
     
-    motorLMaster.setInverted(false);
-		motorLSlave.setInverted(false);
-		
-		motorRMaster.setInverted(true);
-		motorRSlave.setInverted(true);
-		
-		motorLMaster.setSensorPhase(false);
-    motorRMaster.setSensorPhase(false);
-    
-    motorLMaster.selectProfileSlot(0, 0);
-		motorRMaster.selectProfileSlot(0, 0);
-		
-		// resetTalons(motorRMaster);
-		// resetTalons(motorLMaster);
-		
-		// resetTalons(motorRSlave);
-    // resetTalons(motorLSlave);
+    // makes one side of the robot reverse direction in order to ensure that the robot goes forward when the joysticks are both forward and backwards when the joysticks are both backwards
+    motorL1.setInverted(false);
+    motorL2.setInverted(false);
+    motorR1.setInverted(true);
+    motorR2.setInverted(true);
   }
-  public void driveR(double RMotor) {
-		motorRMaster.set(ControlMode.PercentOutput, RMotor);
+
+  public void leftEnc(){
+    // gets the new position of the encoder
+    leftNewPos = motorL1.getEncoder().getPosition();
+    // puts raw number in smartdashboard
+    SmartDashboard.putNumber("Left Raw Pos", leftNewPos);
+    // finds the difference in the new and the old position
+    deltaLeftPos = leftNewPos - leftOldPos;
+
+    // gets the velocity of the left motor
+    leftVel = motorL2.getEncoder().getVelocity();
+    // puts raw number in smartdashboard
+    SmartDashboard.putNumber("Left Raw Vel", leftVel);
+
+    // checks if the shiftstate is up
+    if(RobotMap.shiftState == ShiftState.UP){
+    // takes the change in position and divides it by the high gear ratio
+      deltaLeftPos /= Constants.highFactor;
+    // takes the velocity and divides it by the high gear ratio
+      leftVel /= Constants.highFactor;
+    }
+
+    // checks if the shiftstate is down
+    if(RobotMap.shiftState == ShiftState.DOWN){
+    // takes the change in position and divides it by the low gear ratio
+      deltaLeftPos /= Constants.lowFactor;
+    // takes the velocity and divides it by the low gear ratio
+      leftVel /= Constants.lowFactor;
+    }
+
+    // sets the old position to the new position
+    leftOldPos = leftNewPos;
+    // adds the change in position to the left output
+    leftOutput += deltaLeftPos;
+    // outputs position in smartdashboard
+    SmartDashboard.putNumber("Left Pos", leftOutput);
+    // outputs velocity in smartdashboard
+    SmartDashboard.putNumber("Left Vel", leftVel);
+  }
+
+  public void rightEnc(){
+    // gets the new position of the encoder
+    rightNewPos = motorR1.getEncoder().getPosition();
+    // puts raw number in smartdashboard
+    SmartDashboard.putNumber("Right Raw Pos", rightNewPos);
+    // finds the difference in the new and the old position
+    deltaRightPos = rightNewPos - rightOldPos;
+
+    // gets the velocity of the left motor
+    rightVel = motorR2.getEncoder().getVelocity();
+    // puts raw number in smartdashboard
+    SmartDashboard.putNumber("Right Raw Vel", rightVel);
+
+    if(RobotMap.shiftState == ShiftState.UP){
+    // takes the change in position and divides it by the high gear ratio
+      deltaRightPos /= Constants.highFactor;
+    // takes the velocity and divides it by the high gear ratio
+      rightVel /= Constants.highFactor;
+    }
+      
+    if(RobotMap.shiftState == ShiftState.DOWN){
+    // takes the change in position and divides it by the low gear ratio
+      deltaRightPos /= Constants.lowFactor;
+    // takes the velocity and divides it by the low gear ratio
+      rightVel /= Constants.lowFactor;
+    }
+  
+    // sets the old position to the new position
+    rightOldPos = rightNewPos;
+    // adds the change in position to the left output
+    rightOutput += deltaRightPos;
+    // outputs position in smartdashboard
+    SmartDashboard.putNumber("Right Pos", rightOutput);
+    // outputs velocity in smartdashboard
+    SmartDashboard.putNumber("Right Vel", rightVel);
+  }
+
+  public void driveRMAX(double RMotor) {
+    // sets the primary motor on the right side is set to the speed set by the joystick
+    motorR1.set(RMotor);
+    // makes the rightEnc method run and put the numbers in smartdashboard
+    rightEnc();
 	}
-	public void driveL(double LMotor){
-		motorLMaster.set(ControlMode.PercentOutput, LMotor);
+	public void driveLMAX(double LMotor){
+    // sets the primary motor on the left side is set to the speed set by the joystick
+    motorL1.set(LMotor);
+    // makes the leftEnc method run and put the numbers in smartdashboard
+    leftEnc();
   }
   public void brakeMode() {
-    Robot.driveTrain.motorLMaster.setNeutralMode(NeutralMode.Brake);
-    Robot.driveTrain.motorRMaster.setNeutralMode(NeutralMode.Brake);
-    Robot.driveTrain.motorLSlave.setNeutralMode(NeutralMode.Brake);
-    Robot.driveTrain.motorRSlave.setNeutralMode(NeutralMode.Brake);
-
-    // Robot.driveTrain.motorLMaster.setIdleMode(IdleMode.kBrake);
-    // Robot.driveTrain.motorRMaster.setIdleMode(IdleMode.kBrake);
-    // Robot.driveTrain.motorLSlave.setIdleMode(IdleMode.kBrake);
-    // Robot.driveTrain.motorRSlave.setIdleMode(IdleMode.kBrake);
+    Robot.driveTrain.motorL1.setIdleMode(IdleMode.kBrake);
+    Robot.driveTrain.motorR1.setIdleMode(IdleMode.kBrake);
+    Robot.driveTrain.motorL2.setIdleMode(IdleMode.kBrake);
+    Robot.driveTrain.motorR2.setIdleMode(IdleMode.kBrake);
   }
   public void coastMode() {
-    Robot.driveTrain.motorLMaster.setNeutralMode(NeutralMode.Coast);
-    Robot.driveTrain.motorRMaster.setNeutralMode(NeutralMode.Coast);
-    Robot.driveTrain.motorLSlave.setNeutralMode(NeutralMode.Coast);
-    Robot.driveTrain.motorRSlave.setNeutralMode(NeutralMode.Coast);
-
-    // Robot.driveTrain.motorLMaster.setIdleMode(IdleMode.kCoast);
-    // Robot.driveTrain.motorRMaster.setIdleMode(IdleMode.kCoast);
-    // Robot.driveTrain.motorLSlave.setIdleMode(IdleMode.kCoast);
-    // Robot.driveTrain.motorRSlave.setIdleMode(IdleMode.kCoast);
+    Robot.driveTrain.motorL1.setIdleMode(IdleMode.kCoast);
+    Robot.driveTrain.motorR1.setIdleMode(IdleMode.kCoast);
+    Robot.driveTrain.motorL2.setIdleMode(IdleMode.kCoast);
+    Robot.driveTrain.motorR2.setIdleMode(IdleMode.kCoast);
   }
   @Override
   public void initDefaultCommand() {
