@@ -17,11 +17,13 @@ public class OI {
   public static Joystick joyL = new Joystick(1);
   public static Joystick joyControl = new Joystick(2);
 
+  public static Button buttonMoveWithLime = new JoystickButton(joyR, 3);
+
   public static Button autoShift = new JoystickButton(joyR, 1);
   public static Button manualShift = new JoystickButton(joyR, 2);
 
-  public static Button buttonUp = new JoystickButton(joyL, 1);
-  public static Button buttonDown = new JoystickButton(joyL, 2);
+  public static Button buttonDriveUp = new JoystickButton(joyL, 1);
+  public static Button buttonDriveDown = new JoystickButton(joyL, 2);
 
   public static Button buttonHatchPanelUp = new JoystickButton(joyControl, 7);
   public static Button buttonHatchPanelDown = new JoystickButton(joyControl, 8);
@@ -39,10 +41,17 @@ public class OI {
 
   public static Button buttonWristPanelPosition = new JoystickButton(joyControl, 11);
 
-  public OI() {
-    buttonUp.whenPressed(new ShiftUp());
-    buttonDown.whenPressed(new ShiftDown());
+  public static Button changeCamMode = new JoystickButton(joyR, 4);
 
+  
+  public OI() {
+    buttonMoveWithLime.whenPressed(new MoveToTarget());
+
+    changeCamMode.whenPressed(new CameraMode());
+
+    buttonDriveUp.whenPressed(new ShiftUp());
+		buttonDriveDown.whenPressed(new ShiftDown());
+  
     buttonWristPanelPosition.whenPressed(new WristPanelPosition());
 
     autoShift.whenPressed(new AutoShift());

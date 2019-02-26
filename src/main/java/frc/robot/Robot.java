@@ -8,12 +8,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
 
 public class Robot extends TimedRobot {
   public static Shifter shifter;
+  public static Limelight limelight;
   public static Pneumatics pneumatics;
   public static DriveTrain driveTrain;
   public static ArmControl armControl;
@@ -22,12 +25,13 @@ public class Robot extends TimedRobot {
   public static HatchPanelSolenoid hatchPanelSolenoid;
   public static OI oi;
 
-  //Command m_autonomousCommand;
+  Command autonomousCommand;
   //SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   @Override
   public void robotInit() {
     shifter = new Shifter();
+    limelight = new Limelight();
 		pneumatics = new Pneumatics();
     driveTrain = new DriveTrain();
     armControl = new ArmControl();
@@ -35,10 +39,8 @@ public class Robot extends TimedRobot {
     intakeControl = new IntakeControl();
     hatchPanelSolenoid = new HatchPanelSolenoid();
     oi = new OI();
-    
-    //m_chooser.addDefault("Default Auto", new ExampleCommand());
-    // chooser.addObject("My Auto", new MyAutoCommand());
-    //SmartDashboard.putData("Auto mode", m_chooser);
+
+    autonomousCommand = new SandstromPeriod();
   }
 
   @Override
@@ -47,6 +49,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
+    Robot.driveTrain.coastMode();
   }
 
   @Override
@@ -56,10 +59,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-  //  m_autonomousCommand = m_chooser.getSelected();
-  //   if (m_autonomousCommand != null) {
-  //     m_autonomousCommand.start();
-  //   }
+    Robot.limelight.driveCamera();
+    if (autonomousCommand != null) {
+      autonomousCommand.start();
+    }
   }
 
   @Override
@@ -69,6 +72,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    Robot.limelight.visionCamera();
+    if (autonomousCommand != null) {
+      autonomousCommand.cancel();
+    }
+    Robot.driveTrain.brakeMode();
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.cancel();
     // }

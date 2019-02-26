@@ -7,13 +7,16 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANEncoder;
 
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.RobotMap.ShiftState;
 import frc.robot.commands.JoystickTankDrive;
@@ -153,9 +156,19 @@ public class DriveTrain extends Subsystem {
     motorL1.set(LMotor);
     // makes the leftEnc method run and put the numbers in smartdashboard
     leftEnc();
-    // SmartDashboard.putNumber("Wrist encoder", RobotMap.wristMotor.getSelectedSensorPosition());
-    // SmartDashboard.putNumber("Wrist velocity", RobotMap.wristMotor.getSelectedSensorVelocity());
-	}
+  }
+  public void brakeMode() {
+    Robot.driveTrain.motorL1.setIdleMode(IdleMode.kBrake);
+    Robot.driveTrain.motorR1.setIdleMode(IdleMode.kBrake);
+    Robot.driveTrain.motorL2.setIdleMode(IdleMode.kBrake);
+    Robot.driveTrain.motorR2.setIdleMode(IdleMode.kBrake);
+  }
+  public void coastMode() {
+    Robot.driveTrain.motorL1.setIdleMode(IdleMode.kCoast);
+    Robot.driveTrain.motorR1.setIdleMode(IdleMode.kCoast);
+    Robot.driveTrain.motorL2.setIdleMode(IdleMode.kCoast);
+    Robot.driveTrain.motorR2.setIdleMode(IdleMode.kCoast);
+  }
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new JoystickTankDrive());
