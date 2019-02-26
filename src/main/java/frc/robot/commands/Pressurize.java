@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -31,8 +32,8 @@ public class Pressurize extends Command {
 
   @Override
   protected void execute() {
-    if(shouldRun == true && RobotController.getInputVoltage() > 10) {
-      Robot.pneumatics.pressurize(); 	
+     if(shouldRun == true && RobotController.getInputVoltage() > 10) {
+      Robot.pneumatics.pressurize();
     } else if (shouldRun == true && ! (RobotController.getInputVoltage() > 10)) {
       shouldRun = false;
       Robot.pneumatics.stop();
@@ -56,7 +57,6 @@ public class Pressurize extends Command {
     timer.stop();
 	  timer.reset();
     Robot.pneumatics.stop();
-    System.out.print("End");
   }
 
   @Override

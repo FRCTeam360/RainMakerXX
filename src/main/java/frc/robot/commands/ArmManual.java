@@ -10,46 +10,47 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.*;
 
-public class AutoShift extends Command {
-  public AutoShift() {
+public class ArmManual extends Command {
+  public ArmManual() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    //requires(Robot.shifter);
+    requires(Robot.armControl);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Constants.isInAutoShift = true;
   }
+
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Constants.isInAutoShift == true){
-      double getRightVelocity = RobotMap.right1Motor.getEncoder().getVelocity();
-      double getLeftVelocity = RobotMap.left1Motor.getEncoder().getVelocity();
+    int wristOffset = 0;
+    if(Constants.armPanelPickUpActivation == true){
+      wristOffset = Constants.wristPanelPickUp;
+    }
 
-      if(Math.abs(getRightVelocity) >= Constants.highShiftPoint && Math.abs(getLeftVelocity) >= Constants.highShiftPoint){
+    Robot.wristControl.setMotorPosition((.77 * RobotMap.armMotor.getSelectedSensorPosition() + 200 + wristOffset));
 
-        Robot.driveTrain.driveRMAX(0);
-        Robot.driveTrain.driveLMAX(0);
+    if(Math.abs(OI.joyControl.getRawAxis(1)) >= .15){
+      Robot.armControl.setMotor(OI.joyControl.getRawAxis(1) * -.5);
+    } else{
 
-        Robot.shifter.shiftUp();
-      } else if(Math.abs(getRightVelocity) <= Constants.lowShiftPoint && Math.abs(getLeftVelocity) <= Constants.lowShiftPoint){
-
-        Robot.driveTrain.driveRMAX(0);
-        Robot.driveTrain.driveLMAX(0);
-        
-        Robot.shifter.shiftDown();
+      if(RobotMap.armMotor.getSelectedSensorPosition() < -1100){
+        Robot.armControl.setMotor(Constants.armStaySpeed);
+      }else{
+        Robot.armControl.setMotor(0);
       }
     }
+
+    // Robot.wristControl.setMotorPosition((-1 * RobotMap.armMotor.getSelectedSensorPosition()) + 300);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return OI.joyR.getRawButton(1);
+    return false;
   }
 
   // Called once after isFinished returns true

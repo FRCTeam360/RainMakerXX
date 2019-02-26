@@ -7,54 +7,40 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.*;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
-public class AutoShift extends Command {
-  public AutoShift() {
+import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
+import frc.robot.RobotMap;
+
+public class WristReset extends Command {
+  public WristReset() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    //requires(Robot.shifter);
+    requires(Robot.wristControl);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Constants.isInAutoShift = true;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Constants.isInAutoShift == true){
-      double getRightVelocity = RobotMap.right1Motor.getEncoder().getVelocity();
-      double getLeftVelocity = RobotMap.left1Motor.getEncoder().getVelocity();
-
-      if(Math.abs(getRightVelocity) >= Constants.highShiftPoint && Math.abs(getLeftVelocity) >= Constants.highShiftPoint){
-
-        Robot.driveTrain.driveRMAX(0);
-        Robot.driveTrain.driveLMAX(0);
-
-        Robot.shifter.shiftUp();
-      } else if(Math.abs(getRightVelocity) <= Constants.lowShiftPoint && Math.abs(getLeftVelocity) <= Constants.lowShiftPoint){
-
-        Robot.driveTrain.driveRMAX(0);
-        Robot.driveTrain.driveLMAX(0);
-        
-        Robot.shifter.shiftDown();
-      }
-    }
+    RobotMap.wristMotor.set(ControlMode.PercentOutput, .4);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return OI.joyR.getRawButton(1);
+    return RobotMap.pdp.getCurrent(9) >= 7;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.wristControl.wristReset();
   }
 
   // Called when another command which requires one or more of the same
