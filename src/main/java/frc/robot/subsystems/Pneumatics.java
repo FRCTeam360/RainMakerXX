@@ -14,7 +14,7 @@ import frc.robot.commands.Pressurize;
 
 public class Pneumatics extends Subsystem {
   private Compressor comp = RobotMap.compressor;
-  public void pressurize (){
+  public void pressurize(){
     comp.start();
   }
   public void stop(){
