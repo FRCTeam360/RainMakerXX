@@ -31,21 +31,21 @@ public class MoveToTarget extends Command {
     if(Robot.limelight.getY() < -2.0) {
       if(Robot.limelight.getX() > 0.8) {
         System.out.println("turn right");
-        Robot.driveTrain.driveL(0.3 + Robot.limelight.getX() * 0.01);
-        Robot.driveTrain.driveR(0.3 - Robot.limelight.getX() * 0.01);
+        Robot.driveTrain.driveLMAX(0.3 + Robot.limelight.getX() * 0.01);
+        Robot.driveTrain.driveRMAX(0.3 - Robot.limelight.getX() * 0.01);
       } else if(Robot.limelight.getX() < -0.8) {
         System.out.println("turn left");
-        Robot.driveTrain.driveL(0.3 - Robot.limelight.getX() * -0.01);
-        Robot.driveTrain.driveR(0.3 + Robot.limelight.getX() * -0.01);
+        Robot.driveTrain.driveLMAX(0.3 - Robot.limelight.getX() * -0.01);
+        Robot.driveTrain.driveRMAX(0.3 + Robot.limelight.getX() * -0.01);
       } else {
-        Robot.driveTrain.driveL(0.3 - Robot.limelight.getY() * 0.01);
-        Robot.driveTrain.driveR(0.3 - Robot.limelight.getY() * 0.01);
+        Robot.driveTrain.driveLMAX(0.3 - Robot.limelight.getY() * 0.01);
+        Robot.driveTrain.driveRMAX(0.3 - Robot.limelight.getY() * 0.01);
         System.out.println("run to target");
       }
     } else {
       System.out.println("Stop");
-      Robot.driveTrain.driveL(0);
-      Robot.driveTrain.driveR(0);
+      Robot.driveTrain.driveLMAX(0);
+      Robot.driveTrain.driveRMAX(0);
       finish = 1;
       isFinished();
     }
