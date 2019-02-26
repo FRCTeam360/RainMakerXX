@@ -14,7 +14,7 @@ public class AutoShift extends Command {
   public AutoShift() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.shifter);
+    //requires(Robot.shifter);
   }
 
   // Called just before this Command runs the first time
@@ -49,7 +49,7 @@ public class AutoShift extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return OI.joyDrive.getRawButton(9);
+    return OI.joyR.getRawButton(1);
   }
 
   // Called once after isFinished returns true

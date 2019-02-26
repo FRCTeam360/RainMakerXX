@@ -13,14 +13,15 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.*;
 
 public class OI {
-  public static Joystick joyDrive = new Joystick(0);
-  public static Joystick joyControl = new Joystick(1);
+  public static Joystick joyR = new Joystick(0);
+  public static Joystick joyL = new Joystick(1);
+  public static Joystick joyControl = new Joystick(2);
 
-  public static Button autoShift = new JoystickButton(joyDrive, 10);
-  public static Button manualShift = new JoystickButton(joyDrive, 9);
+  public static Button autoShift = new JoystickButton(joyR, 1);
+  public static Button manualShift = new JoystickButton(joyR, 2);
 
-  public static Button buttonUp = new JoystickButton(joyDrive, 12);
-  public static Button buttonDown = new JoystickButton(joyDrive, 11);
+  public static Button buttonUp = new JoystickButton(joyL, 1);
+  public static Button buttonDown = new JoystickButton(joyL, 2);
 
   public static Button buttonHatchPanelUp = new JoystickButton(joyControl, 7);
   public static Button buttonHatchPanelDown = new JoystickButton(joyControl, 8);

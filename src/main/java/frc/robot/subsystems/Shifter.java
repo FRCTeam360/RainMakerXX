@@ -29,6 +29,6 @@ public class Shifter extends Subsystem {
 	}
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new AutoShift());
+    //setDefaultCommand(new AutoShift());
   }
 }
