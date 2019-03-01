@@ -18,6 +18,7 @@ public class Constants {
     public static final int lowShiftPoint = 1000;
 
     public static final int wristResetPosition = 3500;
+    public static final int wristBallPosition = -950;
 
     public static final int armIntakePosition = 0;
     public static final int armOffset = 90;
@@ -50,6 +51,6 @@ public class Constants {
     public static final double armD = 0;
 
     public static boolean isInAutoShift = false;
-    
+
     public static boolean armPanelPickUpActivation = false;
 }

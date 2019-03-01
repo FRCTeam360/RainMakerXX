@@ -82,7 +82,7 @@ public class ArmControl extends Subsystem {
 	  SmartDashboard.putNumber("ArmError", armTalon.getClosedLoopError(0));
   }
 	
-	public void zeroWrist() {
+	public void zeroArm() {
 		armTalon.setSelectedSensorPosition(0, 0, kTimeoutMs);
 	}
 	
@@ -107,8 +107,7 @@ public class ArmControl extends Subsystem {
 
   
   public void armReset(){
-    RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
-    RobotMap.wristMotor.setSelectedSensorPosition(0);
+    RobotMap.armMotor.setSelectedSensorPosition(0);
   }
   // public ArmControl(){
 

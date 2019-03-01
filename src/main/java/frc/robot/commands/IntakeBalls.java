@@ -8,13 +8,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class ArmReset extends Command {
-  public ArmReset() {
+public class IntakeBalls extends Command {
+  public IntakeBalls() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.armControl);
+    requires(Robot.wristControl);
   }
 
   // Called just before this Command runs the first time
@@ -25,25 +27,25 @@ public class ArmReset extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.armControl.armReset();
+    Robot.wristControl.setMotorPosition(Constants.wristBallPosition);
+    Robot.intakeControl.controlIntake(-.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    // return RobotMap.armSwitch.get();
-    return true;
+    return RobotMap.pdp.getCurrent(8) > 6;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

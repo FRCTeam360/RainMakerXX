@@ -32,6 +32,7 @@ public class OI {
 
   public static Button buttonIntakeBall = new JoystickButton(joyControl, 5);
   public static Button buttonOutakeButton = new JoystickButton(joyControl, 6);
+  public static Button buttonIntakeBallPosition = new JoystickButton(joyControl, 1);
 
   public static Button buttonArmLow = new JoystickButton(joyControl, 2);
   public static Button buttonArmMid = new JoystickButton(joyControl, 3);
@@ -44,6 +45,8 @@ public class OI {
     buttonDown.whenPressed(new ShiftDown());
 
     buttonWristPanelPosition.whenPressed(new WristPanelPosition());
+
+    buttonIntakeBallPosition.whenPressed(new IntakeBalls());
 
     autoShift.whenPressed(new AutoShift());
 
