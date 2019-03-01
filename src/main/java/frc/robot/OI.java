@@ -10,29 +10,25 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ShiftDown;
-import frc.robot.commands.ShiftUp;
-import frc.robot.commands.ClimbingThingDo;
-import frc.robot.commands.ClimbingThingDo1;
-import frc.robot.commands.ClimbingThingDo2;
+import frc.robot.commands.*;
 
 public class OI {
   public static Joystick joyR = new Joystick(0);
 	public static Joystick joyL = new Joystick(1);
   public static Joystick joyOI = new Joystick(2);
 
-  public static Button buttonUp = new JoystickButton(joyOI, 12);
-  public static Button buttonDown = new JoystickButton(joyOI, 11);
+  public static Button buttonUp = new JoystickButton(joyR, 1);
+  public static Button buttonDown = new JoystickButton(joyL, 1);
 
-  public static Button buttonLift1 = new JoystickButton(joyOI, 13);
-  public static Button buttonLift2 = new JoystickButton(joyOI, 14);
-  public static Button buttonLift3 = new JoystickButton(joyOI, 15);
+  public static Button buttonLiftDown = new JoystickButton(joyOI, 4);
+  public static Button buttonLift1 = new JoystickButton(joyOI, 5);
+  public static Button buttonLift2 = new JoystickButton(joyOI, 6);
 
   public OI() {
     buttonUp.whenPressed(new ShiftUp());
     buttonDown.whenPressed(new ShiftDown());
-    //buttonLift1.whenPressed(new ClimbingThingDo());
-    //buttonLift2.whenPressed(new ClimbingThingDo1());
-    //buttonLift3.whenPressed(new ClimbingThingDo2());
+    buttonLiftDown.whenPressed(new Climb());
+    buttonLift1.whenPressed(new ClimbingThingDo1());
+    buttonLift2.whenPressed(new ClimbingThingDo2());
   }
 }

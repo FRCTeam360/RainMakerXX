@@ -28,7 +28,7 @@ public class ClimbingThingDo extends Command {
     //boolean accelStatus = RobotMap.
     Robot.climbingThing.getAccel();
     Robot.climbingThing.iDunnoMane();
-    Robot.climbingThing.climb();
+    //Robot.climbingThing.climb();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,7 +40,7 @@ public class ClimbingThingDo extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    System.out.print("End");
+    
   }
 
   // Called when another command which requires one or more of the same

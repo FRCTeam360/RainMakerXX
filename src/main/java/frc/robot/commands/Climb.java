@@ -9,14 +9,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class ClimbingThingDo2 extends Command {
-  public ClimbingThingDo2() {
+public class Climb extends Command {
+  public Climb() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    // eg. requires(chassis)
     requires(Robot.climbingThing);
-
-  }
+ }
 
   // Called just before this Command runs the first time
   @Override
@@ -26,20 +26,22 @@ public class ClimbingThingDo2 extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // Robot.climbingThing.getAccel();
-    // Robot.climbingThing.iDunnoMane();
-    Robot.climbingThing.retractTwo();
+    //boolean accelStatus = RobotMap.
+    RobotMap.lift1Motor.getSensorCollection().setQuadraturePosition(0, 0);
+    RobotMap.lift2Motor.getSensorCollection().setQuadraturePosition(0, 0);
+    Robot.climbingThing.climb();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return RobotMap.lift1Motor.getSelectedSensorPosition(0) == 100;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    System.out.print("End");
   }
 
   // Called when another command which requires one or more of the same

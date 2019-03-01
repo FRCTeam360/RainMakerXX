@@ -30,9 +30,10 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     shifter = new Shifter();
 		pneumatics = new Pneumatics();
-		driveTrain = new DriveTrain();
-    oi = new OI();
+    driveTrain = new DriveTrain();
     climbingThing = new ClimbingThing();
+    oi = new OI();
+    
     
     //m_chooser.addDefault("Default Auto", new ExampleCommand());
     // chooser.addObject("My Auto", new MyAutoCommand());
@@ -70,6 +71,9 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.cancel();
     // }
+    //Robot.climbingThing.resetLifters(RobotMap.lift1Motor, RobotMap.lift2Motor);
+    RobotMap.lift1Motor.getSensorCollection().setQuadraturePosition(0, 0);
+    RobotMap.lift2Motor.getSensorCollection().setQuadraturePosition(0, 0);
   }
 
   @Override
