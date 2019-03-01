@@ -16,6 +16,7 @@ import frc.robot.commands.ClimbingThingDo;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANEncoder;
 
 import edu.wpi.first.wpilibj.AnalogAccelerometer;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
@@ -40,7 +41,7 @@ public class ClimbingThing extends Subsystem {
   double accelerationX;
   double accelerationY;
   double accelerationZ;
-  double pitch = Math.atan2(accelerationY, accelerationZ) * 57.3;
+  double pitch;/* = Math.atan2(accelerationY, accelerationZ) * 57.3*/;
   double roll;
   double power;
 
@@ -49,25 +50,26 @@ public class ClimbingThing extends Subsystem {
   public static final double pPerRev = 1024.0;
   public static final double dPerPul = dPerRev / pPerRev;
   public static final double dUpLift = 100;
+
+  private Encoder liftOne;
+  private CANEncoder liftTwo;
   // 168
 
   public ClimbingThing() {
     accel = new BuiltInAccelerometer(Accelerometer.Range.k4G);
     power = Math.log(100) / Math.log(maxAngle);
 
-    one.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    two.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     // lift1.setDistancePerPulse(dPerPul);
     // lift2.setDistancePerPulse(dPerPul);
-    //resetLifters(one, two);
   }
 
-  public void resetLifters(TalonSRX liftA, TalonSRX liftB) {
-    reset(liftA);
-    reset(liftB);
+  public void resetLifters() {
+    reset(one);
+    reset(two);
   }
 
   public void reset(TalonSRX talon) {
+    talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     talon.configNominalOutputForward(0, 10);
     talon.configNominalOutputReverse(0, 10);
     talon.configPeakOutputForward(1, 10);
@@ -117,24 +119,28 @@ public class ClimbingThing extends Subsystem {
     //System.out.print("asdfghjkjhgfdsasdfghjhgfdsdfghj");
     // getAccel();
     // iDunnoMane();
-    if(pitch <= 5){
-      SmartDashboard.putNumber("Power", (1-Math.pow(pitch, power))/2);
-      one.set(ControlMode.PercentOutput, -1);
-    } else {
-      one.set(ControlMode.PercentOutput,0);
-    }
-    if(pitch >= -5){
-      two.set(ControlMode.PercentOutput, -1);
-    } else {
-      two.set(ControlMode.PercentOutput, 0);
-    }
+    // if(pitch <= 5.0){
+    //   //SmartDashboard.putNumber("Power", (1-Math.pow(pitch, power))/2);
+    //   one.set(ControlMode.PercentOutput, -0.5);
+    // } else {
+    //   one.set(ControlMode.PercentOutput,0);
+    // }
+    // if(pitch >= -5.0){
+    //   two.set(ControlMode.PercentOutput, -0.5);
+    // } else {
+    //   two.set(ControlMode.PercentOutput, 0);
+    // }
     //}
+    one.set(ControlMode.PercentOutput, -0.5);
+    two.set(ControlMode.PercentOutput, -0.5);
+
   }
 
   public void retract(int limit, TalonSRX victor){
-    while(lift1 >= -dUpLift || OI.joyOI.getRawAxis(1) < -.05){
+    while(lift1 >= -dUpLift || lift2 >= -dUpLift || OI.joyOI.getRawAxis(1) < -.05){
       victor.set(ControlMode.PercentOutput, 0.5);
     }
+    victor.set(ControlMode.PercentOutput, 0);
   }
 
   public void retractOne(){

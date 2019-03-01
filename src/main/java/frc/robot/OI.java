@@ -27,7 +27,7 @@ public class OI {
   public OI() {
     buttonUp.whenPressed(new ShiftUp());
     buttonDown.whenPressed(new ShiftDown());
-    buttonLiftDown.whenPressed(new Climb());
+    buttonLiftDown.whileHeld(new Climb());
     buttonLift1.whenPressed(new ClimbingThingDo1());
     buttonLift2.whenPressed(new ClimbingThingDo2());
   }

@@ -21,21 +21,22 @@ public class Climb extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    // RobotMap.lift1Motor.getSensorCollection().setQuadraturePosition(0, 0);
+    // RobotMap.lift2Motor.getSensorCollection().setQuadraturePosition(0, 0);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     //boolean accelStatus = RobotMap.
-    RobotMap.lift1Motor.getSensorCollection().setQuadraturePosition(0, 0);
-    RobotMap.lift2Motor.getSensorCollection().setQuadraturePosition(0, 0);
     Robot.climbingThing.climb();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return RobotMap.lift1Motor.getSelectedSensorPosition(0) == 100;
+    return true;
+    //RobotMap.lift1Motor.getSelectedSensorPosition() >= 100 || RobotMap.lift2Motor.getSelectedSensorPosition() >= 100;
   }
 
   // Called once after isFinished returns true

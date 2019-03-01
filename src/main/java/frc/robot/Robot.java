@@ -33,6 +33,8 @@ public class Robot extends TimedRobot {
     driveTrain = new DriveTrain();
     climbingThing = new ClimbingThing();
     oi = new OI();
+
+    Robot.climbingThing.resetLifters();
     
     
     //m_chooser.addDefault("Default Auto", new ExampleCommand());
@@ -71,9 +73,9 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.cancel();
     // }
-    //Robot.climbingThing.resetLifters(RobotMap.lift1Motor, RobotMap.lift2Motor);
-    RobotMap.lift1Motor.getSensorCollection().setQuadraturePosition(0, 0);
-    RobotMap.lift2Motor.getSensorCollection().setQuadraturePosition(0, 0);
+    //Robot.climbingThing.resetLifters();
+    // RobotMap.lift1Motor.getSensorCollection().setQuadraturePosition(0, 0);
+    // RobotMap.lift2Motor.getSensorCollection().setQuadraturePosition(0, 0);
   }
 
   @Override
@@ -83,6 +85,11 @@ public class Robot extends TimedRobot {
   }
 
   @Override
+  public void testInit() {
+  }
+
+  @Override
   public void testPeriodic() {
+    Scheduler.getInstance().run();
   }
 }
