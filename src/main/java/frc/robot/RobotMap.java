@@ -7,41 +7,28 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
+/**
+ * The RobotMap is a mapping from the ports sensors and actuators are wired into
+ * to a variable name. This provides flexibility changing wiring, makes checking
+ * the wiring easier and significantly reduces the number of magic numbers
+ * floating around.
+ */
 public class RobotMap {
+  // For example to map the left and right motors, you could define the
+  // following variables to use with your drivetrain subsystem.
+  // public static int leftMotor = 1;
+  // public static int rightMotor = 2;
+
   public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 
-  public static DoubleSolenoid shifter = new DoubleSolenoid(2, 3);
-
-  public static enum ShiftState {UP, DOWN, UNKNOWN};
-  public static ShiftState shiftState = ShiftState.UNKNOWN;
-  
-  public static Compressor compressor = new Compressor();
-
-  // public static TalonSRX motorLeftMaster = new TalonSRX(0);
-	// public static TalonSRX motorLeftSlave = new TalonSRX(1);
-	// public static TalonSRX motorRightMaster = new TalonSRX(2);
-  // public static TalonSRX motorRightSlave = new TalonSRX(3);
-
-  public static CANSparkMax left1Motor = new CANSparkMax(0, MotorType.kBrushless);
-  public static CANSparkMax left2Motor = new CANSparkMax(1, MotorType.kBrushless);
-  public static CANSparkMax right1Motor = new CANSparkMax(2, MotorType.kBrushless);
-  public static CANSparkMax right2Motor = new CANSparkMax(3, MotorType.kBrushless);
-  
-  public static TalonSRX lift1Motor = new TalonSRX(9);
-  public static TalonSRX lift2Motor = new TalonSRX(8);
-  
-  // public static Victor bottom1 = new Victor(10);
-  // public static Victor bottom2 = new Victor(11);
-  public static BuiltInAccelerometer accell = new BuiltInAccelerometer();
-  //public static Encoder lift1 = new Encoder(0, 1, false, EncodingType.k4X);
-  //public static Encoder lift2 = new Encoder(0, 1, false, EncodingType.k4X);
+  // If you are using multiple modules, make sure to define both the port
+  // number and the module. For example you with a rangefinder:
+  // public static int rangefinderPort = 1;
+  // public static int rangefinderModule = 1;
+  public static TalonSRX climbM1 = new TalonSRX(13);
+  public static TalonSRX climbM2 = new TalonSRX(12);
 }

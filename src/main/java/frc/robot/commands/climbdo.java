@@ -7,20 +7,16 @@
 
 package frc.robot.commands;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
-import frc.robot.subsystems.ClimbingThing;
 
-public class ClimbingThingDo extends Command {
-  public ClimbingThingDo() {
+public class climbdo extends Command {
+  public climbdo() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis)
-    requires(Robot.climbingThing);
- }
+    // eg. requires(chassis);
+    requires(Robot.climby);
+  }
 
   // Called just before this Command runs the first time
   @Override
@@ -30,10 +26,16 @@ public class ClimbingThingDo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //boolean accelStatus = RobotMap.
-    Robot.climbingThing.getAccel();
-    Robot.climbingThing.iDunnoMane();
-    //Robot.climbingThing.climb();
+    if(Math.abs(OI.joyOI.getRawAxis(1)) >= .05) {
+      Robot.climby.lift1(OI.joyOI.getRawAxis(1) * .5);
+    } else {
+      Robot.climby.lift1(0);
+    }
+    if(Math.abs(OI.joyOI.getRawAxis(3)) >= .05) {
+      Robot.climby.lift2(OI.joyOI.getRawAxis(3) * .5);
+    } else {
+      Robot.climby.lift2(0);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -45,7 +47,6 @@ public class ClimbingThingDo extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    
   }
 
   // Called when another command which requires one or more of the same

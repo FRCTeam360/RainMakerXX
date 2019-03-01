@@ -13,22 +13,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.*;
 
 public class OI {
-  public static Joystick joyR = new Joystick(0);
-	public static Joystick joyL = new Joystick(1);
-  public static Joystick joyOI = new Joystick(2);
-
-  public static Button buttonUp = new JoystickButton(joyR, 1);
-  public static Button buttonDown = new JoystickButton(joyL, 1);
-
-  public static Button buttonLiftDown = new JoystickButton(joyOI, 4);
-  public static Button buttonLift1 = new JoystickButton(joyOI, 5);
-  public static Button buttonLift2 = new JoystickButton(joyOI, 6);
+  public static Joystick joyOI = new Joystick(0);
 
   public OI() {
-    buttonUp.whenPressed(new ShiftUp());
-    buttonDown.whenPressed(new ShiftDown());
-    buttonLiftDown.whileHeld(new Climb());
-    buttonLift1.whenPressed(new ClimbingThingDo1());
-    buttonLift2.whenPressed(new ClimbingThingDo2());
   }
 }
