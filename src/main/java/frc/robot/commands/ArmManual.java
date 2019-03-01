@@ -34,14 +34,9 @@ public class ArmManual extends Command {
     Robot.wristControl.setMotorPosition((.77 * RobotMap.armMotor.getSelectedSensorPosition() + 200 + wristOffset));
 
     if(Math.abs(OI.joyControl.getRawAxis(1)) >= .15){
-      Robot.armControl.setMotor(OI.joyControl.getRawAxis(1) * -.5);
+      Robot.armControl.setMotor(OI.joyControl.getRawAxis(1) * -.75);
     } else{
-
-      if(RobotMap.armMotor.getSelectedSensorPosition() < -1100){
         Robot.armControl.setMotor(Constants.armStaySpeed);
-      }else{
-        Robot.armControl.setMotor(0);
-      }
     }
 
     // Robot.wristControl.setMotorPosition((-1 * RobotMap.armMotor.getSelectedSensorPosition()) + 300);

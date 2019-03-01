@@ -20,9 +20,9 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class RobotMap {
   public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 
-  public static DoubleSolenoid shifter = new DoubleSolenoid(1, 0);
+  public static DoubleSolenoid shifter = new DoubleSolenoid(0, 1);
 
-  public static DoubleSolenoid hatchPanel = new DoubleSolenoid(1, 5);
+  public static DoubleSolenoid hatchPanel = new DoubleSolenoid(2, 3);
 
   public static int currentPos;
   public static int wristOffset = 0;

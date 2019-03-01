@@ -28,7 +28,7 @@ public class MoveToTarget extends Command {
   @Override
   protected void execute() {
     System.out.println("Move To Target");
-    if(Robot.limelight.getY() < -2.0) {
+    if(Robot.limelight.getY() < -4.0) {
       if(Robot.limelight.getX() > 0.8) {
         System.out.println("turn right");
         Robot.driveTrain.driveLMAX(0.3 + Robot.limelight.getX() * 0.01);
