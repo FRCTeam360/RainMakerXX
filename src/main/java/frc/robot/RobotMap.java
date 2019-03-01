@@ -31,4 +31,7 @@ public class RobotMap {
   // public static int rangefinderModule = 1;
   public static TalonSRX climbM1 = new TalonSRX(13);
   public static TalonSRX climbM2 = new TalonSRX(12);
+
+  public static TalonSRX liftMotorR = new TalonSRX(8);
+  public static TalonSRX liftMotorL = new TalonSRX(9);
 }

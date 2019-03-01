@@ -115,6 +115,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    Robot.climby.resetEncoders();
+    Robot.climby.lift1(0);
+    Robot.climby.lift2(0);
   }
 
   /**

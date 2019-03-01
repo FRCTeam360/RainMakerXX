@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.climbdo;
 
@@ -24,12 +25,63 @@ public class Climber extends Subsystem {
   public TalonSRX climb1 = RobotMap.climbM1;
   public TalonSRX climb2 = RobotMap.climbM2;
 
+  public TalonSRX driveR = RobotMap.liftMotorR;
+  public TalonSRX driveL = RobotMap.liftMotorL;
+
   public void lift1(double power){
     climb1.set(ControlMode.PercentOutput, power);
   }
 
   public void lift2(double power) {
-    climb2.set(ControlMode.PercentOutput, -power);
+    climb2.set(ControlMode.PercentOutput, power);
+  }
+
+  public void lift1Encoder(double power, double position) {
+    if(getFrontEncoder() <= position) {
+      lift1(power);
+    } else {
+      lift1(0);
+    }
+  }
+
+  public void lift2Encoder(double power, double position) {
+    if(getBackEncoder() <= position) {
+      lift2(power);
+    } else {
+      lift2(0);
+    }
+  }
+
+  public double getDifference() {
+    double difference = getFrontEncoder() - getBackEncoder();
+    SmartDashboard.putNumber("difference", difference);
+    return difference;
+  }
+
+  public void getEncoders() {
+    SmartDashboard.putNumber("Back Encoder", climb2.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Front Encoder", climb1.getSelectedSensorPosition());
+  }
+
+  public void resetEncoders() {
+    climb1.setSelectedSensorPosition(0);
+    climb2.setSelectedSensorPosition(0);
+  }
+
+  public double getFrontEncoder() {
+    return climb1.getSelectedSensorPosition();
+  }
+
+  public double getBackEncoder() {
+    return climb2.getSelectedSensorPosition();
+  }
+
+  public void BottomRightDrive(double power) {
+    driveR.set(ControlMode.PercentOutput, power);
+  }
+
+  public void BottomLeftDrive(double power) {
+    driveL.set(ControlMode.PercentOutput, power);
   }
 
   @Override
