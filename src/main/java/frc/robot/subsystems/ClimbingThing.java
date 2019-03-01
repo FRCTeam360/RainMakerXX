@@ -40,7 +40,7 @@ public class ClimbingThing extends Subsystem {
   double accelerationX;
   double accelerationY;
   double accelerationZ;
-  double pitch;
+  double pitch = Math.atan2(accelerationY, accelerationZ) * 57.3;
   double roll;
   double power;
 

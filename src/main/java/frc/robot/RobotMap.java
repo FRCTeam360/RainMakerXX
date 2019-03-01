@@ -31,10 +31,10 @@ public class RobotMap {
 	// public static TalonSRX motorRightMaster = new TalonSRX(2);
   // public static TalonSRX motorRightSlave = new TalonSRX(3);
 
-  //public static CANSparkMax left1Motor = new CANSparkMax(0, MotorType.kBrushless);
-  //public static CANSparkMax left2Motor = new CANSparkMax(1, MotorType.kBrushless);
-  //public static CANSparkMax right1Motor = new CANSparkMax(2, MotorType.kBrushless);
-  //public static CANSparkMax right2Motor = new CANSparkMax(3, MotorType.kBrushless);
+  public static CANSparkMax left1Motor = new CANSparkMax(0, MotorType.kBrushless);
+  public static CANSparkMax left2Motor = new CANSparkMax(1, MotorType.kBrushless);
+  public static CANSparkMax right1Motor = new CANSparkMax(2, MotorType.kBrushless);
+  public static CANSparkMax right2Motor = new CANSparkMax(3, MotorType.kBrushless);
   
   public static TalonSRX lift1Motor = new TalonSRX(9);
   public static TalonSRX lift2Motor = new TalonSRX(8);

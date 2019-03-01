@@ -7,8 +7,13 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.subsystems.ClimbingThing;
 
 public class ClimbingThingDo extends Command {
   public ClimbingThingDo() {
