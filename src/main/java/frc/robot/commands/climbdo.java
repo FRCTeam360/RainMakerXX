@@ -26,13 +26,13 @@ public class climbdo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Math.abs(OI.joyOI.getRawAxis(1)) >= .05) {
-      Robot.climby.lift1(OI.joyOI.getRawAxis(1) * .5);
+    if(Math.abs(OI.joyControl.getRawAxis(1)) >= .05) {
+      Robot.climby.lift1(OI.joyControl.getRawAxis(1) * .5);
     } else {
       Robot.climby.lift1(0);
     }
-    if(Math.abs(OI.joyOI.getRawAxis(3)) >= .05) {
-      Robot.climby.lift2(OI.joyOI.getRawAxis(3) * .5);
+    if(Math.abs(OI.joyControl.getRawAxis(3)) >= .05) {
+      Robot.climby.lift2(OI.joyControl.getRawAxis(3) * .5);
     } else {
       Robot.climby.lift2(0);
     }
