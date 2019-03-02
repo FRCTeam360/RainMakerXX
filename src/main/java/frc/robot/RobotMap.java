@@ -8,7 +8,12 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 /**
@@ -18,17 +23,39 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
  * floating around.
  */
 public class RobotMap {
-  // For example to map the left and right motors, you could define the
-  // following variables to use with your drivetrain subsystem.
-  // public static int leftMotor = 1;
-  // public static int rightMotor = 2;
-
-  public static PowerDistributionPanel pdp = new PowerDistributionPanel();
-
-  // If you are using multiple modules, make sure to define both the port
-  // number and the module. For example you with a rangefinder:
-  // public static int rangefinderPort = 1;
-  // public static int rangefinderModule = 1;
   public static TalonSRX climbM1 = new TalonSRX(13);
   public static TalonSRX climbM2 = new TalonSRX(12);
+  public static PowerDistributionPanel pdp = new PowerDistributionPanel();
+
+  public static DoubleSolenoid shifter = new DoubleSolenoid(0, 1);
+
+  public static DoubleSolenoid hatchPanel = new DoubleSolenoid(2, 3);
+
+  public static int currentPos;
+  public static int wristOffset = 0;
+
+  public static int currentArmPos;
+
+  public static double goalWristPos = 0;
+  public static boolean shouldWristStop = false;
+
+  public static double goalArmPos = 0;
+  public static boolean shouldArmStop = false;
+
+  public static enum ShiftState {UP, DOWN, UNKNOWN};
+  public static ShiftState shiftState = ShiftState.UNKNOWN;
+  
+  public static Compressor compressor = new Compressor();
+
+  public static CANSparkMax left1Motor = new CANSparkMax(1, MotorType.kBrushless);
+  public static CANSparkMax left2Motor = new CANSparkMax(2, MotorType.kBrushless);
+  public static CANSparkMax right1Motor = new CANSparkMax(3, MotorType.kBrushless);
+  public static CANSparkMax right2Motor = new CANSparkMax(4, MotorType.kBrushless);
+
+  public static TalonSRX armMotor = new TalonSRX(5);
+  public static TalonSRX wristMotor = new TalonSRX(6);
+  public static TalonSRX intakeMotor = new TalonSRX(7);
+
+  public static DigitalInput armSwitch = new DigitalInput(1);
+  
 }
