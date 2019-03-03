@@ -26,7 +26,7 @@ public class CameraMode extends Command {
 
   @Override
   protected void execute() {
-    while (OI.joyR.getRawButton(4) == true){
+    while (OI.joyR.getRawButton(4)){
       NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1.0);
     }
     isFinished = true;

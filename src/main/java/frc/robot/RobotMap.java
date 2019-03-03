@@ -23,8 +23,6 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
  * floating around.
  */
 public class RobotMap {
-  public static TalonSRX climbM1 = new TalonSRX(13);
-  public static TalonSRX climbM2 = new TalonSRX(12);
   public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 
   public static DoubleSolenoid shifter = new DoubleSolenoid(0, 1);
@@ -55,6 +53,11 @@ public class RobotMap {
   public static TalonSRX armMotor = new TalonSRX(5);
   public static TalonSRX wristMotor = new TalonSRX(6);
   public static TalonSRX intakeMotor = new TalonSRX(7);
+
+  public static TalonSRX liftMotorR = new TalonSRX(10);
+  public static TalonSRX liftMotorL = new TalonSRX(11);
+  public static TalonSRX climbM1 = new TalonSRX(9);
+  public static TalonSRX climbM2 = new TalonSRX(8);
 
   public static DigitalInput armSwitch = new DigitalInput(1);
   

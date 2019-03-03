@@ -56,7 +56,7 @@ public class Robot extends TimedRobot {
     hatchPanelSolenoid = new HatchPanelSolenoid();
     oi = new OI();
 
-    autonomousCommand = new SandstromPeriod();
+    //autonomousCommand = new SandstromPeriod();
   }
 
   /**
@@ -103,6 +103,7 @@ public class Robot extends TimedRobot {
     if (autonomousCommand != null) {
       autonomousCommand.start();
     }
+    Constants.defenseActivation = false;
   }
 
   /**
@@ -118,9 +119,11 @@ public class Robot extends TimedRobot {
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }
-    Robot.limelight.visionCamera();
+    Robot.limelight.driveCamera();
     Robot.shifter.shiftDown();
     Robot.driveTrain.brakeMode();
+    Robot.climby.resetEncoders();
+    Constants.defenseActivation = false;
   }
 
   /**

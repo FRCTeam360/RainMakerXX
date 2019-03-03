@@ -33,8 +33,8 @@ public class MoveArm extends Command {
     	RobotMap.shouldArmStop = true;
     }
     pos = wantedPos;	
-	  Robot.armControl.motionMagicInit();
-	  Robot.armControl.setMotorPosition(pos);
+	  // Robot.armControl.motionMagicInit();
+	  // Robot.armControl.setMotorPosition(pos);
   }
 
   // Called repeatedly when this Command is scheduled to run

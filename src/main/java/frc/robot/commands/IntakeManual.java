@@ -8,8 +8,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class IntakeManual extends Command {
   public IntakeManual() {
@@ -26,18 +28,25 @@ public class IntakeManual extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if(!OI.joyControl.getRawButton(10)) {
     if(OI.joyControl.getRawButton(5)) {
-
+      Robot.wristControl.setMotorPosition(-950);
       Robot.intakeControl.controlIntake(-.5);
-
+      if(RobotMap.pdp.getCurrent(8) >= 12) {
+        Constants.hasCargo = true;
+      }
     } else if(OI.joyControl.getRawButton(6)){
 
       Robot.intakeControl.controlIntake(.5);
+      Constants.hasCargo = false;
 
-    }else{
+    } else if(Constants.hasCargo == true) {
+      Robot.intakeControl.controlIntake(-.1);
+    } else {
       
-      Robot.intakeControl.controlIntake(-.03);
+      Robot.intakeControl.controlIntake(0);
     }
+  }
   }
 
   // Make this return true when this Command no longer needs to run execute()
