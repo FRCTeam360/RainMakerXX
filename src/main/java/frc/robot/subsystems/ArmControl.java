@@ -16,10 +16,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import frc.robot.Constants;
 import frc.robot.RobotMap;
-import frc.robot.commands.ArmManual;
 
 /**
  * Add your docs here.
@@ -40,19 +38,19 @@ public class ArmControl extends Subsystem {
     armTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, kPIDLoopIdx, kTimeoutMs);
     armTalon.setSensorPhase(false);
 
-    // armTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, kTimeoutMs);
-    // armTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, kTimeoutMs);
+    armTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, kTimeoutMs);
+    armTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, kTimeoutMs);
     
-    // armTalon.configNominalOutputForward(0, kTimeoutMs);
-		// armTalon.configNominalOutputReverse(0, kTimeoutMs);
-		// armTalon.configPeakOutputForward(1, kTimeoutMs);
-    // armTalon.configPeakOutputReverse(-1, kTimeoutMs);
+    armTalon.configNominalOutputForward(0, kTimeoutMs);
+		armTalon.configNominalOutputReverse(0, kTimeoutMs);
+		armTalon.configPeakOutputForward(1, kTimeoutMs);
+    armTalon.configPeakOutputReverse(-1, kTimeoutMs);
     
-    // armTalon.selectProfileSlot(kSlotIdx, kPIDLoopIdx);
-		// armTalon.config_kF(0, Constants.armF, kTimeoutMs);
-		// armTalon.config_kP(0, Constants.armP, kTimeoutMs);
-		// armTalon.config_kI(0, Constants.armI, kTimeoutMs);
-    // armTalon.config_kD(0, Constants.armD, kTimeoutMs);
+    armTalon.selectProfileSlot(kSlotIdx, kPIDLoopIdx);
+		armTalon.config_kF(0, Constants.armF, kTimeoutMs);
+		armTalon.config_kP(0, Constants.armP, kTimeoutMs);
+		armTalon.config_kI(0, Constants.armI, kTimeoutMs);
+    armTalon.config_kD(0, Constants.armD, kTimeoutMs);
     
     // wristMotor.configContinuousCurrentLimit(70, 10);
   }
@@ -61,20 +59,21 @@ public class ArmControl extends Subsystem {
     armTalon.set(ControlMode.PercentOutput, speed);
     Process();
 	}
-	// public void setMotorPosition(double position) {
-  //   armTalon.set(ControlMode.MotionMagic, position);
-  //   Process();
-	// }
+	public void setMotorPosition(double position) {
+    armTalon.set(ControlMode.MotionMagic, position);
+    Process();
+	}
 	public void stop() {
 		armTalon.set(ControlMode.PercentOutput, 0);
 	}
 	public double getPosition() {
 		return armTalon.getSelectedSensorPosition(0);
 	}
-	// public void motionMagicInit() {
-	// 	armTalon.configMotionCruiseVelocity(460, kTimeoutMs);
-  //   armTalon.configMotionAcceleration(642, kTimeoutMs);
-  // }
+	public void motionMagicInit() {
+		armTalon.configMotionCruiseVelocity(460, kTimeoutMs);
+    armTalon.configMotionAcceleration(642, kTimeoutMs);
+  }
+
   public void Process(){
     SmartDashboard.putNumber("ArmVel", armTalon.getSelectedSensorVelocity(0));
 	  SmartDashboard.putNumber("ArmPos",  getPosition());
@@ -119,20 +118,18 @@ public class ArmControl extends Subsystem {
   // }
 
   public void articulateArm(double armMotor){
-
     armTalon.set(ControlMode.PercentOutput, armMotor);
   }
 
-  // public double armPosition(){
+  public double armPosition(){
+    return armTalon.getSelectedSensorPosition();
+  }
 
-  //   return armTalon.getSelectedSensorPosition();
-  // }
-
-  // public void resetArm(){
+  public void resetArm(){
     
-  //   armTalon.set(ControlMode.PercentOutput, 0);
-  //   armTalon.setSelectedSensorPosition(0);
-  // }
+    armTalon.set(ControlMode.PercentOutput, 0);
+    armTalon.setSelectedSensorPosition(0);
+  }
 
   @Override
   public void initDefaultCommand() {

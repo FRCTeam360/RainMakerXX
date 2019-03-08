@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
-import frc.robot.commands.MoveWrist;;
 
 /**
  * Add your docs here.
@@ -115,10 +114,6 @@ public class WristControl extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    int wristOffset = 0;
-    if(Constants.armPanelPickUpActivation == true){
-      wristOffset = Constants.wristPanelPickUp;
-    }
     // setDefaultCommand(new MoveWrist((-.77 * RobotMap.armMotor.getSelectedSensorPosition()) - 3200 + wristOffset));
   }
 }

@@ -47,7 +47,7 @@ public class Constants {
     public static final double wristI = 0.002;
     public static final double wristD = 0.025;
 
-    public static final double armF = 0;
+    public static final double armF = 1.6679;
     public static final double armP = 0;
     public static final double armI = 0;
     public static final double armD = 0;

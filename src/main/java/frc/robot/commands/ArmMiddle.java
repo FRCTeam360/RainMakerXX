@@ -7,11 +7,9 @@
 
 package frc.robot.commands;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
-import frc.robot.RobotMap;
+import frc.robot.Robot;
 
 public class ArmMiddle extends Command {
   boolean isDone;
@@ -33,15 +31,17 @@ public class ArmMiddle extends Command {
     if(Constants.armPanelPickUpActivation == true){
       hatchPanelOffset = Constants.armHatchPanelOffset;
     }
-    if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armMidPosition - hatchPanelOffset) > Constants.armAutoThreshold){
+    // if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armMidPosition - hatchPanelOffset) > Constants.armAutoThreshold){
 
-      RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedUp);
-    }else if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armMidPosition) < Constants.armAutoThreshold){
+    //   RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedUp);
+    // }else if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armMidPosition) < Constants.armAutoThreshold){
       
-      RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedDown);
-    }else{
-      isDone = true;
-    }
+    //   RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedDown);
+    // }else{
+    //   isDone = true;
+    // }
+
+    Robot.armControl.setMotorPosition(Constants.armMidPosition + hatchPanelOffset);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -59,5 +59,6 @@ public class ArmMiddle extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
