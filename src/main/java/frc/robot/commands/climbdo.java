@@ -38,15 +38,14 @@ public class climbdo extends Command {
         } else {
           Robot.climby.lift1(0);
         }
-      }
-      if(Robot.climby.getFrontEncoder() >= 28000) {
+      } else if(Robot.climby.getFrontEncoder() >= 28000) {
         if(OI.joyOI.getRawAxis(1) > 0) {
           Robot.climby.lift1(-OI.joyOI.getRawAxis(1) * .5);
         } else {
           Robot.climby.lift1(0);
         }
       } else {
-        Robot.climby.lift1(-OI.joyOI.getRawAxis(1) * .5);
+        Robot.climby.lift1(0);
       }
       //Robot.climby.lift1(-OI.joyOI.getRawAxis(1) * .5);
     } else {
@@ -60,8 +59,7 @@ public class climbdo extends Command {
         } else {
           Robot.climby.lift2(0);
         }
-      }
-      if(Robot.climby.getBackEncoder() >= 28000) {
+      } else if(Robot.climby.getBackEncoder() >= 28000) {
         if(OI.joyOI.getRawAxis(3) > 0) {
           Robot.climby.lift2(OI.joyOI.getRawAxis(3) * .5);
         } else {

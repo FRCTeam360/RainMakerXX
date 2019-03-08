@@ -15,14 +15,14 @@ import frc.robot.commands.*;
 public class OI {
   public static Joystick joyOI = new Joystick(0);
 
-  public static Button LiftDown = new JoystickButton(joyOI, 4);
-  public static Button LiftUp = new JoystickButton(joyOI, 2);
+  // public static Button LiftDown = new JoystickButton(joyOI, 4);
+  // public static Button LiftUp = new JoystickButton(joyOI, 2);
 
   public static Button RightForward = new JoystickButton(joyOI, 5);
   public static Button LeftForward = new JoystickButton(joyOI, 6);
   public OI() {
-    LiftDown.whileHeld(new LiftDown());
-    LiftDown.whenReleased(new LiftUp());
+    // LiftDown.whileHeld(new LiftDown());
+    // LiftDown.whenReleased(new LiftUp());
 
 
   }
