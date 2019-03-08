@@ -26,7 +26,6 @@ public class WristManual extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
     if(Math.abs(OI.joyControl.getRawAxis(3)) > .1) {
       Robot.wristControl.setMotor(OI.joyControl.getRawAxis(3) * -.5);
     } else {

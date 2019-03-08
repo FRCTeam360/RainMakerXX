@@ -109,12 +109,16 @@ public class WristControl extends Subsystem {
   
   public void wristReset(){
     RobotMap.wristMotor.set(ControlMode.PercentOutput, 0);
-    RobotMap.wristMotor.setSelectedSensorPosition(Constants.wristResetPosition);
+    RobotMap.wristMotor.setSelectedSensorPosition(0);
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new MoveWrist((-1 * RobotMap.armMotor.getSelectedSensorPosition()) + 300));
+    int wristOffset = 0;
+    if(Constants.armPanelPickUpActivation == true){
+      wristOffset = Constants.wristPanelPickUp;
+    }
+    // setDefaultCommand(new MoveWrist((-.77 * RobotMap.armMotor.getSelectedSensorPosition()) - 3200 + wristOffset));
   }
 }

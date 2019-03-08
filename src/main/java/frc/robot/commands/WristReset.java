@@ -34,7 +34,7 @@ public class WristReset extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return RobotMap.pdp.getCurrent(9) >= 7;
+    return RobotMap.pdp.getCurrent(10) >= 5;
   }
 
   // Called once after isFinished returns true

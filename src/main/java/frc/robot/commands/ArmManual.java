@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.*;
 
@@ -27,22 +28,31 @@ public class ArmManual extends Command {
   @Override
   protected void execute() {
     int wristOffset = 0;
+    if(!OI.joyControl.getRawButton(10)) {
     if(Constants.armPanelPickUpActivation == true){
       wristOffset = Constants.wristPanelPickUp;
     }
 
-    Robot.wristControl.setMotorPosition((.77 * RobotMap.armMotor.getSelectedSensorPosition() + 200 + wristOffset));
+    Robot.wristControl.setMotorPosition((.77 * RobotMap.armMotor.getSelectedSensorPosition() + 200 + wristOffset - 3500));
 
     if(Math.abs(OI.joyControl.getRawAxis(1)) >= .15){
-      Robot.armControl.setMotor(OI.joyControl.getRawAxis(1) * -.5);
+      Robot.armControl.setMotor(OI.joyControl.getRawAxis(1) * -.75);
     } else{
-
-      if(RobotMap.armMotor.getSelectedSensorPosition() < -1100){
+      if(RobotMap.armMotor.getSelectedSensorPosition() < -1500){
         Robot.armControl.setMotor(Constants.armStaySpeed);
       }else{
-        Robot.armControl.setMotor(0);
+        Robot.armControl.setMotor(.2);
       }
     }
+    if(OI.joyControl.getRawButton(9) || Constants.defenseActivation == true){
+      Constants.defenseActivation = true;
+      Robot.armControl.setMotor(-.14);
+      Robot.wristControl.setMotorPosition(-200);
+      if(OI.joyControl.getRawButton(9) == true){
+        Constants.defenseActivation = false;
+      }
+    }
+  }
 
     // Robot.wristControl.setMotorPosition((-1 * RobotMap.armMotor.getSelectedSensorPosition()) + 300);
   }

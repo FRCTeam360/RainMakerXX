@@ -55,7 +55,7 @@ public class Pressurize extends Command {
   protected void end() {
     timer.stop();
 	  timer.reset();
-    Robot.pneumatics.stop();
+	  Robot.pneumatics.stop();
   }
 
   @Override

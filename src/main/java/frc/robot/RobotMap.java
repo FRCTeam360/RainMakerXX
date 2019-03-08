@@ -7,22 +7,27 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DigitalInput;
-
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+
+/**
+ * The RobotMap is a mapping from the ports sensors and actuators are wired into
+ * to a variable name. This provides flexibility changing wiring, makes checking
+ * the wiring easier and significantly reduces the number of magic numbers
+ * floating around.
+ */
 public class RobotMap {
   public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 
-  public static DoubleSolenoid shifter = new DoubleSolenoid(3, 2);
+  public static DoubleSolenoid shifter = new DoubleSolenoid(0, 1);
 
-  public static DoubleSolenoid hatchPanel = new DoubleSolenoid(1, 5);
+  public static DoubleSolenoid hatchPanel = new DoubleSolenoid(2, 3);
 
   public static int currentPos;
   public static int wristOffset = 0;
@@ -48,6 +53,11 @@ public class RobotMap {
   public static TalonSRX armMotor = new TalonSRX(5);
   public static TalonSRX wristMotor = new TalonSRX(6);
   public static TalonSRX intakeMotor = new TalonSRX(7);
+
+  public static TalonSRX liftMotorR = new TalonSRX(10);
+  public static TalonSRX liftMotorL = new TalonSRX(11);
+  public static TalonSRX climbM1 = new TalonSRX(9);
+  public static TalonSRX climbM2 = new TalonSRX(8);
 
   public static DigitalInput armSwitch = new DigitalInput(1);
   
