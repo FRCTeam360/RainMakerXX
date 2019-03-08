@@ -8,48 +8,47 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.*;
 
-public class AutoShift extends Command {
-  public AutoShift() {
+public class MoveWrist extends Command {
+
+  public double pos;
+  double wantedPos;
+  
+  public MoveWrist(double wantedPosition) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    //requires(Robot.shifter);
+    requires(Robot.wristControl);
+		wantedPos = wantedPosition;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Constants.isInAutoShift = true;
+    
+    RobotMap.goalWristPos = wantedPos + RobotMap.wristOffset - 3500;
+    RobotMap.shouldWristStop = false;
+    if(wantedPos == 0) {
+    	RobotMap.shouldWristStop = true;
+    }
+    pos = wantedPos;	
+	  Robot.wristControl.motionMagicInit();
+	  Robot.wristControl.setMotorPosition(pos);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Constants.isInAutoShift == true){
-      double getRightVelocity = RobotMap.right1Motor.getEncoder().getVelocity();
-      double getLeftVelocity = RobotMap.left1Motor.getEncoder().getVelocity();
-
-      if(Math.abs(getRightVelocity) >= Constants.highShiftPoint && Math.abs(getLeftVelocity) >= Constants.highShiftPoint){
-
-        Robot.driveTrain.driveRMAX(0);
-        Robot.driveTrain.driveLMAX(0);
-
-        Robot.shifter.shiftUp();
-      } else if(Math.abs(getRightVelocity) <= Constants.lowShiftPoint && Math.abs(getLeftVelocity) <= Constants.lowShiftPoint){
-
-        Robot.driveTrain.driveRMAX(0);
-        Robot.driveTrain.driveLMAX(0);
-        
-        Robot.shifter.shiftDown();
-      }
-    }
+    Robot.wristControl.Process();
+    SmartDashboard.putNumber("Wrist Position", Robot.wristControl.getPosition());
+   	SmartDashboard.putNumber("Future Position", pos);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return OI.joyR.getRawButton(1);
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -61,5 +60,6 @@ public class AutoShift extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

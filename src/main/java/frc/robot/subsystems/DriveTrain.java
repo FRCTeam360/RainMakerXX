@@ -7,13 +7,16 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANEncoder;
 
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.RobotMap.ShiftState;
 import frc.robot.commands.JoystickTankDrive;
@@ -100,6 +103,8 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("Left Pos", leftOutput);
     // outputs velocity in smartdashboard
     SmartDashboard.putNumber("Left Vel", leftVel);
+
+    SmartDashboard.putNumber("Wrist Amp Draw", RobotMap.pdp.getCurrent(15));
   }
 
   public void rightEnc(){
@@ -144,13 +149,26 @@ public class DriveTrain extends Subsystem {
     motorR1.set(RMotor);
     // makes the rightEnc method run and put the numbers in smartdashboard
     rightEnc();
+    // SmartDashboard.putNumber("Arm encoder", RobotMap.armMotor.getSelectedSensorPosition());
 	}
 	public void driveLMAX(double LMotor){
     // sets the primary motor on the left side is set to the speed set by the joystick
     motorL1.set(LMotor);
     // makes the leftEnc method run and put the numbers in smartdashboard
     leftEnc();
-	}
+  }
+  public void brakeMode() {
+    Robot.driveTrain.motorL1.setIdleMode(IdleMode.kBrake);
+    Robot.driveTrain.motorR1.setIdleMode(IdleMode.kBrake);
+    Robot.driveTrain.motorL2.setIdleMode(IdleMode.kBrake);
+    Robot.driveTrain.motorR2.setIdleMode(IdleMode.kBrake);
+  }
+  public void coastMode() {
+    Robot.driveTrain.motorL1.setIdleMode(IdleMode.kCoast);
+    Robot.driveTrain.motorR1.setIdleMode(IdleMode.kCoast);
+    Robot.driveTrain.motorL2.setIdleMode(IdleMode.kCoast);
+    Robot.driveTrain.motorR2.setIdleMode(IdleMode.kCoast);
+  }
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new JoystickTankDrive());

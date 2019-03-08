@@ -8,48 +8,31 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.*;
+import frc.robot.Robot;
 
-public class AutoShift extends Command {
-  public AutoShift() {
+public class HatchOut extends Command {
+  public HatchOut() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    //requires(Robot.shifter);
+    requires(Robot.hatchPanelSolenoid);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Constants.isInAutoShift = true;
+    Robot.hatchPanelSolenoid.hatchOut();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Constants.isInAutoShift == true){
-      double getRightVelocity = RobotMap.right1Motor.getEncoder().getVelocity();
-      double getLeftVelocity = RobotMap.left1Motor.getEncoder().getVelocity();
-
-      if(Math.abs(getRightVelocity) >= Constants.highShiftPoint && Math.abs(getLeftVelocity) >= Constants.highShiftPoint){
-
-        Robot.driveTrain.driveRMAX(0);
-        Robot.driveTrain.driveLMAX(0);
-
-        Robot.shifter.shiftUp();
-      } else if(Math.abs(getRightVelocity) <= Constants.lowShiftPoint && Math.abs(getLeftVelocity) <= Constants.lowShiftPoint){
-
-        Robot.driveTrain.driveRMAX(0);
-        Robot.driveTrain.driveLMAX(0);
-        
-        Robot.shifter.shiftDown();
-      }
-    }
+    System.out.println("Hatch out");
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return OI.joyR.getRawButton(1);
+    return true;
   }
 
   // Called once after isFinished returns true
