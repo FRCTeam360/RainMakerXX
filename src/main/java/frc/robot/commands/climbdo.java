@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -31,61 +32,125 @@ public class climbdo extends Command {
   protected void execute() {
     Robot.climby.getEncoders();
     Robot.climby.getDifference();
-    if(Math.abs(OI.joyOI.getRawAxis(1)) >= .05) {
-      if(Robot.climby.getFrontEncoder() <= 100) {
-        if(OI.joyOI.getRawAxis(1) < 0) {
-          Robot.climby.lift1(-OI.joyOI.getRawAxis(1) * .5);
-        } else {
-          Robot.climby.lift1(0);
+    // if(Math.abs(OI.joyControl.getRawAxis(1)) >= .05) {
+    //   if(Robot.climby.getFrontEncoder() <= 100) {
+    //     if(OI.joyControl.getRawAxis(1) < 0) {
+    //       Robot.climby.lift1(-OI.joyControl.getRawAxis(1) * .5);
+    //     } else {
+    //       Robot.climby.lift1(0);
+    //     }
+    //   } else if(Robot.climby.getFrontEncoder() >= 28000) {
+    //     if(OI.joyControl.getRawAxis(1) > 0) {
+    //       Robot.climby.lift1(-OI.joyControl.getRawAxis(1) * .5);
+    //     } else {
+    //       Robot.climby.lift1(0);
+    //     }
+    //   } else {
+    //     Robot.climby.lift1(0);
+    //   }
+    //   //Robot.climby.lift1(-OI.joyControl.getRawAxis(1) * .5);
+    // } else {
+    //   Robot.climby.lift1(0);
+    // }
+
+    // if(Math.abs(OI.joyControl.getRawAxis(3)) >= .05) {
+    //   if(Robot.climby.getBackEncoder() <= 100) {
+    //     if(OI.joyControl.getRawAxis(3) < 0) {
+    //       Robot.climby.lift2(OI.joyControl.getRawAxis(3) * .5);
+    //     } else {
+    //       Robot.climby.lift2(0);
+    //     }
+    //   } else if(Robot.climby.getBackEncoder() >= 28000) {
+    //     if(OI.joyControl.getRawAxis(3) > 0) {
+    //       Robot.climby.lift2(OI.joyControl.getRawAxis(3) * .5);
+    //     } else {
+    //       Robot.climby.lift2(0);
+    //     }
+    //   } else {
+    //     Robot.climby.lift2(0);
+    //   }
+    //   //Robot.climby.lift2(OI.joyControl.getRawAxis(3) * .5);
+    // } else {
+    //   Robot.climby.lift2(0);
+    // }
+
+    Robot.climby.toggleMode();
+    if(Constants.isClimbing)  {
+      if(Math.abs(OI.joyControl.getRawAxis(1)) >= .05) {
+        if(Robot.climby.getFrontEncoder() <= 100) {
+          if(OI.joyControl.getRawAxis(1) < 0) {
+            Robot.climby.lift1(-OI.joyControl.getRawAxis(1) * .5);
+          } else {
+            Robot.climby.lift1(0);
+          }
         }
-      } else if(Robot.climby.getFrontEncoder() >= 28000) {
-        if(OI.joyOI.getRawAxis(1) > 0) {
-          Robot.climby.lift1(-OI.joyOI.getRawAxis(1) * .5);
+        if(Robot.climby.getFrontEncoder() >= 28000) {
+          if(OI.joyControl.getRawAxis(1) > 0) {
+            Robot.climby.lift1(-OI.joyControl.getRawAxis(1) * .5);
+          } else {
+            Robot.climby.lift1(0);
+          }
         } else {
-          Robot.climby.lift1(0);
+          Robot.climby.lift1(-OI.joyControl.getRawAxis(1) * .5);
         }
+        //Robot.climby.lift1(-OI.joyControl.getRawAxis(1) * .5);
       } else {
         Robot.climby.lift1(0);
       }
-      //Robot.climby.lift1(-OI.joyOI.getRawAxis(1) * .5);
-    } else {
-      Robot.climby.lift1(0);
-    }
 
-    if(Math.abs(OI.joyOI.getRawAxis(3)) >= .05) {
-      if(Robot.climby.getBackEncoder() <= 100) {
-        if(OI.joyOI.getRawAxis(3) < 0) {
-          Robot.climby.lift2(OI.joyOI.getRawAxis(3) * .5);
-        } else {
-          Robot.climby.lift2(0);
+      if(Math.abs(OI.joyControl.getRawAxis(3)) >= .05) {
+        if(Robot.climby.getBackEncoder() <= 100) {
+          if(OI.joyControl.getRawAxis(3) < 0) {
+            Robot.climby.lift2(-OI.joyControl.getRawAxis(3) * .5);
+          } else {
+            Robot.climby.lift2(0);
+          }
         }
-      } else if(Robot.climby.getBackEncoder() >= 28000) {
-        if(OI.joyOI.getRawAxis(3) > 0) {
-          Robot.climby.lift2(OI.joyOI.getRawAxis(3) * .5);
+        if(Robot.climby.getBackEncoder() >= 28000) {
+          if(OI.joyControl.getRawAxis(3) > 0) {
+            Robot.climby.lift2(-OI.joyControl.getRawAxis(3) * .5);
+          } else {
+            Robot.climby.lift2(0);
+          }
         } else {
-          Robot.climby.lift2(0);
+          Robot.climby.lift2(-OI.joyControl.getRawAxis(3) * .5);
         }
+        //Robot.climby.lift2(OI.joyControl.getRawAxis(3) * .5);
       } else {
         Robot.climby.lift2(0);
       }
-      //Robot.climby.lift2(OI.joyOI.getRawAxis(3) * .5);
-    } else {
-      Robot.climby.lift2(0);
+
+      if(OI.joyControl.getRawButton(6)) {
+        Robot.climby.BottomRightDrive(.5);
+      } else {
+        Robot.climby.BottomRightDrive(0);
+      }
+
+      if(OI.joyControl.getRawButton(5)) {
+        Robot.climby.BottomLeftDrive(.5);
+      } else {
+        Robot.climby.BottomLeftDrive(0);
+      }
+
+      // while(OI.joyControl.getRawButton(8)) {
+      //   Robot.climby.lift1Encoder((.5 - (Robot.climby.getDifference()/5000)) * -1, 26000);
+      //   Robot.climby.lift2Encoder((.5 + (Robot.climby.getDifference()/5000)) * -1, 26000);
+      // }
     }
 
-    if(OI.joyOI.getRawButton(6)) {
+    if(OI.joyControl.getRawButton(6)) {
       Robot.climby.BottomRightDrive(.5);
     } else {
       Robot.climby.BottomRightDrive(0);
     }
 
-    if(OI.joyOI.getRawButton(5)) {
+    if(OI.joyControl.getRawButton(5)) {
       Robot.climby.BottomLeftDrive(.5);
     } else {
       Robot.climby.BottomLeftDrive(0);
     }
 
-    while(OI.joyOI.getRawButton(8)) {
+    while(OI.joyControl.getRawButton(8)) {
       Robot.climby.lift1Encoder((.5 - (Robot.climby.getDifference()/5000)) * -1, 26000);
       Robot.climby.lift2Encoder((.5 + (Robot.climby.getDifference()/5000)), 26000);
     }

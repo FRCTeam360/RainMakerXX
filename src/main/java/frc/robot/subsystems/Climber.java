@@ -12,6 +12,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
+import frc.robot.OI;
 import frc.robot.RobotMap;
 import frc.robot.commands.climbdo;
 
@@ -59,8 +61,8 @@ public class Climber extends Subsystem {
   }
 
   public void getEncoders() {
-    SmartDashboard.putNumber("Back Encoder", climb2.getSelectedSensorPosition());
-    SmartDashboard.putNumber("Front Encoder", climb1.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Back Encoder", climb2.getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("Front Encoder", climb1.getSelectedSensorPosition(0));
   }
 
   public void resetEncoders() {
@@ -69,11 +71,11 @@ public class Climber extends Subsystem {
   }
 
   public double getFrontEncoder() {
-    return climb1.getSelectedSensorPosition();
+    return climb1.getSelectedSensorPosition(0);
   }
 
   public double getBackEncoder() {
-    return climb2.getSelectedSensorPosition();
+    return climb2.getSelectedSensorPosition(0);
   }
 
   public void BottomRightDrive(double power) {
@@ -82,6 +84,16 @@ public class Climber extends Subsystem {
 
   public void BottomLeftDrive(double power) {
     driveL.set(ControlMode.PercentOutput, power);
+  }
+
+  public void toggleMode() {
+    if(OI.joyControl.getRawButton(7)) {
+        if(Constants.isClimbing) {
+          Constants.isClimbing = false;
+        } else {
+          Constants.isClimbing = true;
+        }
+    }
   }
 
   @Override
