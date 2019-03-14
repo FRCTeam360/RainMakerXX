@@ -5,28 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
-
-import edu.wpi.first.wpilibj.command.Subsystem;
-
-//Includes for I2C
-import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.I2C.Port;
+package frc.robot;
 
 /**
  * Add your docs here.
  */
-public class ColorSensorArray extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-
-  I2C i2c;
-
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    i2c = new I2C(I2C.Port.kMXP, 0x39);
-  }
-
+public class Constants {
+    public static boolean isClimbing = false;
 }
