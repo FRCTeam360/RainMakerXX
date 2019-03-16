@@ -33,25 +33,25 @@ public class ArmManual extends Command {
       wristOffset = Constants.wristPanelPickUp;
     }
 
-    Robot.wristControl.setMotorPosition((.77 * RobotMap.armMotor.getSelectedSensorPosition() + 200 + wristOffset - 3500));
+    // Robot.wristControl.setMotorPosition((.77 * RobotMap.armMotor.getSelectedSensorPosition() + 200 + wristOffset - 3500));
 
     if(Math.abs(OI.joyControl.getRawAxis(1)) >= .15){
-      Robot.armControl.setMotor(OI.joyControl.getRawAxis(1) * -.75);
+      Robot.armControl.setMotor(OI.joyControl.getRawAxis(1));
     } else{
-      if(RobotMap.armMotor.getSelectedSensorPosition() < -1500){
-        Robot.armControl.setMotor(Constants.armStaySpeed);
-      }else{
-        Robot.armControl.setMotor(.2);
-      }
+      // if(RobotMap.armMotor.getSelectedSensorPosition() < -1500){
+      //   Robot.armControl.setMotor(Constants.armStaySpeed);
+      // }else{
+          Robot.armControl.setMotor(0);
+      // }
     }
-    if(OI.joyControl.getRawButton(9) || Constants.defenseActivation == true){
-      Constants.defenseActivation = true;
-      Robot.armControl.setMotor(-.14);
-      Robot.wristControl.setMotorPosition(-200);
-      if(OI.joyControl.getRawButton(9) == true){
-        Constants.defenseActivation = false;
-      }
-    }
+    // if(OI.joyControl.getRawButton(9) || Constants.defenseActivation == true){
+    //   Constants.defenseActivation = true;
+    //   Robot.armControl.setMotor(-.14);
+    //   Robot.wristControl.setMotorPosition(-200);
+    //   if(OI.joyControl.getRawButton(9) == true){
+    //     Constants.defenseActivation = false;
+    //   }
+    // }
   }
 
     // Robot.wristControl.setMotorPosition((-1 * RobotMap.armMotor.getSelectedSensorPosition()) + 300);

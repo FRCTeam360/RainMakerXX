@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
+import frc.robot.commands.ArmManual;
 
 /**
  * Add your docs here.
@@ -32,11 +33,11 @@ public class ArmControl extends Subsystem {
   private final int kTimeoutMs = 10;
   
   public ArmControl(){
-    armTalon.setInverted(true);
+    armTalon.setInverted(false);
     armTalon.setNeutralMode(NeutralMode.Brake);
 
     armTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, kPIDLoopIdx, kTimeoutMs);
-    armTalon.setSensorPhase(false);
+    armTalon.setSensorPhase(true);
 
     armTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, kTimeoutMs);
     armTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, kTimeoutMs);
@@ -70,8 +71,8 @@ public class ArmControl extends Subsystem {
 		return armTalon.getSelectedSensorPosition(0);
 	}
 	public void motionMagicInit() {
-		armTalon.configMotionCruiseVelocity(460, kTimeoutMs);
-    armTalon.configMotionAcceleration(642, kTimeoutMs);
+		armTalon.configMotionCruiseVelocity(375, kTimeoutMs);
+    armTalon.configMotionAcceleration(490, kTimeoutMs);
   }
 
   public void Process(){
@@ -135,6 +136,6 @@ public class ArmControl extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    // setDefaultCommand(new ArmManual());
+    setDefaultCommand(new ArmManual());
   }
 }

@@ -21,13 +21,12 @@ public class Constants {
     public static final int wristBallPosition = -950;
 
     public static final int armIntakePosition = 0;
-    public static final int armOffset = 90;
 
     public static int armHatchPanelOffset = 200;
 
-    public static final int armLowPosition = -1075 - armOffset;
-    public static final int armMidPosition = -2060 - armOffset;
-    public static final int armHighPosition = -3135 - armOffset;
+    public static final int armLowPosition = -400;
+    public static final int armMidPosition = -2000;
+    public static final int armHighPosition = -2400;
 
     public static final int wristPanelPickUp = 2700;
 
@@ -47,8 +46,8 @@ public class Constants {
     public static final double wristI = 0.002;
     public static final double wristD = 0.025;
 
-    public static final double armF = 1.6679;
-    public static final double armP = 0;
+    public static final double armF = 2.728;
+    public static final double armP = 0.15;
     public static final double armI = 0;
     public static final double armD = 0;
 

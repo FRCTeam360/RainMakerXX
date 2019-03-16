@@ -27,14 +27,7 @@ public class MoveArm extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    RobotMap.goalArmPos = wantedPos;
-    RobotMap.shouldArmStop = false;
-    if(wantedPos == 0) {
-    	RobotMap.shouldArmStop = true;
-    }
-    pos = wantedPos;	
-	  Robot.armControl.motionMagicInit();
-	  Robot.armControl.setMotorPosition(pos);
+	  Robot.armControl.setMotorPosition(wantedPos);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -42,7 +35,7 @@ public class MoveArm extends Command {
   protected void execute() {
     Robot.armControl.Process();
     SmartDashboard.putNumber("Arm Position", Robot.armControl.getPosition());
-   	SmartDashboard.putNumber("Future Arm Position", pos);
+   	SmartDashboard.putNumber("Future Arm Position", wantedPos);
   }
 
   // Make this return true when this Command no longer needs to run execute()
