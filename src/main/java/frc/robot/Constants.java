@@ -46,10 +46,12 @@ public class Constants {
     public static final double wristI = 0.002;
     public static final double wristD = 0.025;
 
-    public static final double armF = 2.728;
-    public static final double armP = 0.15;
+    public static final double armF = 2.5575;
+    public static final double armP = 47; //46.7657, oscilates at 93.5314, 70.1486
     public static final double armI = 0;
     public static final double armD = 0;
+
+    // public static final double armI = .004;
 
     public static boolean isInAutoShift = false;
 

@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class ArmHigh extends Command {
@@ -29,27 +30,28 @@ public class ArmHigh extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    int hatchPanelOffset = 0;
-    if(Constants.armPanelPickUpActivation == true){
-      hatchPanelOffset = Constants.armHatchPanelOffset;
-    }
-    if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armHighPosition - hatchPanelOffset) > Constants.armAutoThreshold){
+    // int hatchPanelOffset = 0;
+    // if(Constants.armPanelPickUpActivation == true){
+    //   hatchPanelOffset = Constants.armHatchPanelOffset;
+    // }
+    // if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armHighPosition - hatchPanelOffset) > Constants.armAutoThreshold){
 
-      RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedUp);
+    //   RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedUp);
 
-    }else if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armHighPosition) < Constants.armAutoThreshold){
+    // }else if((RobotMap.armMotor.getSelectedSensorPosition() - Constants.armHighPosition) < Constants.armAutoThreshold){
 
-      RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedDown);
+    //   RobotMap.armMotor.set(ControlMode.PercentOutput, Constants.armAutoSpeedDown);
       
-    }else{
-      isDone = true;
-    }
+    // }else{
+    //   isDone = true;
+    // }
+    Robot.armControl.setMotorPosition(Constants.armHighPosition);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isDone;
+    return false;
   }
 
   // Called once after isFinished returns true

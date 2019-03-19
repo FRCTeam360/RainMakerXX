@@ -69,7 +69,7 @@ public class OI {
     buttonBallPickup.whileHeld(new WristBallPickUp());
 
     buttonArmLow.whenPressed(new ArmLow());
-    buttonArmMid.whenPressed(new ArmMiddle());
+    buttonArmMid.whileHeld(new ArmMiddle());
     buttonArmHigh.whenPressed(new ArmHigh());
 
     // buttonArmLow.whenPressed(new MoveArm(Constants.armLowPosition));

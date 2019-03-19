@@ -71,8 +71,8 @@ public class ArmControl extends Subsystem {
 		return armTalon.getSelectedSensorPosition(0);
 	}
 	public void motionMagicInit() {
-		armTalon.configMotionCruiseVelocity(375, kTimeoutMs);
-    armTalon.configMotionAcceleration(490, kTimeoutMs);
+		armTalon.configMotionCruiseVelocity(200, kTimeoutMs);
+    armTalon.configMotionAcceleration(200, kTimeoutMs);
   }
 
   public void Process(){
