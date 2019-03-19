@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
   public static Joystick joyR = new Joystick(0);
 	public static Joystick joyL = new Joystick(1);
-  public static Joystick joyOI = new Joystick(2);
+  public static Joystick joyControl = new Joystick(2);
   public OI() {
 
   }
