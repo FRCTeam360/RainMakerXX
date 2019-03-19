@@ -22,10 +22,7 @@ import frc.robot.subsystems.*;
 
 
 public class Robot extends TimedRobot {
-  public static Shifter shifter;
-  public static Pneumatics pneumatics;
-  public static DriveTrain driveTrain;
-  public static OI oi;
+  
   
   
   //Command m_autonomousCommand;
@@ -34,10 +31,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    shifter = new Shifter();
-		pneumatics = new Pneumatics();
-		driveTrain = new DriveTrain();
-    oi = new OI();
+    
 
     //m_chooser.addDefault("Default Auto", new ExampleCommand());
     // chooser.addObject("My Auto", new MyAutoCommand());
