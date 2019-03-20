@@ -27,6 +27,12 @@ public class Robot extends TimedRobot {
   
   //Command m_autonomousCommand;
   //SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+  public static Arm arm;
+  public static Wrist wrist;
+  public static OI oi;
+
+  
       
 
   @Override
@@ -36,6 +42,10 @@ public class Robot extends TimedRobot {
     //m_chooser.addDefault("Default Auto", new ExampleCommand());
     // chooser.addObject("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", m_chooser);
+
+    arm = new Arm();
+    wrist = new Wrist();
+    oi = new OI();
   }
 
   @Override
@@ -70,6 +80,7 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.cancel();
     // }
 
+    Robot.arm.resetEncoder();
   }
 
   @Override

@@ -7,9 +7,13 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.*;
 
 public class RobotMap {
   public static PowerDistributionPanel pdp = new PowerDistributionPanel();
+
+  public static TalonSRX armMotor = new TalonSRX(5);
 
 }
