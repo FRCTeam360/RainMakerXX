@@ -15,5 +15,6 @@ public class RobotMap {
   public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 
   public static TalonSRX armMotor = new TalonSRX(5);
+  public static TalonSRX wristMotor = new TalonSRX(6);
 
 }

@@ -81,6 +81,7 @@ public class Robot extends TimedRobot {
     // }
 
     Robot.arm.resetEncoder();
+    Robot.wrist.resetEncoder();
   }
 
   @Override
