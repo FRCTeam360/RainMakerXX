@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class MoveWrist extends Command {
   double target;
@@ -28,19 +29,21 @@ public class MoveWrist extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // if(Math.abs(OI.joyControl.getRawAxis(3)) >= .1){
-    //   Robot.wrist.moveWrist(OI.joyControl.getRawAxis(3));
+    Robot.wrist.positionWrist((.65 * RobotMap.armMotor.getSelectedSensorPosition()) - 2900);
+
+    // if(Math.abs(OI.joyControl.getRawAxis(3)) >= .1 && OI.joyControl.getRawButton(2)){
+    //   Robot.wrist.moveWrist(OI.joyControl.getRawAxis(3) * .5);
     // } else{
     //   Robot.wrist.moveWrist(0);
     // }
 
-    if(OI.joyControl.getRawButton(2)){
-      target = OI.joyControl.getRawAxis(3) * 4096 * 10;
-      Robot.wrist.positionWrist(target);
-    } else {
-      target = 0;
-      Robot.wrist.moveWrist(0);
-    }
+    // if(OI.joyControl.getRawButton(2)){
+    //   target = -3500;
+    //   Robot.wrist.positionWrist(target);
+    // } else {
+    //   target = 0;
+    //   Robot.wrist.moveWrist(0);
+    // }
   }
 
   // Make this return true when this Command no longer needs to run execute()

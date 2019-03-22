@@ -12,13 +12,13 @@ package frc.robot;
  */
 public class Constants {
 
-    public static final double armF = 2.5575;
-    public static final double armP = 68.736; //0.134251969, 0.26854, .537, 1.074, 2.148, 4.296, 8.592, 17.184, 34.368
-    public static final double armI = 0.002; // .001, .002, .004, .008, .016, .012
-    public static final double armD = 708; //687.36, 690, 700, 705, 703, 704, 705, 707
+    public static final double armF = 2.65714; // 2.65714
+    public static final double armP = 36.0096; // 2.046, 4.096, 8.184, 16.368, 32.736
+    public static final double armI = 0.001; //
+    public static final double armD = 360.096; //
 
-    public static final int armVel = 200;
-    public static final int armAcc = 200;
+    public static final int armVel = 285;
+    public static final int armAcc = 285;
 
     public static final double wristF = 1.023;
     public static final double wristP = 31.488; // .05115, .123, .246, .492, .984, 1.968, 3.936, 7.872, 15.744

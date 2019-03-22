@@ -74,10 +74,10 @@ public class Wrist extends Subsystem {
   }
 
   public void Process(){
-    SmartDashboard.putNumber("WristVel", RobotMap.armMotor.getSelectedSensorVelocity(0));
-	  SmartDashboard.putNumber("WristPos",  RobotMap.armMotor.getSelectedSensorPosition());
-	  SmartDashboard.putNumber("WristOutputPercent", RobotMap.armMotor.getMotorOutputPercent());
-	  SmartDashboard.putNumber("WristError", RobotMap.armMotor.getClosedLoopError(0));
+    SmartDashboard.putNumber("WristVel", RobotMap.wristMotor.getSelectedSensorVelocity(0));
+	  SmartDashboard.putNumber("WristPos",  RobotMap.wristMotor.getSelectedSensorPosition());
+	  SmartDashboard.putNumber("WristOutputPercent", RobotMap.wristMotor.getMotorOutputPercent());
+	  SmartDashboard.putNumber("WristError", RobotMap.wristMotor.getClosedLoopError(0));
   }
 
   @Override
