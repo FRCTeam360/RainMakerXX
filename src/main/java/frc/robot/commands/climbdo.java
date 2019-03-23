@@ -34,7 +34,7 @@ public class climbdo extends Command {
     Robot.climby.getEncoders();
     Robot.climby.getDifference();
     Robot.climby.toggleMode();
-    if(Constants.isClimbing)  {
+    if(OI.joyControl.getRawButton(10))  {
       if(Math.abs(OI.joyControl.getRawAxis(1)) >= .05) {
         if(Robot.climby.getFrontEncoder() <= 100) {
           if(OI.joyControl.getRawAxis(1) < 0) {
@@ -91,10 +91,10 @@ public class climbdo extends Command {
         Robot.climby.BottomLeftDrive(0);
       }
 
-      // while(OI.joyControl.getRawButton(8)) {
-      //   Robot.climby.lift1Encoder((.5 - (Robot.climby.getDifference()/5000)) * -1, 26000);
-      //   Robot.climby.lift2Encoder((.5 + (Robot.climby.getDifference()/5000)) * -1, 26000);
-      // }
+      while(OI.joyControl.getRawButton(8)) {
+        Robot.climby.lift1Encoder((.5 - (Robot.climby.getDifference()/5000)) * -1, 26000);
+        Robot.climby.lift2Encoder((.5 + (Robot.climby.getDifference()/5000)) * -1, 26000);
+      }
     }
   }
 

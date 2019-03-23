@@ -35,7 +35,7 @@ public class Climber extends Subsystem {
   }
 
   public void lift2(double power) {
-    climb2.set(ControlMode.PercentOutput, power);
+    climb2.set(ControlMode.PercentOutput, -power);
   }
 
   public void lift1Encoder(double power, double position) {
