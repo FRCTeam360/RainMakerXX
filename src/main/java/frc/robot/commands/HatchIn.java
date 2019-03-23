@@ -8,52 +8,29 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
-public class MoveWrist extends Command {
-  double target;
-  public MoveWrist() {
+public class HatchIn extends Command {
+  public HatchIn() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.wrist);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    target = 0;
+    Robot.hatchPanel.hatchIn();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    int offset = 0;
-    if(Constants.panelPickUpActivation){
-      offset = 2000;
-    }
-    Robot.wrist.positionWrist(((RobotMap.armMotor.getSelectedSensorPosition()) * .85) - 2400 + offset);
-
-    // if(Math.abs(OI.joyControl.getRawAxis(3)) >= .1 && OI.joyControl.getRawButton(2)){
-    //   Robot.wrist.moveWrist(OI.joyControl.getRawAxis(3) * .5);
-    // } else{
-    //   Robot.wrist.moveWrist(0);
-    // }
-
-    // if(OI.joyControl.getRawButton(2)){
-    //   target = -3500;
-    //   Robot.wrist.positionWrist(target);
-    // } else {
-    //   target = 0;
-    //   Robot.wrist.moveWrist(0);
-    // }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

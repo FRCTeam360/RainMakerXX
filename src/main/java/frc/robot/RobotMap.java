@@ -16,5 +16,8 @@ public class RobotMap {
 
   public static TalonSRX armMotor = new TalonSRX(5);
   public static TalonSRX wristMotor = new TalonSRX(6);
+  public static TalonSRX intakeMotor = new TalonSRX(7);
+
+  public static DoubleSolenoid hatchPanel = new DoubleSolenoid(2, 3);
 
 }

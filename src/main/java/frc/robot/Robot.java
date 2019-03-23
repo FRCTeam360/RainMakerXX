@@ -30,6 +30,8 @@ public class Robot extends TimedRobot {
 
   public static Arm arm;
   public static Wrist wrist;
+  public static HatchSolenoid hatchPanel;
+  public static Intake intake;
   public static OI oi;
 
   
@@ -45,6 +47,8 @@ public class Robot extends TimedRobot {
 
     arm = new Arm();
     wrist = new Wrist();
+    hatchPanel = new HatchSolenoid();
+    intake = new Intake();
     oi = new OI();
   }
 

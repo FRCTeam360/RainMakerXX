@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -8,68 +8,36 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 import frc.robot.OI;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
 
-
-/**
- * An example command.  You can replace me with your own command.
- */
-public class MoveArm extends Command {
-  double target;
-  boolean lowPos;
-  boolean midPos;
-  boolean highPos;
-  public MoveArm() {
+public class WristPanelPosition extends Command {
+  public WristPanelPosition() {
     // Use requires() here to declare subsystem dependencies
-    //requires(Robot.m_subsystem);
-    requires(Robot.arm);
-    
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    target = 0;
-    lowPos = false;
-    midPos = false;
-    highPos = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    int position = RobotMap.armMotor.getSelectedSensorPosition();
-
-    if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){
-      Robot.arm.articulateArm(OI.joyControl.getRawAxis(1));
-      position = RobotMap.armMotor.getSelectedSensorPosition();
-    } else{
-      Robot.arm.articulateArm(0);
-    }
-
-    // if(OI.joyControl.getRawButton(1)){
-    //   target = OI.joyControl.getRawAxis(1) * 4096 * 10.0;
-    //   Robot.arm.setArmPosition(target);
-    // }else{
-    //   target = 0;
-      // if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){
-      //   Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * -1);
-      // }
-      // Robot.arm.articulateArm(0);
-    // }
+    Constants.panelPickUpActivation = true;
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return OI.joyControl.getRawButton(11);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Constants.panelPickUpActivation = false;
   }
 
   // Called when another command which requires one or more of the same
