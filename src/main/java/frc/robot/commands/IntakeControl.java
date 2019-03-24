@@ -12,38 +12,34 @@ import frc.robot.OI;
 import frc.robot.Robot;
 
 public class IntakeControl extends Command {
-  double speed;
-  int joystickPort;
-  boolean stop;
-  public IntakeControl(double speed, int joystickPort) {
+  
+  public IntakeControl() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.intake);
-    this.speed = speed;
-    this.joystickPort = joystickPort;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    stop = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.joyControl.getRawButton(joystickPort)){
-      Robot.intake.setIntakeSpeed(speed);
-    } else{
+    if(OI.joyControl.getRawButton(5)){
+      Robot.intake.setIntakeSpeed(-.5);
+    }else if(OI.joyControl.getRawButton(7)){
+      Robot.intake.setIntakeSpeed(.5);
+    }else{
       Robot.intake.setIntakeSpeed(0);
-      stop = true;
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return stop;
+    return false;
   }
 
   // Called once after isFinished returns true

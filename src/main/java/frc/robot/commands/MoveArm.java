@@ -15,15 +15,15 @@ import frc.robot.*;
  * An example command.  You can replace me with your own command.
  */
 public class MoveArm extends Command {
-  double target;
-  double position;
+  double target = 0;
+  double position = RobotMap.armMotor.getSelectedSensorPosition();
 
-  boolean button1;
-  boolean button2;
-  boolean button3;
-  // boolean low;
-  // boolean mid;
-  // boolean high;
+  boolean button1 = false;
+  boolean button2 = false;
+  boolean button3 = false;
+  boolean low = false;
+  boolean mid = false;
+  boolean high = false;
   public MoveArm() {
     // Use requires() here to declare subsystem dependencies
     //requires(Robot.m_subsystem);
@@ -34,15 +34,6 @@ public class MoveArm extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    target = 0;
-    position = RobotMap.armMotor.getSelectedSensorPosition();
-
-    button1 = false;
-    button2 = false;
-    button3 = false;
-    // low = false;
-    // mid = false;
-    // high = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -76,6 +67,16 @@ public class MoveArm extends Command {
     //     low = button1;
     //     mid = button2;
     //     high = false;
+    //   }
+    // }else{
+    //   if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){
+    //     Robot.arm.articulateArm(OI.joyControl.getRawAxis(1));
+    //     position = RobotMap.armMotor.getSelectedSensorPosition();
+    //     low = false;
+    //     mid = false;
+    //     high = false;
+    //   }else{
+    //     Robot.arm.setArmPosition(position);
     //   }
     // }
 
