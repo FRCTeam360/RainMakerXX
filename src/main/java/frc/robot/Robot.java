@@ -29,10 +29,6 @@ public class Robot extends TimedRobot {
   public static Limelight limelight;
   public static Pneumatics pneumatics;
   public static DriveTrain driveTrain;
-  public static ArmControl armControl;
-  public static WristControl wristControl;
-  public static IntakeControl intakeControl;
-  public static HatchPanelSolenoid hatchPanelSolenoid;
   public static OI oi;
   public static Climber climby;
 
@@ -50,10 +46,6 @@ public class Robot extends TimedRobot {
     limelight = new Limelight();
 		pneumatics = new Pneumatics();
     driveTrain = new DriveTrain();
-    armControl = new ArmControl();
-    wristControl = new WristControl();
-    intakeControl = new IntakeControl();
-    hatchPanelSolenoid = new HatchPanelSolenoid();
     oi = new OI();
 
     //autonomousCommand = new SandstromPeriod();
@@ -103,7 +95,6 @@ public class Robot extends TimedRobot {
     if (autonomousCommand != null) {
       autonomousCommand.start();
     }
-    Constants.defenseActivation = false;
   }
 
   /**
@@ -123,7 +114,6 @@ public class Robot extends TimedRobot {
     Robot.shifter.shiftDown();
     Robot.driveTrain.brakeMode();
     Robot.climby.resetEncoders();
-    Constants.defenseActivation = false;
   }
 
   /**

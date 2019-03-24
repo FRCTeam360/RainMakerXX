@@ -92,8 +92,8 @@ public class climbdo extends Command {
       }
 
       while(OI.joyControl.getRawButton(8)) {
-        Robot.climby.lift1Encoder((.5 - (Robot.climby.getDifference()/5000)) * -1, 26000);
-        Robot.climby.lift2Encoder((.5 + (Robot.climby.getDifference()/5000)) * -1, 26000);
+        Robot.climby.lift1Encoder((1 - (Robot.climby.getDifference()/5000)) * -1, 26000);
+        Robot.climby.lift2Encoder((1 + (Robot.climby.getDifference()/5000)) * -1, 26000);
       }
     }
   }
