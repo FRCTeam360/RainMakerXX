@@ -36,13 +36,14 @@ public class IntakeControl extends Command {
       Robot.intake.setIntakeSpeed(speed);
     } else{
       Robot.intake.setIntakeSpeed(0);
+      stop = true;
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !(OI.joyControl.getRawButton(joystickPort));
+    return stop;
   }
 
   // Called once after isFinished returns true

@@ -25,13 +25,17 @@ public class OI {
   public static JoystickButton intakeIn = new JoystickButton(joyControl, 5);
   public static JoystickButton intakeOut = new JoystickButton(joyControl, 7);
 
+  public static JoystickButton hatchButton = new JoystickButton(joyControl, 6);
+
   public OI() {
 
-    armLow.whenPressed(new ArmPositioning(Constants.armLow));
-    armMid.whenPressed(new ArmPositioning(Constants.armMid));
-    armHigh.whenPressed(new ArmPositioning(Constants.armHigh));
+    // armLow.whenPressed(new ArmPositioning(Constants.armLow));
+    // armMid.whenPressed(new ArmPositioning(Constants.armMid));
+    // armHigh.whenPressed(new ArmPositioning(Constants.armHigh));
 
-    wristOffset.whenPressed(new WristPanelPosition());
+    // wristOffset.whenPressed(new WristPanelPosition());
+
+    // hatchButton.whenPressed(new HatchControl());
 
     intakeIn.whenPressed(new IntakeControl(-.5, 5));
     intakeOut.whenPressed(new IntakeControl(.5, 7));

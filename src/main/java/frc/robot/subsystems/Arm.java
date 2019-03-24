@@ -30,50 +30,52 @@ public class Arm extends Subsystem {
 	private final int kPIDLoopIdx = 0;
   private final int kTimeoutMs = 10;
 
+  public static TalonSRX arm = RobotMap.armMotor;
+
   public Arm(){
-    RobotMap.armMotor.setInverted(false);
-    RobotMap.armMotor.setNeutralMode(NeutralMode.Brake);
+    arm.setInverted(false);
+    arm.setNeutralMode(NeutralMode.Brake);
 
-    RobotMap.armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, kPIDLoopIdx, kTimeoutMs);
-    RobotMap.armMotor.setSensorPhase(true);
+    arm.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, kPIDLoopIdx, kTimeoutMs);
+    arm.setSensorPhase(true);
 
-    RobotMap.armMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, kTimeoutMs);
-    RobotMap.armMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, kTimeoutMs);
+    arm.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, kTimeoutMs);
+    arm.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, kTimeoutMs);
 
-    RobotMap.armMotor.configNominalOutputForward(0, kTimeoutMs);
-    RobotMap.armMotor.configNominalOutputReverse(0, kTimeoutMs);
-		RobotMap.armMotor.configPeakOutputForward(1, kTimeoutMs);
-    RobotMap.armMotor.configPeakOutputReverse(-1, kTimeoutMs);
-    
-    RobotMap.armMotor.selectProfileSlot(kSlotIdx, kPIDLoopIdx);
-		RobotMap.armMotor.config_kF(0, Constants.armF, kTimeoutMs);
-		RobotMap.armMotor.config_kP(0, Constants.armP, kTimeoutMs);
-		RobotMap.armMotor.config_kI(0, Constants.armI, kTimeoutMs);
-    RobotMap.armMotor.config_kD(0, Constants.armD, kTimeoutMs);
+    arm.configNominalOutputForward(0, kTimeoutMs);
+    arm.configNominalOutputReverse(0, kTimeoutMs);
+		arm.configPeakOutputForward(1, kTimeoutMs);
+    arm.configPeakOutputReverse(-1, kTimeoutMs);
 
-    RobotMap.armMotor.configMotionCruiseVelocity(Constants.armVel, kTimeoutMs);
-    RobotMap.armMotor.configMotionAcceleration(Constants.armAcc, kTimeoutMs);
+    arm.selectProfileSlot(kSlotIdx, kPIDLoopIdx);
+		arm.config_kF(0, Constants.armF, kTimeoutMs);
+		arm.config_kP(0, Constants.armP, kTimeoutMs);
+		arm.config_kI(0, Constants.armI, kTimeoutMs);
+    arm.config_kD(0, Constants.armD, kTimeoutMs);
+
+    arm.configMotionCruiseVelocity(Constants.armVel, kTimeoutMs);
+    arm.configMotionAcceleration(Constants.armAcc, kTimeoutMs);
   }
 
   public void setArmPosition(double position){
-    RobotMap.armMotor.set(ControlMode.MotionMagic, position);
+    arm.set(ControlMode.MotionMagic, position);
     Process();
   }
 
   public void resetEncoder(){
-    RobotMap.armMotor.setSelectedSensorPosition(0);
+    arm.setSelectedSensorPosition(0);
   }
 
   public void articulateArm(double speed){
-    RobotMap.armMotor.set(ControlMode.PercentOutput, speed);
+    arm.set(ControlMode.PercentOutput, speed);
     Process();
   }
 
   public void Process(){
-    SmartDashboard.putNumber("ArmVel", RobotMap.armMotor.getSelectedSensorVelocity(0));
-	  SmartDashboard.putNumber("ArmPos",  RobotMap.armMotor.getSelectedSensorPosition());
-	  SmartDashboard.putNumber("ArmOutputPercent", RobotMap.armMotor.getMotorOutputPercent());
-	  SmartDashboard.putNumber("ArmError", RobotMap.armMotor.getClosedLoopError(0));
+    SmartDashboard.putNumber("ArmVel", arm.getSelectedSensorVelocity(0));
+	  SmartDashboard.putNumber("ArmPos",  arm.getSelectedSensorPosition());
+	  SmartDashboard.putNumber("ArmOutputPercent", arm.getMotorOutputPercent());
+	  SmartDashboard.putNumber("ArmError", arm.getClosedLoopError(0));
   }
 
   @Override

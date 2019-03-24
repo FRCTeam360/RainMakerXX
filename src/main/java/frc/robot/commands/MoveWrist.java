@@ -9,11 +9,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
+import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class MoveWrist extends Command {
   double target;
+  int offset;
   public MoveWrist() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -24,16 +26,22 @@ public class MoveWrist extends Command {
   @Override
   protected void initialize() {
     target = 0;
+    offset = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    int offset = 0;
-    if(Constants.panelPickUpActivation){
-      offset = 2000;
+    if (Constants.panelPickUpActivation != OI.joyControl.getRawButton(12)) {
+      if (OI.joyControl.getRawButton(12)) {
+        offset = 2000;
+      } else {
+        offset = 0;
+      }
     }
-    Robot.wrist.positionWrist(((RobotMap.armMotor.getSelectedSensorPosition()) * .85) - 2400 + offset);
+  Constants.panelPickUpActivation = OI.joyControl.getRawButton(12);
+
+  Robot.wrist.positionWrist(((RobotMap.armMotor.getSelectedSensorPosition()) * .85) - 2400 + offset);
 
     // if(Math.abs(OI.joyControl.getRawAxis(3)) >= .1 && OI.joyControl.getRawButton(2)){
     //   Robot.wrist.moveWrist(OI.joyControl.getRawAxis(3) * .5);
