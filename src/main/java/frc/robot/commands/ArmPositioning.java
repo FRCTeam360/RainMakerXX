@@ -31,7 +31,7 @@ public class ArmPositioning extends Command {
   protected void execute() {
     double hatchOffset = 0;
     if(Constants.panelPickUpActivation){
-      hatchOffset = Constants.hatchOffset;
+      hatchOffset = Constants.armHatchOffset;
     }
     Robot.arm.setArmPosition(position + hatchOffset);
   }

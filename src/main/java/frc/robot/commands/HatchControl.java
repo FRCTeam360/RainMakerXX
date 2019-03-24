@@ -12,8 +12,8 @@ import frc.robot.OI;
 import frc.robot.Robot;
 
 public class HatchControl extends Command {
-  boolean hatch;
-  boolean hatch2;
+  boolean togglePressed = false;
+  boolean toggleOn = false;
   public HatchControl() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -23,21 +23,24 @@ public class HatchControl extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    hatch = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (hatch != OI.joyControl.getRawButton(6)) {
-      if (OI.joyControl.getRawButton(6)) {
-          Robot.hatchPanel.hatchIn();
-      } else {
-          Robot.hatchPanel.hatchOut();
+    if(OI.joyControl.getRawButton(6)){
+      if(!togglePressed){
+          toggleOn = !toggleOn;
+          togglePressed = true;
       }
+    }else{
+      togglePressed = false;
     }
-  
-  hatch = OI.joyControl.getRawButton(6);
+    if(toggleOn){
+      Robot.hatchPanel.hatchIn();
+    }else{
+      Robot.hatchPanel.hatchOut();
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

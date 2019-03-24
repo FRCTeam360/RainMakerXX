@@ -15,7 +15,9 @@ import frc.robot.RobotMap;
 
 public class MoveWrist extends Command {
   double target;
-  int offset;
+  double offset;
+  boolean togglePressed = false;
+  boolean toggleOn = false;
   public MoveWrist() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -32,30 +34,21 @@ public class MoveWrist extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Constants.panelPickUpActivation != OI.joyControl.getRawButton(12)) {
-      if (OI.joyControl.getRawButton(12)) {
-        offset = 2000;
-      } else {
-        offset = 0;
+    if(OI.joyControl.getRawButton(12)){
+      if(!togglePressed){
+          toggleOn = !toggleOn;
+          togglePressed = true;
       }
+    }else{
+      togglePressed = false;
     }
-  Constants.panelPickUpActivation = OI.joyControl.getRawButton(12);
+    if(toggleOn){
+      offset = Constants.wristHatchOffset;
+    }else{
+      offset = 0;
+    }
 
   Robot.wrist.positionWrist(((RobotMap.armMotor.getSelectedSensorPosition()) * .85) - 2400 + offset);
-
-    // if(Math.abs(OI.joyControl.getRawAxis(3)) >= .1 && OI.joyControl.getRawButton(2)){
-    //   Robot.wrist.moveWrist(OI.joyControl.getRawAxis(3) * .5);
-    // } else{
-    //   Robot.wrist.moveWrist(0);
-    // }
-
-    // if(OI.joyControl.getRawButton(2)){
-    //   target = -3500;
-    //   Robot.wrist.positionWrist(target);
-    // } else {
-    //   target = 0;
-    //   Robot.wrist.moveWrist(0);
-    // }
   }
 
   // Make this return true when this Command no longer needs to run execute()

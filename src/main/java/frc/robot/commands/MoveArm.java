@@ -8,10 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Constants;
-import frc.robot.OI;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
+import frc.robot.*;
 
 
 /**
@@ -96,19 +93,6 @@ public class MoveArm extends Command {
         Robot.arm.setArmPosition(position);
       }
     }
-
-    
-
-    // if(OI.joyControl.getRawButton(1)){
-    //   target = OI.joyControl.getRawAxis(1) * 4096 * 10.0;
-    //   Robot.arm.setArmPosition(target);
-    // }else{
-    //   target = 0;
-      // if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){
-      //   Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * -1);
-      // }
-      // Robot.arm.articulateArm(0);
-    // }
   }
 
   // Make this return true when this Command no longer needs to run execute()
