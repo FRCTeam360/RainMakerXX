@@ -17,6 +17,7 @@ import frc.robot.*;
 public class MoveArm extends Command {
   double target = 0;
   double position = RobotMap.armMotor.getSelectedSensorPosition();
+  double offset = 0;
 
   boolean button1 = false;
   boolean button2 = false;
@@ -40,12 +41,18 @@ public class MoveArm extends Command {
   @Override
   protected void execute() {
 
-    button1 = OI.joyControl.getRawButton(1);
+    button1 = OI.joyControl.getRawButton(2);
     button2 = OI.joyControl.getRawButton(3);
     button3 = OI.joyControl.getRawButton(4);
 
+    if(Constants.panelPickUpActivation){
+      offset = Constants.armHatchOffset;
+    }else{
+      offset = 0;
+    }
+
     // if(button1 || low){
-    //   position = Constants.armLow;
+    //   position = Constants.armLow + offset;
     //   low = true;
     //   if(button2 || button3){
     //     low = false;
@@ -53,7 +60,7 @@ public class MoveArm extends Command {
     //     high = button3;
     //   }
     // }else if(button2 || mid){
-    //   position = Constants.armMid;
+    //   position = Constants.armMid + offset;
     //   mid = true;
     //   if(button1 || button3){
     //     low = button1;
@@ -61,7 +68,7 @@ public class MoveArm extends Command {
     //     high = button3;
     //   }
     // }else if(button3 || high){
-    //   position = Constants.armHigh;
+    //   position = Constants.armHigh + offset;
     //   high = true;
     //   if(button2 || button1){
     //     low = button1;
@@ -81,11 +88,11 @@ public class MoveArm extends Command {
     // }
 
     if(button1){
-      position = Constants.armLow;
+      position = Constants.armLow + offset;
     }else if(button2){
-      position = Constants.armMid;
+      position = Constants.armMid + offset;
     }else if(button3){
-      position = Constants.armHigh;
+      position = Constants.armHigh + offset;
     }else{
       if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){
         Robot.arm.articulateArm(OI.joyControl.getRawAxis(1));

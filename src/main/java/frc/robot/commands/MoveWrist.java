@@ -44,6 +44,7 @@ public class MoveWrist extends Command {
     }
     if(toggleOn){
       offset = Constants.wristHatchOffset;
+      Constants.panelPickUpActivation = true;
     }else{
       offset = 0;
     }
