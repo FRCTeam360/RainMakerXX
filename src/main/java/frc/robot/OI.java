@@ -8,17 +8,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.*;
 
 public class OI {
   public static Joystick joyR = new Joystick(0);
 	public static Joystick joyL = new Joystick(1);
   public static Joystick joyControl = new Joystick(2);
 
-  public static JoystickButton ballIntake = new JoystickButton(joyControl, 1);
-
   public OI() {
-    ballIntake.whenPressed(new BallPickUp());
   }
 }

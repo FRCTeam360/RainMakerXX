@@ -48,8 +48,12 @@ public class MoveWrist extends Command {
     }else{
       offset = 0;
     }
-
-  Robot.wrist.positionWrist(((RobotMap.armMotor.getSelectedSensorPosition()) * .85) - 2400 + offset);
+    if(!OI.joyControl.getRawButton(1)){
+      Robot.wrist.positionWrist(((RobotMap.armMotor.getSelectedSensorPosition()) * .85) - 2700 + offset);
+    }else{
+      Robot.wrist.positionWrist(-3390);
+    }
+  
   }
 
   // Make this return true when this Command no longer needs to run execute()

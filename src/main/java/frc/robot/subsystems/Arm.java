@@ -63,7 +63,11 @@ public class Arm extends Subsystem {
   }
 
   public void resetEncoder(){
-    arm.setSelectedSensorPosition(0);
+    while(RobotMap.pdp.getCurrent(14) <= 4){
+      articulateArm(.3);
+    }
+    arm.setSelectedSensorPosition(200);
+    setArmPosition(0);
   }
 
   public void articulateArm(double speed){

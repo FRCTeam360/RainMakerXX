@@ -19,9 +19,10 @@ public class MoveArm extends Command {
   double position = RobotMap.armMotor.getSelectedSensorPosition();
   double offset = 0;
 
-  boolean button1 = false;
   boolean button2 = false;
   boolean button3 = false;
+  boolean button4 = false;
+  boolean button1 = false;
   boolean low = false;
   boolean mid = false;
   boolean high = false;
@@ -40,10 +41,10 @@ public class MoveArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    button1 = OI.joyControl.getRawButton(2);
-    button2 = OI.joyControl.getRawButton(3);
-    button3 = OI.joyControl.getRawButton(4);
+    button1 = OI.joyControl.getRawButton(1);
+    button2 = OI.joyControl.getRawButton(2);
+    button3 = OI.joyControl.getRawButton(3);
+    button4 = OI.joyControl.getRawButton(4);
 
     if(Constants.panelPickUpActivation){
       offset = Constants.armHatchOffset;
@@ -87,11 +88,13 @@ public class MoveArm extends Command {
     //   }
     // }
 
-    if(button1){
-      position = Constants.armLow + offset;
+    if(button1 && RobotMap.pdp.getCurrent(8) <= 12){
+      position = Constants.armIntake;
     }else if(button2){
-      position = Constants.armMid + offset;
+      position = Constants.armLow + offset;
     }else if(button3){
+      position = Constants.armMid + offset;
+    }else if(button4){
       position = Constants.armHigh + offset;
     }else{
       if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){

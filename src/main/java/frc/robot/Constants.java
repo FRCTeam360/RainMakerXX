@@ -28,6 +28,7 @@ public class Constants {
     public static final int wristVel = 500;
     public static final int wristAcc = 500;
 
+    public static final double armIntake = -100;
     public static final double armLow = -1100;
     public static final double armMid = -2030;
     public static final double armHigh = -3200;

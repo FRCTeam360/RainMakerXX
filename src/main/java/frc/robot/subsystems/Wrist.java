@@ -65,6 +65,9 @@ public class Wrist extends Subsystem {
   }
 
   public void resetEncoder(){
+    while(RobotMap.pdp.getCurrent(9) <= 4){
+      moveWrist(.4);
+    }
     wrist.setSelectedSensorPosition(0);
   }
 

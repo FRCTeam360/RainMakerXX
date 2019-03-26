@@ -75,6 +75,8 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.cancel();
     // }
 
+
+
     Robot.arm.resetEncoder();
     Robot.wrist.resetEncoder();
   }
