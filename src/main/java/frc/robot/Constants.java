@@ -40,4 +40,13 @@ public class Constants {
     public static final double wristHatchOffset = 2100;
 
 
+    public static final double highFactor = 22.66667;
+    public static final double lowFactor = 7.56667;
+
+    public static final int highShiftPoint = 5200;
+    public static final int lowShiftPoint = 1000;
+
+    public static boolean isInAutoShift = false;
+
+    public static boolean isClimbing = false;
 }
