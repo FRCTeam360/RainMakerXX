@@ -8,7 +8,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,14 +24,24 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
+  
+  
+  
+  //Command m_autonomousCommand;
+  //SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+  public static Arm arm;
+  public static Wrist wrist;
+  public static HatchSolenoid hatchPanel;
+  public static Intake intake;
   public static Shifter shifter;
   public static Limelight limelight;
   public static Pneumatics pneumatics;
   public static DriveTrain driveTrain;
-  public static OI oi;
   public static Climber climby;
+  public static OI oi;
 
-  Command autonomousCommand;
+  // Command autonomousCommand;
   //SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /**
@@ -46,6 +55,10 @@ public class Robot extends TimedRobot {
     limelight = new Limelight();
 		pneumatics = new Pneumatics();
     driveTrain = new DriveTrain();
+    arm = new Arm();
+    wrist = new Wrist();
+    hatchPanel = new HatchSolenoid();
+    intake = new Intake();
     oi = new OI();
 
     //autonomousCommand = new SandstromPeriod();
@@ -92,9 +105,9 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     Robot.limelight.driveCamera();
-    if (autonomousCommand != null) {
-      autonomousCommand.start();
-    }
+    // if (autonomousCommand != null) {
+    //   autonomousCommand.start();
+    // }
   }
 
   /**
@@ -107,9 +120,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    if (autonomousCommand != null) {
-      autonomousCommand.cancel();
-    }
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.cancel();
+    // }
+
+
+
+    Robot.arm.resetEncoder();
+    Robot.wrist.resetEncoder();
     Robot.limelight.driveCamera();
     Robot.shifter.shiftDown();
     Robot.driveTrain.brakeMode();
@@ -121,7 +139,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+
     Scheduler.getInstance().run();
+
   }
 
   /**
