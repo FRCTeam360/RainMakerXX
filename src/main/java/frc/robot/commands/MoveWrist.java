@@ -16,8 +16,10 @@ import frc.robot.RobotMap;
 public class MoveWrist extends Command {
   double target;
   double offset;
-  boolean togglePressed = false;
+  boolean togglePressWrist = false;
   boolean toggleOn = false;
+  boolean toggleDefense = false;
+  boolean toggleOnDefense = false;
   public MoveWrist() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -35,23 +37,36 @@ public class MoveWrist extends Command {
   @Override
   protected void execute() {
     if(OI.joyControl.getRawButton(12)){
-      if(!togglePressed){
+      if(!togglePressWrist){
           toggleOn = !toggleOn;
-          togglePressed = true;
+          togglePressWrist = true;
       }
     }else{
-      togglePressed = false;
+      togglePressWrist = false;
     }
+
+    if(OI.joyControl.getRawButton(9)){
+      if(!toggleDefense){
+          toggleOnDefense = !toggleOnDefense;
+          toggleDefense = true;
+      }
+    }else{
+      toggleDefense = false;
+    }
+    Constants.defenseMode = toggleOnDefense;
+
     if(toggleOn){
       offset = Constants.wristHatchOffset;
       Constants.panelPickUpActivation = true;
     }else{
       offset = 0;
     }
-    if(!OI.joyControl.getRawButton(1)){
-      Robot.wrist.positionWrist(((RobotMap.armMotor.getSelectedSensorPosition()) * .85) - 2700 + offset);
+    if(OI.joyControl.getRawButton(1) && !Constants.defenseMode){
+      Robot.wrist.positionWrist(-3800);
+    }else if(Constants.defenseMode){
+      Robot.wrist.positionWrist(-200);
     }else{
-      Robot.wrist.positionWrist(-3390);
+      Robot.wrist.positionWrist(((RobotMap.armMotor.getSelectedSensorPosition()) * .85) - 2700 + offset);
     }
   
   }

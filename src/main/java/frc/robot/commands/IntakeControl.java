@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 import frc.robot.OI;
 import frc.robot.Robot;
 
@@ -27,9 +28,9 @@ public class IntakeControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.joyControl.getRawButton(5) || OI.joyControl.getRawButton(1)){
+    if((OI.joyControl.getRawButton(5) || OI.joyControl.getRawButton(1)) && !Constants.defenseMode){
       Robot.intake.setIntakeSpeed(-.5);
-    }else if(OI.joyControl.getRawButton(7)){
+    }else if(OI.joyControl.getRawButton(7) && !Constants.defenseMode){
       Robot.intake.setIntakeSpeed(.5);
     }else{
       Robot.intake.setIntakeSpeed(0);

@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 import frc.robot.OI;
 import frc.robot.Robot;
 
@@ -36,7 +37,7 @@ public class HatchControl extends Command {
     }else{
       togglePressed = false;
     }
-    if(toggleOn){
+    if(toggleOn && !Constants.defenseMode){
       Robot.hatchPanel.hatchIn();
     }else{
       Robot.hatchPanel.hatchOut();

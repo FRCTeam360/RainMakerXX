@@ -33,9 +33,11 @@ public class Constants {
     public static final double armMid = -2030;
     public static final double armHigh = -3200;
 
+    public static boolean defenseMode = false;
+
     public static boolean panelPickUpActivation = false;
     public static final double armHatchOffset = 0;
-    public static final double wristHatchOffset = 2000;
+    public static final double wristHatchOffset = 2100;
 
 
 }

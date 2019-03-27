@@ -23,9 +23,6 @@ public class MoveArm extends Command {
   boolean button3 = false;
   boolean button4 = false;
   boolean button1 = false;
-  boolean low = false;
-  boolean mid = false;
-  boolean high = false;
   public MoveArm() {
     // Use requires() here to declare subsystem dependencies
     //requires(Robot.m_subsystem);
@@ -52,51 +49,18 @@ public class MoveArm extends Command {
       offset = 0;
     }
 
-    // if(button1 || low){
-    //   position = Constants.armLow + offset;
-    //   low = true;
-    //   if(button2 || button3){
-    //     low = false;
-    //     mid = button2;
-    //     high = button3;
-    //   }
-    // }else if(button2 || mid){
-    //   position = Constants.armMid + offset;
-    //   mid = true;
-    //   if(button1 || button3){
-    //     low = button1;
-    //     mid = false;
-    //     high = button3;
-    //   }
-    // }else if(button3 || high){
-    //   position = Constants.armHigh + offset;
-    //   high = true;
-    //   if(button2 || button1){
-    //     low = button1;
-    //     mid = button2;
-    //     high = false;
-    //   }
-    // }else{
-    //   if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){
-    //     Robot.arm.articulateArm(OI.joyControl.getRawAxis(1));
-    //     position = RobotMap.armMotor.getSelectedSensorPosition();
-    //     low = false;
-    //     mid = false;
-    //     high = false;
-    //   }else{
-    //     Robot.arm.setArmPosition(position);
-    //   }
-    // }
-
-    if(button1 && RobotMap.pdp.getCurrent(8) <= 12){
-      position = Constants.armIntake;
-    }else if(button2){
-      position = Constants.armLow + offset;
-    }else if(button3){
-      position = Constants.armMid + offset;
-    }else if(button4){
-      position = Constants.armHigh + offset;
-    }else{
+    if(button1 && !Constants.defenseMode){
+      Robot.arm.setArmPosition(Constants.armIntake);
+    }else if(button2 && !Constants.defenseMode){
+      Robot.arm.setArmPosition(Constants.armLow + offset);
+    }else if(button3 && !Constants.defenseMode){
+      Robot.arm.setArmPosition(Constants.armMid + offset);
+    }else if(Constants.defenseMode){
+      Robot.arm.setArmPosition(150);
+    }else if(button4 && !Constants.defenseMode){
+      Robot.arm.setArmPosition(Constants.armHigh + offset);
+    }else if(!Constants.defenseMode){
+      position = RobotMap.armMotor.getSelectedSensorPosition();
       if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){
         Robot.arm.articulateArm(OI.joyControl.getRawAxis(1));
         position = RobotMap.armMotor.getSelectedSensorPosition();
