@@ -20,11 +20,11 @@ public class RobotMap {
   public static TalonSRX wristMotor = new TalonSRX(6);
   public static TalonSRX intakeMotor = new TalonSRX(7);
 
-  public static DoubleSolenoid hatchPanel = new DoubleSolenoid(5, 1);
+  public static DoubleSolenoid hatchPanel = new DoubleSolenoid(2, 3);
 
   public static DoubleSolenoid shifter = new DoubleSolenoid(0, 1);
 
-  public static DoubleSolenoid wings = new DoubleSolenoid(6, 7);
+  public static DoubleSolenoid wings = new DoubleSolenoid(4, 5);
 
   public static enum ShiftState {UP, DOWN, UNKNOWN};
   public static ShiftState shiftState = ShiftState.UNKNOWN;
