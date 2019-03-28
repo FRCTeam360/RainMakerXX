@@ -37,14 +37,14 @@ public class climbdo extends Command {
     if(OI.joyControl.getRawButton(10))  {
       if(Math.abs(OI.joyControl.getRawAxis(1)) >= .05) {
         if(Robot.climby.getFrontEncoder() <= 100) {
-          if(OI.joyControl.getRawAxis(1) < 0) {
+          if(OI.joyControl.getRawAxis(1) > 0) {
             Robot.climby.lift1(-OI.joyControl.getRawAxis(1) * .5);
           } else {
             Robot.climby.lift1(0);
           }
         }
         if(Robot.climby.getFrontEncoder() >= 28000) {
-          if(OI.joyControl.getRawAxis(1) > 0) {
+          if(OI.joyControl.getRawAxis(1) < 0) {
             Robot.climby.lift1(-OI.joyControl.getRawAxis(1) * .5);
           } else {
             Robot.climby.lift1(0);
@@ -58,15 +58,15 @@ public class climbdo extends Command {
       }
 
       if(Math.abs(OI.joyControl.getRawAxis(3)) >= .05) {
-        if(Robot.climby.getBackEncoder() <= 100) {
-          if(OI.joyControl.getRawAxis(3) < 0) {
+        if(Robot.climby.getBackEncoder() <= 50) {
+          if(OI.joyControl.getRawAxis(3) > 0) {
             Robot.climby.lift2(-OI.joyControl.getRawAxis(3) * .5);
           } else {
             Robot.climby.lift2(0);
           }
         }
         if(Robot.climby.getBackEncoder() >= 28000) {
-          if(OI.joyControl.getRawAxis(3) > 0) {
+          if(OI.joyControl.getRawAxis(3) < 0) {
             Robot.climby.lift2(-OI.joyControl.getRawAxis(3) * .5);
           } else {
             Robot.climby.lift2(0);
@@ -89,6 +89,10 @@ public class climbdo extends Command {
         Robot.climby.BottomLeftDrive(.5);
       } else {
         Robot.climby.BottomLeftDrive(0);
+      }
+
+      if(OI.joyControl.getRawButtonPressed(2)) {
+        Robot.climby.deployWings();
       }
 
       while(OI.joyControl.getRawButton(8)) {

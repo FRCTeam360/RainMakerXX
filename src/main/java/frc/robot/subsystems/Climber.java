@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
@@ -29,6 +30,8 @@ public class Climber extends Subsystem {
 
   public TalonSRX driveR = RobotMap.liftMotorR;
   public TalonSRX driveL = RobotMap.liftMotorL;
+
+  public DoubleSolenoid wings = RobotMap.wings;
 
   public void lift1(double power){
     climb1.set(ControlMode.PercentOutput, power);
@@ -84,6 +87,14 @@ public class Climber extends Subsystem {
 
   public void BottomLeftDrive(double power) {
     driveL.set(ControlMode.PercentOutput, power);
+  }
+
+  public void deployWings() {
+    if(wings.get().equals(DoubleSolenoid.Value.kReverse)) {
+      wings.set(DoubleSolenoid.Value.kForward);
+    } else {
+      wings.set(DoubleSolenoid.Value.kReverse);
+    }
   }
 
   public void toggleMode() {

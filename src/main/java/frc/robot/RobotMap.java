@@ -24,6 +24,8 @@ public class RobotMap {
 
   public static DoubleSolenoid shifter = new DoubleSolenoid(0, 1);
 
+  public static DoubleSolenoid wings = new DoubleSolenoid(6, 7);
+
   public static enum ShiftState {UP, DOWN, UNKNOWN};
   public static ShiftState shiftState = ShiftState.UNKNOWN;
   
@@ -39,6 +41,6 @@ public class RobotMap {
   public static TalonSRX climbM1 = new TalonSRX(9);
   public static TalonSRX climbM2 = new TalonSRX(8);
 
-  public static DigitalInput armSwitch = new DigitalInput(1);
+  //public static DigitalInput armSwitch = new DigitalInput(1);
   
 }
