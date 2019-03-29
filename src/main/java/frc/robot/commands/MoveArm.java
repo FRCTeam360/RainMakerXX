@@ -44,10 +44,11 @@ public class MoveArm extends Command {
     button4 = OI.joyControl.getRawButton(4);
 
     if(Constants.panelPickUpActivation){
-      offset = Constants.armHatchOffset;
+      offset = 0;
     }else{
       offset = 0;
     }
+    System.out.println(RobotMap.armReset.get());
 
     if(button1 && !Constants.defenseMode){
       Robot.arm.setArmPosition(Constants.armIntake);
@@ -56,13 +57,13 @@ public class MoveArm extends Command {
     }else if(button3 && !Constants.defenseMode){
       Robot.arm.setArmPosition(Constants.armMid + offset);
     }else if(Constants.defenseMode){
-      Robot.arm.setArmPosition(150);
+      Robot.arm.setArmPosition(50);
     }else if(button4 && !Constants.defenseMode){
       Robot.arm.setArmPosition(Constants.armHigh + offset);
     }else if(!Constants.defenseMode){
       position = RobotMap.armMotor.getSelectedSensorPosition();
       if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){
-        Robot.arm.articulateArm(OI.joyControl.getRawAxis(1));
+        Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * .4);
         position = RobotMap.armMotor.getSelectedSensorPosition();
       } else{
         Robot.arm.setArmPosition(position);

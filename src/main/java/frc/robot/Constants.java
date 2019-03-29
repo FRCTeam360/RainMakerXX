@@ -29,15 +29,19 @@ public class Constants {
     public static final int wristAcc = 500;
 
     public static final double armIntake = -100;
-    public static final double armLow = -1100;
-    public static final double armMid = -2030;
-    public static final double armHigh = -3200;
+    // public static final double armLow = -1202;
+    // public static final double armMid = -2248;
+    // public static final double armHigh = -3190;
+    public static final double armLow = -770;
+    public static final double armMid = -1825;
+    public static final double armHigh = -2800;
+    // arm low hatch: 
 
     public static boolean defenseMode = false;
 
-    public static boolean panelPickUpActivation = false;
-    public static final double armHatchOffset = 0;
-    public static final double wristHatchOffset = 2100;
+    public static boolean panelPickUpActivation = true;
+    public static final double armHatchOffset = 200;
+    public static final double wristHatchOffset = 1400;
 
 
     public static final double highFactor = 22.66667;

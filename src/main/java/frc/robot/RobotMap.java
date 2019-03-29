@@ -26,6 +26,8 @@ public class RobotMap {
 
   public static DoubleSolenoid wings = new DoubleSolenoid(4, 5);
 
+  public static DigitalInput armReset = new DigitalInput(0);
+
   public static enum ShiftState {UP, DOWN, UNKNOWN};
   public static ShiftState shiftState = ShiftState.UNKNOWN;
   

@@ -61,6 +61,9 @@ public class Robot extends TimedRobot {
     intake = new Intake();
     oi = new OI();
 
+    // RobotMap.armMotor.setSelectedSensorPosition(0);
+    // RobotMap.wristMotor.setSelectedSensorPosition(0);
+
     //autonomousCommand = new SandstromPeriod();
   }
 
@@ -126,8 +129,8 @@ public class Robot extends TimedRobot {
 
 
 
-    Robot.arm.resetEncoder();
-    Robot.wrist.resetEncoder();
+    // Robot.arm.resetEncoder();
+    // Robot.wrist.resetEncoder();
     Robot.limelight.driveCamera();
     Robot.shifter.shiftDown();
     Robot.driveTrain.brakeMode();

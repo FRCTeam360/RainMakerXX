@@ -16,6 +16,7 @@ import frc.robot.RobotMap;
 public class MoveWrist extends Command {
   double target;
   double offset;
+  double position = RobotMap.wristMotor.getSelectedSensorPosition();
   boolean togglePressWrist = false;
   boolean toggleOn = false;
   boolean toggleDefense = false;
@@ -56,17 +57,25 @@ public class MoveWrist extends Command {
     Constants.defenseMode = toggleOnDefense;
 
     if(toggleOn){
+      offset = 0;
+      Constants.panelPickUpActivation = false;
+    }else{
       offset = Constants.wristHatchOffset;
       Constants.panelPickUpActivation = true;
-    }else{
-      offset = 0;
     }
     if(OI.joyControl.getRawButton(1) && !Constants.defenseMode){
       Robot.wrist.positionWrist(-3800);
     }else if(Constants.defenseMode){
       Robot.wrist.positionWrist(-200);
     }else{
-      Robot.wrist.positionWrist(((RobotMap.armMotor.getSelectedSensorPosition()) * .85) - 2700 + offset);
+      // Robot.wrist.positionWrist(((RobotMap.armMotor.getSelectedSensorPosition()) * .85) - 1900 + offset);
+      if(Math.abs(OI.joyControl.getRawAxis(3)) >= .05){
+        Robot.wrist.moveWrist(OI.joyControl.getRawAxis(3) * .3);
+        position = RobotMap.wristMotor.getSelectedSensorPosition();
+      }else{
+        Robot.wrist.moveWrist(0);
+        Robot.wrist.positionWrist(position);
+      }
     }
   
   }
