@@ -28,12 +28,16 @@ public class IntakeControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if((OI.joyControl.getRawButton(5) || OI.joyControl.getRawButton(1)) && !Constants.defenseMode){
-      Robot.intake.setIntakeSpeed(-.5);
-    }else if(OI.joyControl.getRawButton(7) && !Constants.defenseMode){
-      Robot.intake.setIntakeSpeed(.5);
-    }else{
+    if(OI.joyControl.getRawButton(10)){
       Robot.intake.setIntakeSpeed(0);
+    }else{
+      if((OI.joyControl.getRawButton(5) || OI.joyControl.getRawButton(1)) && !Constants.defenseMode){
+        Robot.intake.setIntakeSpeed(-.5);
+      }else if(OI.joyControl.getRawButton(7) && !Constants.defenseMode){
+        Robot.intake.setIntakeSpeed(.5);
+      }else{
+        Robot.intake.setIntakeSpeed(0);
+      }
     }
   }
 

@@ -48,25 +48,26 @@ public class MoveArm extends Command {
     }else{
       offset = 0;
     }
-    System.out.println(RobotMap.armReset.get());
-
-    if(button1 && !Constants.defenseMode){
-      Robot.arm.setArmPosition(Constants.armIntake);
-    }else if(button2 && !Constants.defenseMode){
-      Robot.arm.setArmPosition(Constants.armLow + offset);
-    }else if(button3 && !Constants.defenseMode){
-      Robot.arm.setArmPosition(Constants.armMid + offset);
-    }else if(Constants.defenseMode){
-      Robot.arm.setArmPosition(50);
-    }else if(button4 && !Constants.defenseMode){
-      Robot.arm.setArmPosition(Constants.armHigh + offset);
-    }else if(!Constants.defenseMode){
-      position = RobotMap.armMotor.getSelectedSensorPosition();
-      if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){
-        Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * .4);
+    // System.out.println(RobotMap.armReset.get());
+    if(!OI.joyControl.getRawButton(10)){
+      if(button1 && !Constants.defenseMode){
+        Robot.arm.setArmPosition(Constants.armIntake);
+      }else if(button2 && !Constants.defenseMode){
+        Robot.arm.setArmPosition(Constants.armLow + offset);
+      }else if(button3 && !Constants.defenseMode){
+        Robot.arm.setArmPosition(Constants.armMid + offset);
+      }else if(Constants.defenseMode){
+        Robot.arm.setArmPosition(50);
+      }else if(button4 && !Constants.defenseMode){
+        Robot.arm.setArmPosition(Constants.armHigh + offset);
+      }else if(!Constants.defenseMode){
         position = RobotMap.armMotor.getSelectedSensorPosition();
-      } else{
-        Robot.arm.setArmPosition(position);
+        if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){
+          Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * .4);
+          position = RobotMap.armMotor.getSelectedSensorPosition();
+        } else{
+          Robot.arm.setArmPosition(position);
+        }
       }
     }
   }

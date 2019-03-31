@@ -69,9 +69,14 @@ public class MoveWrist extends Command {
       Robot.wrist.positionWrist(-200);
     }else{
       // Robot.wrist.positionWrist(((RobotMap.armMotor.getSelectedSensorPosition()) * .85) - 1900 + offset);
-      if(Math.abs(OI.joyControl.getRawAxis(3)) >= .05){
-        Robot.wrist.moveWrist(OI.joyControl.getRawAxis(3) * .3);
-        position = RobotMap.wristMotor.getSelectedSensorPosition();
+      if(!OI.joyControl.getRawButton(10)){
+        if(Math.abs(OI.joyControl.getRawAxis(3)) >= .05){
+          Robot.wrist.moveWrist(-OI.joyControl.getRawAxis(3) * .3);
+          position = RobotMap.wristMotor.getSelectedSensorPosition();
+        }else{
+          Robot.wrist.moveWrist(0);
+          Robot.wrist.positionWrist(position);
+        }
       }else{
         Robot.wrist.moveWrist(0);
         Robot.wrist.positionWrist(position);

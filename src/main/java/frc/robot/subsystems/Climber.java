@@ -38,7 +38,7 @@ public class Climber extends Subsystem {
   }
 
   public void lift2(double power) {
-    climb2.set(ControlMode.PercentOutput, -power);
+    climb2.set(ControlMode.PercentOutput, power);
   }
 
   public void lift1Encoder(double power, double position) {
@@ -82,11 +82,11 @@ public class Climber extends Subsystem {
   }
 
   public void BottomRightDrive(double power) {
-    driveR.set(ControlMode.PercentOutput, power);
+    driveR.set(ControlMode.PercentOutput, -power);
   }
 
   public void BottomLeftDrive(double power) {
-    driveL.set(ControlMode.PercentOutput, power);
+    driveL.set(ControlMode.PercentOutput, -power);
   }
 
   public void deployWings() {

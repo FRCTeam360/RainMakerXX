@@ -29,7 +29,7 @@ public class HatchControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(OI.joyControl.getRawButton(6)){
+    if(OI.joyControl.getRawButton(6) && !OI.joyControl.getRawButton(10)){
       if(!togglePressed){
           toggleOn = !toggleOn;
           togglePressed = true;
