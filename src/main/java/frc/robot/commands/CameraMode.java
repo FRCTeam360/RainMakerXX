@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 import frc.robot.OI;
 import frc.robot.Robot;
 
@@ -27,7 +28,11 @@ public class CameraMode extends Command {
   @Override
   protected void execute() {
     while (OI.joyR.getRawButton(4)){
-      NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1.0);
+      if(Constants.auto) {
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0);
+      } else {
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1.0);
+      }
     }
     isFinished = true;
   }
@@ -39,7 +44,11 @@ public class CameraMode extends Command {
 
   @Override
   protected void end() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0);
+    if(Constants.auto) {
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1.0);
+    } else {
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0);
+    }
   }
 
   @Override

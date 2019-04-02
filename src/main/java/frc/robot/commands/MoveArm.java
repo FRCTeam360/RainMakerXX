@@ -48,7 +48,7 @@ public class MoveArm extends Command {
     }else{
       offset = 0;
     }
-    // System.out.println(RobotMap.armReset.get());
+    // System.out.println(RobotMap.armReset.get()); 
     if(!OI.joyControl.getRawButton(10)){
       if(button1 && !Constants.defenseMode){
         Robot.arm.setArmPosition(Constants.armIntake);
@@ -57,18 +57,39 @@ public class MoveArm extends Command {
       }else if(button3 && !Constants.defenseMode){
         Robot.arm.setArmPosition(Constants.armMid + offset);
       }else if(Constants.defenseMode){
+        // if(!RobotMap.armReset.get()){
+        //   RobotMap.armMotor.setSelectedSensorPosition(0);
+        //   Robot.arm.setArmPosition(0);
+        // }else{
+        //   Robot.arm.setArmPosition(100);
+        // }
         Robot.arm.setArmPosition(50);
       }else if(button4 && !Constants.defenseMode){
         Robot.arm.setArmPosition(Constants.armHigh + offset);
       }else if(!Constants.defenseMode){
-        position = RobotMap.armMotor.getSelectedSensorPosition();
         if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){
-          Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * .4);
+          if(OI.joyControl.getRawAxis(1) < 0){
+            Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * .6);
+          }else if(OI.joyControl.getRawAxis(1) > 0){
+            Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * .25);
+          }else{
+            Robot.arm.articulateArm(0);
+          }
           position = RobotMap.armMotor.getSelectedSensorPosition();
-        } else{
+        }/*else if(!RobotMap.armReset.get()){
+          RobotMap.armMotor.setSelectedSensorPosition(0);
+          Robot.arm.setArmPosition(-50);
+        }*/else {
           Robot.arm.setArmPosition(position);
         }
+      }else if(Constants.defenseMode){
+        Robot.arm.articulateArm(0);
+        position = RobotMap.armMotor.getSelectedSensorPosition();
       }
+    }else{
+      // Robot.arm.setArmPosition(0);
+      Robot.arm.articulateArm(0);
+      position = RobotMap.armMotor.getSelectedSensorPosition();
     }
   }
 

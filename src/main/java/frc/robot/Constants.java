@@ -53,4 +53,6 @@ public class Constants {
     public static boolean isInAutoShift = false;
 
     public static boolean isClimbing = false;
+
+    public static boolean auto = true;
 }

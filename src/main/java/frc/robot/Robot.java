@@ -108,6 +108,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     Robot.limelight.driveCamera();
+    Robot.driveTrain.brakeMode();
+    Constants.auto = true;
     // if (autonomousCommand != null) {
     //   autonomousCommand.start();
     // }
@@ -126,8 +128,8 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.cancel();
     // }
-
-
+    
+    Constants.auto = false;
 
     // Robot.arm.resetEncoder();
     // Robot.wrist.resetEncoder();

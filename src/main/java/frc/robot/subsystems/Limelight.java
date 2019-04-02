@@ -19,6 +19,8 @@ public class Limelight extends Subsystem {
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tx = table.getEntry("tx");
   NetworkTableEntry ty = table.getEntry("ty");
+  NetworkTableEntry ta = table.getEntry("ta");
+  NetworkTableEntry tv = table.getEntry("tv");
 
   private double x = tx.getDouble(0.0);
   private double y = ty.getDouble(0.0);
@@ -37,6 +39,14 @@ public class Limelight extends Subsystem {
 
   public double getY() {
     return ty.getDouble(0.0);
+  }
+
+  public double getA() {
+    return ta.getDouble(0.0);
+  }
+
+  public double getV() {
+    return tv.getDouble(0.0);
   }
 
   @Override

@@ -55,6 +55,8 @@ public class Arm extends Subsystem {
 
     arm.configMotionCruiseVelocity(Constants.armVel, kTimeoutMs);
     arm.configMotionAcceleration(Constants.armAcc, kTimeoutMs);
+
+    arm.setSelectedSensorPosition(0);
   }
 
   public void setArmPosition(double position){
@@ -62,13 +64,13 @@ public class Arm extends Subsystem {
     Process();
   }
 
-  public void resetEncoder(){
-    while(RobotMap.pdp.getCurrent(14) <= 4){
-      articulateArm(.3);
-    }
-    arm.setSelectedSensorPosition(200);
-    setArmPosition(0);
-  }
+  // public void resetEncoder(){
+  //   while(!RobotMap.armReset.get()){
+  //     articulateArm(.3);
+  //   }
+  //   arm.setSelectedSensorPosition(200);
+  //   setArmPosition(0);
+  // }
 
   public void articulateArm(double speed){
     arm.set(ControlMode.PercentOutput, speed);
