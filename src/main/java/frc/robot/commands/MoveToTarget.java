@@ -28,17 +28,17 @@ public class MoveToTarget extends Command {
   @Override
   protected void execute() {
     if(Robot.limelight.getA() < 1.5 && Robot.limelight.getV() == 1) {
-      if(Robot.limelight.getX() > 1.2) {
+      if(Robot.limelight.getX() > 1.0) {
         System.out.println("turn right");
-        Robot.driveTrain.driveLMAX(0.2 + Robot.limelight.getX() * 0.01);
-        Robot.driveTrain.driveRMAX(0.2 - Robot.limelight.getX() * 0.01);
-      } else if(Robot.limelight.getX() < -1.2) {
+        Robot.driveTrain.driveLMAX(0.25 + Robot.limelight.getX() * 0.025);
+        Robot.driveTrain.driveRMAX(0.25 - Robot.limelight.getX() * 0.025);
+      } else if(Robot.limelight.getX() < -1.0) {
         System.out.println("turn left");
-        Robot.driveTrain.driveLMAX(0.2 - Robot.limelight.getX() * -0.01);
-        Robot.driveTrain.driveRMAX(0.22 + Robot.limelight.getX() * -0.01);
+        Robot.driveTrain.driveLMAX(0.25 - Robot.limelight.getX() * -0.025);
+        Robot.driveTrain.driveRMAX(0.25 + Robot.limelight.getX() * -0.025);
       } else {
-        Robot.driveTrain.driveLMAX(0.3 - Robot.limelight.getA() * 0.1);
-        Robot.driveTrain.driveRMAX(0.3 - Robot.limelight.getA() * 0.1);
+        Robot.driveTrain.driveLMAX(0.25 + Math.abs(Robot.limelight.getX()) * 0.05);
+        Robot.driveTrain.driveRMAX(0.25 + Math.abs(Robot.limelight.getX()) * 0.05);
         System.out.println("run to target");
       }
     } else {
