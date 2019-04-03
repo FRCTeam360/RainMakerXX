@@ -53,43 +53,55 @@ public class MoveArm extends Command {
       if(button1 && !Constants.defenseMode){
         Robot.arm.setArmPosition(Constants.armIntake);
       }else if(button2 && !Constants.defenseMode){
+        // Robot.arm.setArmPosition(Constants.armLow + offset - 75);
         Robot.arm.setArmPosition(Constants.armLow + offset);
       }else if(button3 && !Constants.defenseMode){
+        // Robot.arm.setArmPosition(Constants.armMid + offset - 75);
         Robot.arm.setArmPosition(Constants.armMid + offset);
+      }else if(button4 && !Constants.defenseMode){
+        // Robot.arm.setArmPosition(Constants.armHigh + offset - 75);
+        Robot.arm.setArmPosition(Constants.armHigh + offset);
       }else if(Constants.defenseMode){
-        // if(!RobotMap.armReset.get()){
-        //   RobotMap.armMotor.setSelectedSensorPosition(0);
-        //   Robot.arm.setArmPosition(0);
-        // }else{
-        //   Robot.arm.setArmPosition(100);
-        // }
-        Robot.arm.setArmPosition(50);
+        if(!RobotMap.armReset.get()){
+          RobotMap.armMotor.setSelectedSensorPosition(0);
+          Robot.arm.setArmPosition(0);
+        }else{
+          Robot.arm.setArmPosition(100);
+        }
       }else if(button4 && !Constants.defenseMode){
         Robot.arm.setArmPosition(Constants.armHigh + offset);
       }else if(!Constants.defenseMode){
         if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){
-          if(OI.joyControl.getRawAxis(1) < 0){
+          if(OI.joyControl.getRawAxis(1) < -0.1){
             Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * .6);
-          }else if(OI.joyControl.getRawAxis(1) > 0){
+          }else if(OI.joyControl.getRawAxis(1) > 0.1){
             Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * .25);
           }else{
             Robot.arm.articulateArm(0);
+            position = RobotMap.armMotor.getSelectedSensorPosition();
+            Robot.arm.setArmPosition(position);
           }
+          //position = RobotMap.armMotor.getSelectedSensorPosition();
+        }//else if(!RobotMap.armReset.get()){
+          // RobotMap.armMotor.setSelectedSensorPosition(0);
+          // Robot.arm.setArmPosition(-50);
+        //}
+        else{
+          Robot.arm.articulateArm(0);
           position = RobotMap.armMotor.getSelectedSensorPosition();
-        }/*else if(!RobotMap.armReset.get()){
-          RobotMap.armMotor.setSelectedSensorPosition(0);
-          Robot.arm.setArmPosition(-50);
-        }*/else {
           Robot.arm.setArmPosition(position);
         }
-      }else if(Constants.defenseMode){
-        Robot.arm.articulateArm(0);
-        position = RobotMap.armMotor.getSelectedSensorPosition();
+      // }else if(Constants.defenseMode){
+      //   Robot.arm.articulateArm(0);
+      //   position = RobotMap.armMotor.getSelectedSensorPosition();
+      //   Robot.arm.setArmPosition(position);
+      // }
       }
     }else{
       // Robot.arm.setArmPosition(0);
       Robot.arm.articulateArm(0);
       position = RobotMap.armMotor.getSelectedSensorPosition();
+      Robot.arm.setArmPosition(position);
     }
   }
 

@@ -16,6 +16,9 @@ import frc.robot.Robot;
 public class CameraMode extends Command {
   private boolean isFinished = false;
 
+  boolean togglePressCamera = false;
+  boolean toggleOn = false;
+
   public CameraMode() {
     requires(Robot.limelight);
   }
@@ -27,28 +30,36 @@ public class CameraMode extends Command {
 
   @Override
   protected void execute() {
-    while (OI.joyR.getRawButton(4)){
-      if(Constants.auto) {
-      NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0);
-      } else {
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1.0);
+    // if (OI.joyR.getRawButtonPressed(4)){
+    //   if(Constants.auto) {
+    //     NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0);
+    //   } else {
+    //     NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1.0);
+    //   }
+    // }
+    if(OI.joyControl.getRawButton(4)){
+      if(!togglePressCamera){
+          toggleOn = !toggleOn;
+          togglePressCamera = true;
       }
+    }else{
+      togglePressCamera = false;
     }
-    isFinished = true;
+    if(toggleOn) {
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0);
+    } else {
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1.0);
+    }
   }
 
   @Override
   protected boolean isFinished() {
-    return isFinished;
+    return false;
   }
 
   @Override
   protected void end() {
-    if(Constants.auto) {
-      NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(1.0);
-    } else {
-      NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0);
-    }
+
   }
 
   @Override

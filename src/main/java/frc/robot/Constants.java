@@ -23,7 +23,7 @@ public class Constants {
     public static final double wristF = 1.023;
     public static final double wristP = 31.488; // .05115, .123, .246, .492, .984, 1.968, 3.936, 7.872, 15.744
     public static final double wristI = 0.001; // .001, .002
-    public static final double wristD = 314.88;
+    public static final double wristD = 320.88;
     
     public static final int wristVel = 500;
     public static final int wristAcc = 500;
