@@ -32,9 +32,9 @@ public class Constants {
     // public static final double armLow = -1202;
     // public static final double armMid = -2248;
     // public static final double armHigh = -3190;
-    public static final double armLow = -770;
-    public static final double armMid = -1825;
-    public static final double armHigh = -2800;
+    public static final double armLow = -300;
+    public static final double armMid = -1425;
+    public static final double armHigh = -2000;
     // arm low hatch: 
 
     public static boolean defenseMode = false;

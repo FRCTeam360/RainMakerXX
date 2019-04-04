@@ -75,7 +75,7 @@ public class MoveArm extends Command {
           if(OI.joyControl.getRawAxis(1) <= -0.1){
             Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * .6);
           }else if(OI.joyControl.getRawAxis(1) >= 0.1){
-            Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * .25);
+            Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * .3);
           }else{
             Robot.arm.articulateArm(0);
             position = RobotMap.armMotor.getSelectedSensorPosition();
