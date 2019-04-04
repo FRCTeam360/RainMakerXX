@@ -72,9 +72,9 @@ public class MoveArm extends Command {
         Robot.arm.setArmPosition(Constants.armHigh + offset);
       }else if(!Constants.defenseMode){
         if(Math.abs(OI.joyControl.getRawAxis(1)) >= .1){
-          if(OI.joyControl.getRawAxis(1) < -0.1){
+          if(OI.joyControl.getRawAxis(1) <= -0.1){
             Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * .6);
-          }else if(OI.joyControl.getRawAxis(1) > 0.1){
+          }else if(OI.joyControl.getRawAxis(1) >= 0.1){
             Robot.arm.articulateArm(OI.joyControl.getRawAxis(1) * .25);
           }else{
             Robot.arm.articulateArm(0);
@@ -82,26 +82,30 @@ public class MoveArm extends Command {
             Robot.arm.setArmPosition(position);
           }
           //position = RobotMap.armMotor.getSelectedSensorPosition();
-        }//else if(!RobotMap.armReset.get()){
-          // RobotMap.armMotor.setSelectedSensorPosition(0);
-          // Robot.arm.setArmPosition(-50);
-        //}
-        else{
+        }else{
           Robot.arm.articulateArm(0);
           position = RobotMap.armMotor.getSelectedSensorPosition();
           Robot.arm.setArmPosition(position);
         }
-      // }else if(Constants.defenseMode){
-      //   Robot.arm.articulateArm(0);
-      //   position = RobotMap.armMotor.getSelectedSensorPosition();
-      //   Robot.arm.setArmPosition(position);
-      // }
+      }else if(Constants.defenseMode){
+        if(RobotMap.armReset.get()) {
+          Robot.arm.articulateArm(.25);
+        }else{
+          Robot.arm.articulateArm(0);
+          position = RobotMap.armMotor.getSelectedSensorPosition();
+          Robot.arm.setArmPosition(position);
+        }
       }
     }else{
       // Robot.arm.setArmPosition(0);
       Robot.arm.articulateArm(0);
       position = RobotMap.armMotor.getSelectedSensorPosition();
       Robot.arm.setArmPosition(position);
+    }
+    if(!RobotMap.armReset.get()){
+      RobotMap.armMotor.setSelectedSensorPosition(0);
+      // position = RobotMap.armMotor.getSelectedSensorPosition();
+      // Robot.arm.setArmPosition(position);
     }
   }
 

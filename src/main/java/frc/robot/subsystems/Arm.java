@@ -81,7 +81,8 @@ public class Arm extends Subsystem {
     SmartDashboard.putNumber("ArmVel", arm.getSelectedSensorVelocity(0));
 	  SmartDashboard.putNumber("ArmPos",  arm.getSelectedSensorPosition());
 	  SmartDashboard.putNumber("ArmOutputPercent", arm.getMotorOutputPercent());
-	  SmartDashboard.putNumber("ArmError", arm.getClosedLoopError(0));
+    SmartDashboard.putNumber("ArmError", arm.getClosedLoopError(0));
+    SmartDashboard.putBoolean("Limit Switch", RobotMap.armReset.get());
   }
 
   @Override
