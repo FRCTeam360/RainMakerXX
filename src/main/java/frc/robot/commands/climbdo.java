@@ -38,14 +38,14 @@ public class climbdo extends Command {
       if(Math.abs(OI.joyControl.getRawAxis(1)) >= .05) {
         if(Robot.climby.getFrontEncoder() <= 100) {
           if(OI.joyControl.getRawAxis(1) > 0) {
-            Robot.climby.lift1(-OI.joyControl.getRawAxis(1) * .5);
+            Robot.climby.lift1(-OI.joyControl.getRawAxis(1) * .7);
           } else {
             Robot.climby.lift1(0);
           }
         }
         if(Robot.climby.getFrontEncoder() >= 28000) {
           if(OI.joyControl.getRawAxis(1) < 0) {
-            Robot.climby.lift1(-OI.joyControl.getRawAxis(1) * .5);
+            Robot.climby.lift1(-OI.joyControl.getRawAxis(1) * .7);
           } else {
             Robot.climby.lift1(0);
           }
