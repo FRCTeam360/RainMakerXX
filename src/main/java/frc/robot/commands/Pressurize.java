@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 public class Pressurize extends Command {
 
@@ -34,7 +33,7 @@ public class Pressurize extends Command {
   protected void execute() {
      if(shouldRun == true && RobotController.getInputVoltage() > 10) {
       Robot.pneumatics.pressurize();
-    } else if (shouldRun == true && ! (RobotController.getInputVoltage() > 10)) {
+    } else if (shouldRun == true && !(RobotController.getInputVoltage() > 10)) {
       shouldRun = false;
       Robot.pneumatics.stop();
       timer.reset();

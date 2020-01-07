@@ -9,10 +9,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.Climber;
-import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
 
@@ -30,15 +26,10 @@ public class Robot extends TimedRobot {
   //Command m_autonomousCommand;
   //SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-  public static Arm arm;
-  public static Wrist wrist;
-  public static HatchSolenoid hatchPanel;
-  public static Intake intake;
   public static Shifter shifter;
   public static Limelight limelight;
   public static Pneumatics pneumatics;
   public static DriveTrain driveTrain;
-  public static Climber climby;
   public static OI oi;
 
   // Command autonomousCommand;
@@ -50,15 +41,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    climby = new Climber();
     shifter = new Shifter();
     limelight = new Limelight();
 		pneumatics = new Pneumatics();
     driveTrain = new DriveTrain();
-    arm = new Arm();
-    wrist = new Wrist();
-    hatchPanel = new HatchSolenoid();
-    intake = new Intake();
     oi = new OI();
 
     // RobotMap.armMotor.setSelectedSensorPosition(0);
@@ -136,7 +122,6 @@ public class Robot extends TimedRobot {
     Robot.limelight.driveCamera();
     Robot.shifter.shiftDown();
     Robot.driveTrain.brakeMode();
-    Robot.climby.resetEncoders();
   }
 
   /**

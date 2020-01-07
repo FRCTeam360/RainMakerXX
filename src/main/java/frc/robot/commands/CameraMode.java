@@ -9,12 +9,11 @@ package frc.robot.commands;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Constants;
 import frc.robot.OI;
 import frc.robot.Robot;
 
 public class CameraMode extends Command {
-  private boolean isFinished = false;
+  //private boolean isFinished = false;
 
   boolean togglePressCamera = false;
   boolean toggleOn = false;
