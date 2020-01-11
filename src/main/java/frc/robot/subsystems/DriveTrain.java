@@ -17,32 +17,32 @@ import frc.robot.commands.*;
 
 public class DriveTrain extends Subsystem {
 
-  // public TalonSRX motorRMaster = RobotMap.motorRightMaster;
-	// private TalonSRX motorRSlave = RobotMap.motorRightSlave;
+  public TalonSRX motorRMaster = RobotMap.motorRightMaster;
+	private TalonSRX motorRSlave = RobotMap.motorRightSlave;
 	
-	// public TalonSRX motorLMaster = RobotMap.motorLeftMaster;
-  // private TalonSRX motorLSlave = RobotMap.motorLeftSlave;
+	public TalonSRX motorLMaster = RobotMap.motorLeftMaster;
+  private TalonSRX motorLSlave = RobotMap.motorLeftSlave;
 
-  public TalonSRX motor = RobotMap.motor;
+  // public TalonSRX motor = RobotMap.motor;
   
   public DriveTrain() {
 
-    // motorRSlave.follow(motorRMaster);
-    // motorLSlave.follow(motorLMaster);
+    motorRSlave.follow(motorRMaster);
+    motorLSlave.follow(motorLMaster);
     
-    // motorLMaster.setInverted(false);
-		// motorLSlave.setInverted(false);
+    motorLMaster.setInverted(false);
+		motorLSlave.setInverted(false);
 		
-		// motorRMaster.setInverted(true);
-		// motorRSlave.setInverted(true);
+		motorRMaster.setInverted(true);
+		motorRSlave.setInverted(true);
 		
-		// motorLMaster.setSensorPhase(false);
-    // motorRMaster.setSensorPhase(false);
+		motorLMaster.setSensorPhase(false);
+    motorRMaster.setSensorPhase(false);
     
-    // motorLMaster.selectProfileSlot(0, 0);
-    // motorRMaster.selectProfileSlot(0, 0);
+    motorLMaster.selectProfileSlot(0, 0);
+    motorRMaster.selectProfileSlot(0, 0);
     
-    motor.selectProfileSlot(0, 0);
+    // motor.selectProfileSlot(0, 0);
 		
 		// resetTalons(motorRMaster);
 		// resetTalons(motorLMaster);
@@ -50,15 +50,15 @@ public class DriveTrain extends Subsystem {
 		// resetTalons(motorRSlave);
     // resetTalons(motorLSlave);
   }
-  public void drive (double power) {
-    motor.set(ControlMode.PercentOutput, power);
-  }
-  // public void driveR(double RMotor) {
-	// 	motorRMaster.set(ControlMode.PercentOutput, RMotor);
-	// }
-	// public void driveL(double LMotor){
-	// 	motorLMaster.set(ControlMode.PercentOutput, LMotor);
-	// }
+  // public void drive (double power) {
+  //   motor.set(ControlMode.PercentOutput, power);
+  // }
+  public void driveR(double RMotor) {
+		motorRMaster.set(ControlMode.PercentOutput, RMotor);
+	}
+	public void driveL(double LMotor){
+		motorLMaster.set(ControlMode.PercentOutput, LMotor);
+	}
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new JoystickTankDrive());

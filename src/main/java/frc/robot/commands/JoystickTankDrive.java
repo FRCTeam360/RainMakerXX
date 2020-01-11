@@ -22,22 +22,22 @@ public class JoystickTankDrive extends Command {
 
   @Override
   protected void execute() {
-    // if(Math.abs(OI.joyR.getRawAxis(1)) > .05) {
-    //   Robot.driveTrain.driveR(-1 * OI.joyR.getRawAxis(1));
-    // } else {
-    //   Robot.driveTrain.driveR(0);
-    // }
-    // if(Math.abs(OI.joyL.getRawAxis(1)) > .05) {
-    //   Robot.driveTrain.driveL(-1 * OI.joyL.getRawAxis(1));
-    // } else {
-    //   Robot.driveTrain.driveL(0);
-    // }
-
     if(Math.abs(OI.joyR.getRawAxis(1)) > .05) {
-      Robot.driveTrain.drive(-1 * OI.joyR.getRawAxis(1));
+      Robot.driveTrain.driveR(-1 * OI.joyR.getRawAxis(1));
     } else {
-      Robot.driveTrain.drive(0);
+      Robot.driveTrain.driveR(0);
     }
+    if(Math.abs(OI.joyL.getRawAxis(1)) > .05) {
+      Robot.driveTrain.driveL(-1 * OI.joyL.getRawAxis(1));
+    } else {
+      Robot.driveTrain.driveL(0);
+    }
+
+    // if(Math.abs(OI.joyR.getRawAxis(1)) > .05) {
+    //   Robot.driveTrain.drive(-1 * OI.joyR.getRawAxis(1));
+    // } else {
+    //   Robot.driveTrain.drive(0);
+    // }
   }
 
   @Override
