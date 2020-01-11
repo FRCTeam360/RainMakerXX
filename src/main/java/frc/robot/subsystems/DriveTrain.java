@@ -41,6 +41,11 @@ public class DriveTrain extends Subsystem {
     
     motorLMaster.selectProfileSlot(0, 0);
     motorRMaster.selectProfileSlot(0, 0);
+
+    motorLMaster.configPeakCurrentLimit(60);
+    motorLMaster.configPeakCurrentDuration(0);
+    motorLMaster.configContinuousCurrentLimit(40);
+    motorLMaster.enableCurrentLimit(true);
     
     // motor.selectProfileSlot(0, 0);
 		
